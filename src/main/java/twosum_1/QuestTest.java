@@ -1,8 +1,7 @@
-package twosum;
+package twosum_1;
 
 import com.alibaba.fastjson.JSON;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
