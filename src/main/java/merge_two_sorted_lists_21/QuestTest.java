@@ -14,13 +14,16 @@ import org.junit.Test;
 public class QuestTest {
 
   public ListNode buildFromArray(int[] array){
-    ListNode build = new ListNode(array[0]);
-    ListNode point = build;
-    for (int i = 1;i<array.length;i++){
-      point.next = new ListNode(array[i]);
-      point = point.next;
+    if (array != null && array.length>0){
+      ListNode build = new ListNode(array[0]);
+      ListNode point = build;
+      for (int i = 1;i<array.length;i++){
+        point.next = new ListNode(array[i]);
+        point = point.next;
+      }
+      return build;
     }
-    return build;
+    return null;
   }
 
   @Test
@@ -29,7 +32,7 @@ public class QuestTest {
     ListNode l2 = buildFromArray(new int[]{1,3,4});
     ListNode result = buildFromArray(new int[]{1,1,2,3,4,4});
     String resultStr = JSON.toJSONString(result);
-    Assert.assertEquals(resultStr, JSON.toJSONString(MergeTwoSortedLists.mergeTwoLists(l1,l2)));
+    Assert.assertEquals(resultStr, JSON.toJSONString(MergeTwoSortedLists.anotherSolution(l1,l2)));
   }
   @Test
   public void test2() {
@@ -37,7 +40,7 @@ public class QuestTest {
     ListNode l2 = buildFromArray(new int[]{0});
     ListNode result = buildFromArray(new int[]{0});
     String resultStr = JSON.toJSONString(result);
-    Assert.assertEquals(resultStr, JSON.toJSONString(MergeTwoSortedLists.mergeTwoLists(l1,l2)));
+    Assert.assertEquals(resultStr, JSON.toJSONString(MergeTwoSortedLists.anotherSolution(l1,l2)));
   }
   @Test
   public void test4() {
@@ -45,7 +48,7 @@ public class QuestTest {
     ListNode l2 = buildFromArray(new int[]{1});
     ListNode result = buildFromArray(new int[]{1,2});
     String resultStr = JSON.toJSONString(result);
-    Assert.assertEquals(resultStr, JSON.toJSONString(MergeTwoSortedLists.mergeTwoLists(l1,l2)));
+    Assert.assertEquals(resultStr, JSON.toJSONString(MergeTwoSortedLists.anotherSolution(l1,l2)));
   }
 
 }
