@@ -1,6 +1,7 @@
 package valid_parentheses_20;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 
@@ -51,6 +52,46 @@ public class ValidParentheses {
         } else {
           stack.push(c);
         }
+      }
+    }
+    return stack.isEmpty();
+  }
+
+  /**
+   * √ Accepted
+     √ 76/76 cases passed (1 ms)
+     √ Your runtime beats 99.44 % of java submissions
+     √ Your memory usage beats 36.72 % of java submissions (35.7 MB)
+   */
+  public static boolean anotherIsValid(String s) {
+    LinkedList<Character> stack = new LinkedList<>();
+    for (int i=0;i<s.length();i++){
+      char top = stack.isEmpty()? '#':stack.peekFirst();
+      char c = s.charAt(i);
+      switch (c){
+        case ')':
+          if (top == '('){
+            stack.pop();
+            break;
+          }
+          return false;
+        case ']':
+          if (top == '['){
+            stack.pop();
+            break;
+          }
+          return false;
+        case '}':
+          if (top == '{'){
+            stack.pop();
+            break;
+          }
+          return false;
+        case '(':
+        case '[':
+        case '{':
+          stack.push(c);
+          break;
       }
     }
     return stack.isEmpty();
