@@ -1,4 +1,4 @@
-package twosum_1;
+package _1_twosum;
 
 import com.alibaba.fastjson.JSON;
 import java.util.List;

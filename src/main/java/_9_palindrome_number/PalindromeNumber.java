@@ -1,4 +1,4 @@
-package palindrome_number_9;
+package _9_palindrome_number;
 
 /**
  * @program: leetcode

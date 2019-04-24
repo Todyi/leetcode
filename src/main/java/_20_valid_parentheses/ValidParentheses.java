@@ -1,8 +1,6 @@
-package valid_parentheses_20;
+package _20_valid_parentheses;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Stack;
 
 /**

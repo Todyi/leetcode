@@ -1,4 +1,4 @@
-package longest_common_prefix_14;
+package _14_longest_common_prefix;
 
 import org.junit.Assert;
 import org.junit.Test;

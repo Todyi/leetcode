@@ -1,4 +1,4 @@
-package reverse_integer_7;
+package _7_reverse_integer;
 
 
 /**

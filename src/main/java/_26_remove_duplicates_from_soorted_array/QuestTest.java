@@ -1,7 +1,6 @@
-package remove_duplicates_from_soorted_array_26;
+package _26_remove_duplicates_from_soorted_array;
 
 import com.alibaba.fastjson.JSON;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;

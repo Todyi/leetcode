@@ -1,4 +1,4 @@
-package remove_duplicates_from_soorted_array_26;
+package _26_remove_duplicates_from_soorted_array;
 
 /**
  * @program: leetcode

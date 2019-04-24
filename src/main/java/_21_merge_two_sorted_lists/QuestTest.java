@@ -1,4 +1,4 @@
-package merge_two_sorted_lists_21;
+package _21_merge_two_sorted_lists;
 
 import com.alibaba.fastjson.JSON;
 import org.junit.Assert;

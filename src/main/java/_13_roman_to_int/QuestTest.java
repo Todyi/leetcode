@@ -1,4 +1,4 @@
-package roman_to_int_13;
+package _13_roman_to_int;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package valid_parentheses_20;
+package _20_valid_parentheses;
 
 import org.junit.Assert;
 import org.junit.Test;
