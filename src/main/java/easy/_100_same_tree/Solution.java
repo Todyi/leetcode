@@ -19,43 +19,60 @@ class Solution {
   //57/57 cases passed (1 ms)
   //Your runtime beats 100 % of java submissions
   //Your memory usage beats 5.75 % of java submissions (39.2 MB)
+//  public boolean isSameTree(TreeNode p, TreeNode q) {
+//    List<TreeNode> pQueue = new ArrayList<>();
+//    pQueue.add(p);
+//    List<TreeNode> qQueue = new ArrayList<>();
+//    qQueue.add(q);
+//    TreeNode pPointer;
+//    TreeNode qPointer;
+//    while (0 < pQueue.size()) {
+//      pPointer = pQueue.get(0);
+//      qPointer = qQueue.get(0);
+//      pQueue.remove(0);
+//      qQueue.remove(0);
+//      if (pPointer != null && qPointer != null) {
+//        if (pPointer.val != qPointer.val) {
+//          return false;
+//        }
+//      } else {
+//        if (pPointer == null && qPointer != null) {
+//          return false;
+//        }
+//        if (pPointer != null && qPointer == null) {
+//          return false;
+//        }
+//      }
+//      if (pPointer != null && (pPointer.left != null || pPointer.right != null)) {
+//        pQueue.add(pPointer.left);
+//        pQueue.add(pPointer.right);
+//      }
+//      if (qPointer != null && (qPointer.left != null || qPointer.right != null)) {
+//        qQueue.add(qPointer.left);
+//        qQueue.add(qPointer.right);
+//      }
+//    }
+//    if (0 < qQueue.size()) {
+//      return false;
+//    }
+//    return true;
+//  }
+
+  //57/57 cases passed (0 ms)
+  //Your runtime beats 100 % of java submissions
+  //Your memory usage beats 5.75 % of java submissions (36.6 MB)
   public boolean isSameTree(TreeNode p, TreeNode q) {
-    List<TreeNode> pQueue = new ArrayList<>();
-    pQueue.add(p);
-    List<TreeNode> qQueue = new ArrayList<>();
-    qQueue.add(q);
-    TreeNode pPointer;
-    TreeNode qPointer;
-    while (0 < pQueue.size()) {
-      pPointer = pQueue.get(0);
-      qPointer = qQueue.get(0);
-      pQueue.remove(0);
-      qQueue.remove(0);
-      if (pPointer != null && qPointer != null) {
-        if (pPointer.val != qPointer.val) {
-          return false;
-        }
-      } else {
-        if (pPointer == null && qPointer != null) {
-          return false;
-        }
-        if (pPointer != null && qPointer == null) {
-          return false;
-        }
-      }
-      if (pPointer != null && (pPointer.left != null || pPointer.right != null)) {
-        pQueue.add(pPointer.left);
-        pQueue.add(pPointer.right);
-      }
-      if (qPointer != null && (qPointer.left != null || qPointer.right != null)) {
-        qQueue.add(qPointer.left);
-        qQueue.add(qPointer.right);
-      }
+    if (p == null && q == null){
+      return true;
     }
-    if (0 < qQueue.size()) {
+    if (p == null || q == null){
       return false;
     }
-    return true;
+    if (p.val == q.val){
+      return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+    }
+
+    return false;
   }
 
 }
