@@ -1,5 +1,7 @@
 package easy._21_merge_two_sorted_lists;
 
+import common.ListNode;
+
 /**
  * @program: leetcode
  * @description: 21.merge-two-sorted-lists

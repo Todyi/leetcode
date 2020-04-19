@@ -1,6 +1,7 @@
 package easy._21_merge_two_sorted_lists;
 
 import com.alibaba.fastjson.JSON;
+import common.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
