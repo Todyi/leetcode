@@ -18,12 +18,12 @@ import common.ListNode;
  */
 class Solution {
 
-  //165/165 cases passed (1 ms)
-  //Your runtime beats 12.44 % of java submissions
-  //Your memory usage beats 7.14 % of java submissions (41.7 MB)
+  //165/165 cases passed (0 ms)
+  //Your runtime beats 100 % of java submissions
+  //Your memory usage beats 7.14 % of java submissions (39.2 MB)
 
   public ListNode deleteDuplicates(ListNode head) {
-    if (head == null) return null;
+    if (head == null || head.next == null) return head;
     ListNode pointer = head;
     ListNode next = pointer.next;
     while (true) {
