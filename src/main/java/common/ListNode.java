@@ -1,4 +1,4 @@
-package easy._21_merge_two_sorted_lists;
+package common;
 
 /**
  * @program: leetcode
@@ -9,8 +9,8 @@ package easy._21_merge_two_sorted_lists;
 
 public class ListNode {
 
-  int val;
-  ListNode next;
+  public int val;
+  public ListNode next;
 
   ListNode(int x) {
     val = x;
