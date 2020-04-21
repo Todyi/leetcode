@@ -23,7 +23,7 @@ public class TreeNode {
   }
 
   public static TreeNode buildTree(Integer[] treeArr) {
-    if (treeArr.length == 0) {
+    if (treeArr == null || treeArr.length == 0) {
       return null;
     }
     TreeNode root = new TreeNode(treeArr[0]);

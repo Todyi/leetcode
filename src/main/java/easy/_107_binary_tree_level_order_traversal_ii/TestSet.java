@@ -17,6 +17,14 @@ public class TestSet {
         .levelOrderBottom(buildTree(input)));
     Assert.assertTrue(result.equals(resolution));
   }
+  @Test
+  public void test1() {
+    Integer[] input = null;
+    String result = "[]";
+    String resolution = JSON.toJSONString(new easy._107_binary_tree_level_order_traversal_ii.Solution()
+        .levelOrderBottom(buildTree(input)));
+    Assert.assertTrue(result.equals(resolution));
+  }
 
 
 }
