@@ -54,22 +54,26 @@ class Solution {
   //解答成功:
   //执行耗时:1 ms,击败了50.21% 的Java用户
   //内存消耗:39.8 MB,击败了68.52% 的Java用户
-  public boolean isBalanced(TreeNode root) {
-    if (root == null) {
-      return true;
-    }
-    if (root.left == null && root.right == null) {
-      return true;
-    }
-    int maxLevelLeft = getMaxLevel(root.left);
-    int maxLevelRight = getMaxLevel(root.right);
-    if (Math.abs(maxLevelLeft - maxLevelRight) < 2) {
-      return isBalanced(root.left) && isBalanced(root.right);
-    }
-    return false;
+//  public boolean isBalanced(TreeNode root) {
+//    if (root == null) {
+//      return true;
+//    }
+//    if (root.left == null && root.right == null) {
+//      return true;
+//    }
+//    int maxLevelLeft = getMaxLevel(root.left);
+//    int maxLevelRight = getMaxLevel(root.right);
+//    if (Math.abs(maxLevelLeft - maxLevelRight) < 2) {
+//      return isBalanced(root.left) && isBalanced(root.right);
+//    }
+//    return false;
+//
+//  }
+//
 
-  }
-
+//解答成功:
+//执行耗时:0 ms,击败了100.00% 的Java用户
+//内存消耗:39.6 MB,击败了70.37% 的Java用户
   public int getMaxLevel(TreeNode node) {
     if (node == null) {
       return 0;
@@ -80,6 +84,20 @@ class Solution {
     return 1 + Math.max(getMaxLevel(node.left), getMaxLevel(node.right));
   }
 
+  public boolean isBalanced(TreeNode root) {
+    if (root == null) {
+      return true;
+    }
+    if (root.left == null && root.right == null) {
+      return true;
+    }
+    if (isBalanced(root.left) && isBalanced(root.right)) {
+      int maxLevelLeft = getMaxLevel(root.left);
+      int maxLevelRight = getMaxLevel(root.right);
+      return Math.abs(maxLevelLeft - maxLevelRight) < 2;
+    }
+    return false;
+  }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
