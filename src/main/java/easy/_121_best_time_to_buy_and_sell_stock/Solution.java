@@ -34,8 +34,8 @@ package easy._121_best_time_to_buy_and_sell_stock;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:229 ms,击败了13.91% 的Java用户
-  //  内存消耗:39.6 MB,击败了16.81% 的Java用户
+  //  执行耗时:1 ms,击败了99.18% 的Java用户
+  //  内存消耗:39.6 MB,击败了17.70% 的Java用户
   public int maxProfit(int[] prices) {
     if (prices == null || prices.length == 1) {
       return 0;
@@ -44,6 +44,9 @@ class Solution {
     for (int i = 0; i < prices.length; i++) {
       int buy = prices[i];
       for (int j = i + 1; j < prices.length; j++) {
+        if (prices[j] <= buy) {
+          break;
+        }
         maxProfit = Math.max(maxProfit, prices[j] - buy);
       }
     }
