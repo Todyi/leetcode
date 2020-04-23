@@ -56,19 +56,34 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了93.45% 的Java用户
   //  内存消耗:39.4 MB,击败了17.14% 的Java用户
+//  public int maxProfit(int[] prices) {
+//    if (prices == null || prices.length == 1) {
+//      return 0;
+//    }
+//    int maxProfit = 0;
+//    int minPrice = Integer.MAX_VALUE;
+//    for (int i = 0; i < prices.length; i++) {
+//      if (prices[i] < minPrice) {
+//        minPrice = prices[i];
+//      } else if (0 < prices[i] - minPrice) {
+//        maxProfit += prices[i] - minPrice;
+//        minPrice = prices[i];
+//      }
+//    }
+//    return maxProfit;
+//  }
+
+  //解答成功:
+  //执行耗时:1 ms,击败了93.45% 的Java用户
+  //内存消耗:39.7 MB,击败了12.38% 的Java用户
   public int maxProfit(int[] prices) {
-    if (prices == null || prices.length == 1) {
-      return 0;
-    }
+    int prePrice = prices[0];
     int maxProfit = 0;
-    int minPrice = Integer.MAX_VALUE;
-    for (int i = 0; i < prices.length; i++) {
-      if (prices[i] < minPrice) {
-        minPrice = prices[i];
-      } else if (0 < prices[i] - minPrice) {
-        maxProfit += prices[i] - minPrice;
-        minPrice = prices[i];
+    for (int price : prices) {
+      if (prePrice < price) {
+        maxProfit += price - prePrice;
       }
+      prePrice = price;
     }
     return maxProfit;
   }
