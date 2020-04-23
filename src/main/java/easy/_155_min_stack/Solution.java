@@ -50,44 +50,93 @@ import java.util.List;
 //解答成功:
 //执行耗时:4 ms,击败了89.57% 的Java用户
 //内存消耗:41.5 MB,击败了10.15% 的Java用户
+//class MinStack {
+//
+//  int min = Integer.MAX_VALUE;
+//  List<Integer> stack = null;
+//
+//  /**
+//   * initialize your data structure here.
+//   */
+//  public MinStack() {
+//    stack = new ArrayList<>();
+//  }
+//
+//  public void push(int x) {
+//    if (x < min) {
+//      min = x;
+//    }
+//    stack.add(x);
+//  }
+//
+//  public void pop() {
+//    int x = stack.get(stack.size() - 1);
+//    stack.remove(stack.size() - 1);
+//    if (x == min) {
+//      min = Integer.MAX_VALUE;
+//      for (Integer num : stack) {
+//        if (num < min) {
+//          min = num;
+//        }
+//      }
+//    }
+//  }
+//
+//  public int top() {
+//    return stack.get(stack.size() - 1);
+//  }
+//
+//  public int getMin() {
+//    return min;
+//  }
+//
+//}
+
+//解答成功:
+//执行耗时:3 ms,击败了100.00% 的Java用户
+//内存消耗:41.1 MB,击败了17.39% 的Java用户
 class MinStack {
 
-  int min = Integer.MAX_VALUE;
-  List<Integer> stack = null;
+
+  class Node{
+    int value;
+    int min;
+    Node next;
+
+    public Node(int value, int min, Node next) {
+      this.value = value;
+      this.min = min;
+      this.next = next;
+    }
+  }
+
+  Node head = null;
 
   /**
    * initialize your data structure here.
    */
   public MinStack() {
-    stack = new ArrayList<>();
+
   }
 
   public void push(int x) {
-    if (x < min) {
-      min = x;
+    if (head == null){
+      head = new Node(x,x,null);
+    }else{
+      head = new Node(x,Math.min(x,head.min),head);
     }
-    stack.add(x);
   }
 
   public void pop() {
-    int x = stack.get(stack.size() - 1);
-    stack.remove(stack.size() - 1);
-    if (x == min) {
-      min = Integer.MAX_VALUE;
-      for (Integer num : stack) {
-        if (num < min) {
-          min = num;
-        }
-      }
-    }
+    head = head.next;
   }
 
   public int top() {
-    return stack.get(stack.size() - 1);
+    return head.value;
   }
 
   public int getMin() {
-    return min;
+    return head.min;
   }
 
 }
