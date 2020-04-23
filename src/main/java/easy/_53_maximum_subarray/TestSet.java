@@ -1,4 +1,4 @@
-package easy._53_maximum_ubarray;
+package easy._53_maximum_subarray;
 
 
 import org.junit.Assert;

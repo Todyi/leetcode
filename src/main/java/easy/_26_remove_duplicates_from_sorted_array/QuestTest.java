@@ -1,4 +1,4 @@
-package easy._26_remove_duplicates_from_soorted_array;
+package easy._26_remove_duplicates_from_sorted_array;
 
 import com.alibaba.fastjson.JSON;
 import java.util.Arrays;
