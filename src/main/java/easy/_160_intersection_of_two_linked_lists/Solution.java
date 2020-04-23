@@ -77,24 +77,60 @@ public class Solution {
   //  解答成功:
   //  执行耗时:825 ms,击败了5.02% 的Java用户
   //  内存消耗:42 MB,击败了5.71% 的Java用户
+//  public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//    if (headA == null || headB == null) {
+//      return null;
+//    }
+//    while (headA != null) {
+//      if (headA.val != 0) {
+//        ListNode pointer = headB;
+//        while (pointer != null) {
+//          if (headA == pointer) {
+//            return headA;
+//          }
+//          pointer = pointer.next;
+//        }
+//      }
+//      headA = headA.next;
+//    }
+//
+//    return null;
+//  }
+
+//  解答成功:
+//  执行耗时:1 ms,击败了96.71% 的Java用户
+//  内存消耗:42.1 MB,击败了5.71% 的Java用户
   public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-    if (headA == null || headB == null) {
-      return null;
-    }
-    while (headA != null) {
-      if (headA.val != 0) {
-        ListNode pointer = headB;
-        while (pointer != null) {
-          if (headA == pointer) {
-            return headA;
-          }
-          pointer = pointer.next;
-        }
+    int aLength = length(headA);
+    int bLength = length(headB);
+
+    int skip = aLength - bLength;
+    if (0 < skip) {
+      while (0 < skip) {
+        headA = headA.next;
+        skip--;
       }
-      headA = headA.next;
+    } else {
+      while (skip < 0) {
+        headB = headB.next;
+        skip++;
+      }
     }
 
-    return null;
+    while (headA != headB) {
+      headA = headA.next;
+      headB = headB.next;
+    }
+    return headA;
+  }
+
+  public int length(ListNode node) {
+    int length = 0;
+    while (node != null) {
+      length++;
+      node = node.next;
+    }
+    return length;
   }
 
 }
