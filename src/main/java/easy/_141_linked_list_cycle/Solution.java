@@ -56,6 +56,8 @@ package easy._141_linked_list_cycle;
 //leetcode submit region begin(Prohibit modification and deletion)
 
 import common.ListNode;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Definition for singly-linked list. class ListNode { int val; ListNode next; ListNode(int x) { val
@@ -66,22 +68,41 @@ public class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了23.36% 的Java用户
   //  内存消耗:39.5 MB,击败了5.71% 的Java用户
+//  public boolean hasCycle(ListNode head) {
+//    if (head == null) {
+//      return false;
+//    }
+//    ListNode cycleStart = head;
+//    int count = 1;
+//    while (head.next != null) {
+//      if (head.next == cycleStart) {
+//        return true;
+//      }
+//      if (10 < count) {
+//        cycleStart = cycleStart.next;
+//        count = 1;
+//      }
+//      head = head.next;
+//      count++;
+//    }
+//    return false;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.6 MB,击败了5.71% 的Java用户
   public boolean hasCycle(ListNode head) {
     if (head == null) {
       return false;
     }
-    ListNode cycleStart = head;
-    int count = 1;
     while (head.next != null) {
-      if (head.next == cycleStart) {
+      if (head.next == head) {
         return true;
       }
-      if (10 < count) {
-        cycleStart = cycleStart.next;
-        count = 1;
-      }
       head = head.next;
-      count++;
+      if (head != null && head.next != null) {
+        head.next = head.next.next;
+      }
     }
     return false;
   }
