@@ -61,18 +61,38 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了47.20% 的Java用户
   //  内存消耗:39.4 MB,击败了5.22% 的Java用户
+//  public int[] twoSum(int[] numbers, int target) {
+//    Map<Integer, Integer> map = new HashMap<>();
+//    for (int i = 0; i < numbers.length; i++) {
+//      int remain = target - numbers[i];
+//      if (map.get(remain) != null) {
+//        int[] result = {map.get(remain), i + 1};
+//        return result;
+//      } else {
+//        map.put(numbers[i], i + 1);
+//      }
+//    }
+//    return null;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.2 MB,击败了8.95% 的Java用户
   public int[] twoSum(int[] numbers, int target) {
-    Map<Integer, Integer> map = new HashMap<>();
-    for (int i = 0; i < numbers.length; i++) {
-      int remain = target - numbers[i];
-      if (map.get(remain) != null) {
-        int[] result = {map.get(remain), i + 1};
-        return result;
-      } else {
-        map.put(numbers[i], i + 1);
+    int left = 0;
+    int right = numbers.length - 1;
+    while (left < right) {
+      int sum = numbers[left] + numbers[right];
+      if (sum == target) {
+        return new int[]{left + 1, right + 1};
+      } else if (sum < target){
+        left++;
+      }else {
+        right--;
       }
     }
     return null;
+
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
