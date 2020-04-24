@@ -23,33 +23,53 @@ package easy._167_two_sum_ii;
 // Related Topics Array Two Pointers Binary Search
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
   //  执行耗时:174 ms,击败了9.14% 的Java用户
   //  内存消耗:39.6 MB,击败了5.22% 的Java用户
+//  public int[] twoSum(int[] numbers, int target) {
+//
+//    if (numbers == null) {
+//      return null;
+//    }
+//
+//    if (numbers.length == 1) {
+//      if (target == numbers[0]) {
+//        int[] result = {numbers[0]};
+//        return result;
+//      }
+//      return null;
+//    }
+//
+//    for (int i = 0; i < numbers.length; i++) {
+//      int remain = target - numbers[i];
+//      for (int j = i + 1; j < numbers.length; j++) {
+//        if (remain == numbers[j]) {
+//          int[] result = {i + 1, j + 1};
+//          return result;
+//        }
+//      }
+//    }
+//    return null;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了47.20% 的Java用户
+  //  内存消耗:39.4 MB,击败了5.22% 的Java用户
   public int[] twoSum(int[] numbers, int target) {
-
-    if (numbers == null) {
-      return null;
-    }
-
-    if (numbers.length == 1) {
-      if (target == numbers[0]) {
-        int[] result = {numbers[0]};
-        return result;
-      }
-      return null;
-    }
-
+    Map<Integer, Integer> map = new HashMap<>();
     for (int i = 0; i < numbers.length; i++) {
       int remain = target - numbers[i];
-      for (int j = i + 1; j < numbers.length; j++) {
-        if (remain == numbers[j]) {
-          int[] result = {i + 1, j + 1};
-          return result;
-        }
+      if (map.get(remain) != null) {
+        int[] result = {map.get(remain), i + 1};
+        return result;
+      } else {
+        map.put(numbers[i], i + 1);
       }
     }
     return null;
