@@ -47,13 +47,35 @@ class Solution {
 //    return 0;
 //  }
 
-
   //  解答成功:
   //  执行耗时:1 ms,击败了99.87% 的Java用户
   //  内存消耗:42.7 MB,击败了48.53% 的Java用户
+//  public int majorityElement(int[] nums) {
+//    Arrays.sort(nums);
+//    return nums[nums.length >> 1];
+//  }
+
   public int majorityElement(int[] nums) {
-    Arrays.sort(nums);
-    return nums[nums.length >> 1];
+    return majorityElement(nums, 0);
+  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:43.7 MB,击败了5.15% 的Java用户
+  public int majorityElement(int[] nums, int start) {
+    int count = 1;
+    int major = nums[start];
+    for (int i = start + 1; i < nums.length; i++) {
+      if (major == nums[i]) {
+        count++;
+      } else {
+        count--;
+      }
+      if (count == 0) {
+        return majorityElement(nums, i + 1);
+      }
+    }
+    return major;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
