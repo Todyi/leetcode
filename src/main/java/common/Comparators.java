@@ -12,7 +12,7 @@ package common;
 
 public class Comparators {
 
-  public static boolean isSame(Integer[] array0,Integer[] array1){
+  public static boolean isSame(int[] array0,int[] array1){
     if (array0 == null && array1 == null){
       return true;
     }
@@ -29,6 +29,11 @@ public class Comparators {
     }
     return true;
   }
+
+  public static boolean isSame(Integer[] array0,Integer[] array1){
+    return isSame(array0,array1);
+  }
+
 
   public static boolean isSame(TreeNode p, TreeNode q) {
     if (p == null && q == null){
