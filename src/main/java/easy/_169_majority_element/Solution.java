@@ -21,6 +21,7 @@ package easy._169_majority_element;
 // Related Topics Array Divide and Conquer Bit Manipulation
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,20 +31,29 @@ class Solution {
   //  解答成功:
   //  执行耗时:8 ms,击败了43.26% 的Java用户
   //  内存消耗:45.1 MB,击败了5.15% 的Java用户
+//  public int majorityElement(int[] nums) {
+//    Map<Integer,Integer> element = new HashMap<>();
+//    for (int i = 0; i < nums.length; i++) {
+//      Integer times = element.get(nums[i]);
+//      if (times == null){
+//        times = 0;
+//      }
+//      times++;
+//      if (times > nums.length>>1){
+//        return nums[i];
+//      }
+//      element.put(nums[i],times);
+//    }
+//    return 0;
+//  }
+
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了99.87% 的Java用户
+  //  内存消耗:42.7 MB,击败了48.53% 的Java用户
   public int majorityElement(int[] nums) {
-    Map<Integer,Integer> element = new HashMap<>();
-    for (int i = 0; i < nums.length; i++) {
-      Integer times = element.get(nums[i]);
-      if (times == null){
-        times = 0;
-      }
-      times++;
-      if (times > nums.length>>1){
-        return nums[i];
-      }
-      element.put(nums[i],times);
-    }
-    return 0;
+    Arrays.sort(nums);
+    return nums[nums.length >> 1];
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
