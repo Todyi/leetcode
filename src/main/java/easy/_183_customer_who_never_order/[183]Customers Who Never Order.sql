@@ -55,3 +55,13 @@ WHERE
 		WHERE
 			o.CustomerId = c.Id
 	)
+
+-- Runtime: 239 ms, faster than 87.27% of MySQL online submissions for Customers Who Never Order.
+-- Memory Usage: 0B, less than 100.00% of MySQL online submissions for Customers Who Never Order.
+SELECT
+	Name AS Customers
+FROM
+	Customers AS c
+LEFT JOIN Orders AS o ON o.CustomerId = c.Id
+WHERE
+	o.Id IS NULL
