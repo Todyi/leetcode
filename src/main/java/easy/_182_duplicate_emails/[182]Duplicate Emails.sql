@@ -42,3 +42,11 @@ FROM
 	) p
 WHERE
 	c > 1
+
+-- Runtime: 223 ms, faster than 71.59% of MySQL online submissions for Duplicate Emails.
+-- Memory Usage: 0B, less than 100.00% of MySQL online submissions for Duplicate Emails.
+SELECT
+    Email
+FROM Person
+GROUP BY Email
+having count(id) > 1
