@@ -35,3 +35,24 @@ SELECT
     LEFT JOIN Weather AS we ON we.RecordDate = DATE_ADD(w.RecordDate, INTERVAL -1 DAY)
     WHERE
     we.Temperature < w.Temperature
+
+
+-- Runtime: 212 ms, faster than 99.86% of MySQL online submissions for Rising Temperature.
+-- Memory Usage: 0B, less than 100.00% of MySQL online submissions for Rising Temperature.
+SELECT
+    Id
+FROM
+    (
+        SELECT
+            Id,
+            if(Temperature>@prev,if(datediff(RecordDate,@prev_date)=1, 1, 0), 0)
+            AS flag,
+            @prev:=Temperature,
+            @prev_date:=RecordDate
+        FROM
+            Weather, (SELECT @prev:=1000,@prev_date:="1994-08-01") init
+        ORDER BY
+            RecordDate
+    ) AS t
+WHERE
+    t.flag > 0;
