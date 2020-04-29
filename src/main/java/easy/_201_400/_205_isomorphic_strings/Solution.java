@@ -38,27 +38,54 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了95.27% 的Java用户
   //  内存消耗:39.5 MB,击败了6.14% 的Java用户
+//  public boolean isIsomorphic(String s, String t) {
+//
+//    Integer[] charArray = new Integer[127];
+//    int[] countArray = new int[127];
+//
+//    for (int i = 0; i < s.length(); i++) {
+//
+//      int spo = s.charAt(i);
+//
+//      int tpo = t.charAt(i);
+//
+//      Integer scChar = charArray[spo];
+//      if (scChar == null) {
+//        charArray[spo] = tpo;
+//        countArray[tpo]++;
+//        if (1 < countArray[tpo]) {
+//          //if diverse chars map to same char,return false
+//          return false;
+//        }
+//      } else {
+//        if (scChar.intValue() != tpo) {
+//          return false;
+//        }
+//      }
+//
+//    }
+//
+//    return true;
+//  }
+  
+//  解答成功:
+//  执行耗时:2 ms,击败了98.82% 的Java用户
+//  内存消耗:39.5 MB,击败了6.14% 的Java用户
   public boolean isIsomorphic(String s, String t) {
 
-    Integer[] charArray = new Integer[127];
-    int[] countArray = new int[127];
+    int[] sMapArray = new int[127];
+    int[] tMapArray = new int[127];
 
     for (int i = 0; i < s.length(); i++) {
 
       int spo = s.charAt(i);
-
       int tpo = t.charAt(i);
 
-      Integer scChar = charArray[spo];
-      if (scChar == null) {
-        charArray[spo] = tpo;
-        countArray[tpo]++;
-        if (1 < countArray[tpo]) {
-          //if diverse chars map to same char,return false
-          return false;
-        }
+      if (sMapArray[spo] == 0 && tMapArray[tpo] == 0) {
+        sMapArray[spo] = tpo;
+        tMapArray[tpo] = spo;
       } else {
-        if (scChar.intValue() != tpo) {
+        if (sMapArray[spo] != tpo) {
           return false;
         }
       }

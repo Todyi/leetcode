@@ -80,8 +80,8 @@ public class TestSet {
 
   @Test
   public void test8() {
-    String s = "qwertyuiop[]asdfghjkl;'\\\\zxcvbnm,./";
-    String t = "',.pyfgcrl/=aoeuidhtns-\\\\;qjkxbmwvz";
+    String s = "qwertyuiop[]asdfghjkl;'\\\\zxcvbnm,./~";
+    String t = "',.pyfgcrl/=aoeuidhtns-\\\\;qjkxbmwvz~";
     Boolean result = true;
     boolean resolution = new easy._201_400._205_isomorphic_strings.Solution().isIsomorphic(s,t);
     Assert.assertTrue(result.equals(resolution));
