@@ -33,42 +33,26 @@ package easy._201_400._219_contains_duplicate_ii;
 // Related Topics Array Hash Table
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
-  //  执行耗时:10 ms,击败了25.08% 的Java用户
-  //  内存消耗:49 MB,击败了5.26% 的Java用户
+  //  执行耗时:6 ms,击败了61.29% 的Java用户
+  //  内存消耗:44.9 MB,击败了10.53% 的Java用户
   public boolean containsNearbyDuplicate(int[] nums, int k) {
-    Map<Integer, List<Integer>> numMap = new HashMap<>();
+    Map<Integer, Integer> numMap = new HashMap<>();
 
     for (int i = 0; i < nums.length; i++) {
-      List<Integer> numAddr = numMap.get(nums[i]);
-      if (numAddr == null) {
-        numAddr = new ArrayList<>();
-        numMap.put(nums[i], numAddr);
-      }
-      numAddr.add(i);
-    }
-    Set<Integer> keys = numMap.keySet();
-    if (keys != null && 0 < keys.size()) {
-      for (Integer key : keys) {
-        List<Integer> numAddr = numMap.get(key);
-        if (numAddr.size() < 2) {
-          continue;
-        }
-        for (int i = 0; i < numAddr.size() - 1; i++) {
-          if (numAddr.get(i + 1) - numAddr.get(i) <= k) {
-            return true;
-          }
+      Integer preAddr = numMap.get(nums[i]);
+      if (preAddr != null) {
+        if (i - preAddr <= k) {
+          return true;
         }
       }
+      numMap.put(nums[i], i);
     }
 
     return false;
