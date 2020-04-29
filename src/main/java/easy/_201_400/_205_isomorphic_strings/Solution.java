@@ -36,18 +36,18 @@ package easy._201_400._205_isomorphic_strings;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:4 ms,击败了86.11% 的Java用户
-  //  内存消耗:39.2 MB,击败了8.77% 的Java用户
+  //  执行耗时:3 ms,击败了95.27% 的Java用户
+  //  内存消耗:39.5 MB,击败了6.14% 的Java用户
   public boolean isIsomorphic(String s, String t) {
 
-    Integer[] charArray = new Integer[95];
-    int[] countArray = new int[95];
+    Integer[] charArray = new Integer[127];
+    int[] countArray = new int[127];
 
     for (int i = 0; i < s.length(); i++) {
 
-      int spo = s.charAt(i) - ' ';
+      int spo = s.charAt(i);
 
-      int tpo = t.charAt(i) - ' ';
+      int tpo = t.charAt(i);
 
       Integer scChar = charArray[spo];
       if (scChar == null) {
