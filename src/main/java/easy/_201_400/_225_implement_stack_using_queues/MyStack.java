@@ -34,7 +34,7 @@ package easy._201_400._225_implement_stack_using_queues;
 // Related Topics Stack Design
 
 
-import java.util.Stack;
+import common.ListNode;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class MyStack {
@@ -42,42 +42,87 @@ class MyStack {
   //  解答成功:
   //  执行耗时:0 ms,击败了100.00% 的Java用户
   //  内存消耗:37 MB,击败了6.67% 的Java用户
-  Stack<Integer> stack;
+//  Stack<Integer> stack;
+//
+//  /**
+//   * Initialize your data structure here.
+//   */
+//  public MyStack() {
+//    stack = new Stack<>();
+//  }
+//
+//  /**
+//   * Push element x onto stack.
+//   */
+//  public void push(int x) {
+//    stack.push(x);
+//  }
+//
+//  /**
+//   * Removes the element on top of the stack and returns that element.
+//   */
+//  public int pop() {
+//    return stack.pop();
+//  }
+//
+//  /**
+//   * Get the top element.
+//   */
+//  public int top() {
+//    return stack.peek();
+//  }
+//
+//  /**
+//   * Returns whether the stack is empty.
+//   */
+//  public boolean empty() {
+//    return stack.empty();
+//  }
 
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:36.9 MB,击败了6.67% 的Java用户
+  ListNode stack;
   /**
    * Initialize your data structure here.
    */
   public MyStack() {
-    stack = new Stack<>();
   }
 
   /**
    * Push element x onto stack.
    */
   public void push(int x) {
-    stack.push(x);
+    ListNode top = new ListNode(x);
+    top.next = stack;
+    stack = top;
   }
 
   /**
    * Removes the element on top of the stack and returns that element.
    */
   public int pop() {
-    return stack.pop();
+    int val = stack.val;
+    stack = stack.next;
+    return val;
   }
 
   /**
    * Get the top element.
    */
   public int top() {
-    return stack.peek();
+    return stack.val;
   }
 
   /**
    * Returns whether the stack is empty.
    */
   public boolean empty() {
-    return stack.empty();
+    return stack == null;
   }
+
+
 }
 
 /**
