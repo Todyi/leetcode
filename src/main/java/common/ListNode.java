@@ -19,6 +19,11 @@ public class ListNode {
     val = x;
   }
 
+  public ListNode(int val, ListNode next) {
+    this.val = val;
+    this.next = next;
+  }
+
   public static ListNode buildList(Integer[] listArr) {
     if (listArr == null || listArr.length == 0) {
       return null;
@@ -33,7 +38,7 @@ public class ListNode {
     return header;
   }
 
-  public static ListNode buildListAppend(Integer[] listArr,ListNode appendNode) {
+  public static ListNode buildListAppend(Integer[] listArr, ListNode appendNode) {
     if (listArr == null || listArr.length == 0) {
       return null;
     }
@@ -43,11 +48,11 @@ public class ListNode {
       ListNode node = new ListNode(listArr[i]);
       point.next = node;
       point = node;
-      if (i == listArr.length-1){
+      if (i == listArr.length - 1) {
         node.next = appendNode;
       }
     }
-    if (listArr.length == 1){
+    if (listArr.length == 1) {
       header.next = appendNode;
     }
     return header;
