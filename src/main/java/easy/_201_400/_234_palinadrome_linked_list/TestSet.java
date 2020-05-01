@@ -22,4 +22,28 @@ public class TestSet {
     boolean resolution = new easy._201_400._234_palinadrome_linked_list.Solution().isPalindrome(input);
     Assert.assertTrue(result.equals(resolution));
   }
+
+  @Test
+  public void test2() {
+    ListNode input = ListNode.buildList(new Integer[]{1,0,0});
+    Boolean result = false;
+    boolean resolution = new easy._201_400._234_palinadrome_linked_list.Solution().isPalindrome(input);
+    Assert.assertTrue(result.equals(resolution));
+  }
+
+  @Test
+  public void test3() {
+    ListNode input = ListNode.buildList(new Integer[]{1});
+    Boolean result = true;
+    boolean resolution = new easy._201_400._234_palinadrome_linked_list.Solution().isPalindrome(input);
+    Assert.assertTrue(result.equals(resolution));
+  }
+
+  @Test
+  public void test4() {
+    ListNode input = ListNode.buildList(new Integer[]{1,0,1});
+    Boolean result = true;
+    boolean resolution = new easy._201_400._234_palinadrome_linked_list.Solution().isPalindrome(input);
+    Assert.assertTrue(result.equals(resolution));
+  }
 }
