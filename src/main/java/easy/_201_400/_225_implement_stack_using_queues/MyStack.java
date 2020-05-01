@@ -41,87 +41,90 @@ class MyStack {
 
   //  解答成功:
   //  执行耗时:0 ms,击败了100.00% 的Java用户
-  //  内存消耗:37 MB,击败了6.67% 的Java用户
-//  Stack<Integer> stack;
-//
-//  /**
-//   * Initialize your data structure here.
-//   */
-//  public MyStack() {
-//    stack = new Stack<>();
-//  }
-//
-//  /**
-//   * Push element x onto stack.
-//   */
-//  public void push(int x) {
-//    stack.push(x);
-//  }
-//
-//  /**
-//   * Removes the element on top of the stack and returns that element.
-//   */
-//  public int pop() {
-//    return stack.pop();
-//  }
-//
-//  /**
-//   * Get the top element.
-//   */
-//  public int top() {
-//    return stack.peek();
-//  }
-//
-//  /**
-//   * Returns whether the stack is empty.
-//   */
-//  public boolean empty() {
-//    return stack.empty();
-//  }
+  //  内存消耗:37.1 MB,击败了6.67% 的Java用户
+  class Queue {
 
+    private ListNode header;
+    private ListNode tail;
+    private int size = 0;
 
-  //  解答成功:
-  //  执行耗时:0 ms,击败了100.00% 的Java用户
-  //  内存消耗:36.9 MB,击败了6.67% 的Java用户
-  ListNode stack;
+    public Queue() {
+    }
+
+    public void push(int x) {
+      ListNode newTail = new ListNode(x);
+      size++;
+      if (header == null) {
+        header = newTail;
+        tail = newTail;
+      } else {
+        tail.next = newTail;
+        tail = newTail;
+      }
+    }
+
+    public int pop() {
+      int val = header.val;
+      header = header.next;
+      size--;
+      return val;
+    }
+
+    public int peek() {
+      return header.val;
+    }
+
+    public int size() {
+      return size;
+    }
+
+    public boolean isEmpty() {
+      return header == null;
+    }
+  }
+
+  Queue queue;
+  Integer top;
+
   /**
    * Initialize your data structure here.
    */
   public MyStack() {
+    queue = new Queue();
   }
 
   /**
    * Push element x onto stack.
    */
   public void push(int x) {
-    ListNode top = new ListNode(x);
-    top.next = stack;
-    stack = top;
+    queue.push(x);
+    top = x;
   }
 
   /**
    * Removes the element on top of the stack and returns that element.
    */
   public int pop() {
-    int val = stack.val;
-    stack = stack.next;
-    return val;
+    for (int i = 0; i < queue.size(); i++) {
+      top = queue.pop();
+      queue.push(top);
+    }
+    return queue.pop();
   }
 
   /**
    * Get the top element.
    */
   public int top() {
-    return stack.val;
+    return top;
   }
 
   /**
    * Returns whether the stack is empty.
    */
   public boolean empty() {
-    return stack == null;
+    return queue.isEmpty();
   }
-
 
 }
 
