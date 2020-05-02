@@ -49,8 +49,8 @@ import common.TreeNode;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:4 ms,击败了74.14% 的Java用户
-  //  内存消耗:40.1 MB,击败了5.10% 的Java用户
+  //  执行耗时:3 ms,击败了100.00% 的Java用户
+  //  内存消耗:40.4 MB,击败了5.10% 的Java用户
   public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
     if (root == null || (root.left == null && root.right == null)) {
       return null;
@@ -58,15 +58,14 @@ class Solution {
 
     int val = root.val;
 
-    if ((val == p.val || val == q.val) || (val <= p.val && q.val <= val) || (val <= q.val
-        && p.val <= val)) {
-      return root;
-    }
-    if (p.val < val) {
+    if (p.val < val && q.val < val) {
       return lowestCommonAncestor(root.left, p, q);
-    } else {
+    }
+    if (val < p.val && val < q.val) {
       return lowestCommonAncestor(root.right, p, q);
     }
+
+    return root;
 
   }
 
