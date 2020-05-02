@@ -49,44 +49,25 @@ import common.TreeNode;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:11 ms,击败了6.26% 的Java用户
+  //  执行耗时:4 ms,击败了74.14% 的Java用户
   //  内存消耗:40.1 MB,击败了5.10% 的Java用户
   public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
     if (root == null || (root.left == null && root.right == null)) {
       return null;
     }
-    boolean isPAncestor = isAncestor(root, p.val);
-    boolean isQAncestor = isAncestor(root, q.val);
-    if (root.val == p.val && isQAncestor) {
+
+    int val = root.val;
+
+    if ((val == p.val || val == q.val) || (val <= p.val && q.val <= val) || (val <= q.val
+        && p.val <= val)) {
       return root;
     }
-    if (root.val == q.val && isPAncestor) {
-      return root;
-    }
-    TreeNode leftSubTree = lowestCommonAncestor(root.left, p, q);
-    if (leftSubTree != null) {
-      return leftSubTree;
+    if (p.val < val) {
+      return lowestCommonAncestor(root.left, p, q);
+    } else {
+      return lowestCommonAncestor(root.right, p, q);
     }
 
-    TreeNode rightSubTree = lowestCommonAncestor(root.right, p, q);
-    if (rightSubTree != null) {
-      return rightSubTree;
-    }
-
-    if (isQAncestor && isPAncestor) {
-      return root;
-    }
-    return null;
-  }
-
-  public boolean isAncestor(TreeNode node, int q) {
-    if (node == null) {
-      return false;
-    }
-    if (node.val == q) {
-      return true;
-    }
-    return isAncestor(node.left, q) || isAncestor(node.right, q);
   }
 
 }
