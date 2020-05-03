@@ -34,8 +34,8 @@ import java.util.List;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:23 ms,击败了5.49% 的Java用户
-  //  内存消耗:41 MB,击败了5.55% 的Java用户
+  //  执行耗时:10 ms,击败了12.42% 的Java用户
+  //  内存消耗:39.6 MB,击败了5.55% 的Java用户
   public List<String> binaryTreePaths(TreeNode root) {
     List<String> result = new ArrayList<>();
     if (root == null) {
@@ -44,10 +44,13 @@ class Solution {
     if (root.left == null && root.right == null) {
       result.add(root.val + "");
     } else {
-      result.addAll(binaryTreePaths(root.left));
-      result.addAll(binaryTreePaths(root.right));
-      for (int i = 0; i < result.size(); i++) {
-        result.set(i, root.val + "->" + result.get(i));
+      List<String> left = binaryTreePaths(root.left);
+      for (String s : left) {
+        result.add(root.val + "->" + s);
+      }
+      List<String> right = binaryTreePaths(root.right);
+      for (String s : right) {
+        result.add(root.val + "->" + s);
       }
     }
     return result;
