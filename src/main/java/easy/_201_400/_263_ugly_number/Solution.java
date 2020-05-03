@@ -41,26 +41,44 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了10.83% 的Java用户
   //  内存消耗:38.6 MB,击败了6.25% 的Java用户
+//  public boolean isUgly(int num) {
+//    if (num == 1) {
+//      return true;
+//    }
+//    while (0 < num) {
+//      if (num % 2 == 0) {
+//        num = num >> 1;
+//        continue;
+//      } else if (num % 3 == 0) {
+//        num = num / 3;
+//        continue;
+//      } else if (num % 5 == 0) {
+//        num = num / 5;
+//        continue;
+//      } else {
+//        return num == 1;
+//      }
+//    }
+//    return false;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.6 MB,击败了6.25% 的Java用户
   public boolean isUgly(int num) {
-    if (num == 1) {
-      return true;
+    while (0 < num && num % 2 == 0) {
+      num = num >> 1;
     }
-    while (0 < num) {
-      if (num % 2 == 0) {
-        num = num >> 1;
-        continue;
-      } else if (num % 3 == 0) {
-        num = num / 3;
-        continue;
-      } else if (num % 5 == 0) {
-        num = num / 5;
-        continue;
-      } else {
-        return num == 1;
-      }
+    while (0 < num && num % 3 == 0) {
+      num = num / 3;
     }
-    return false;
+    while (0 < num && num % 5 == 0) {
+      num = num / 5;
+    }
+    return num == 1;
   }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
