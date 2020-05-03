@@ -35,4 +35,22 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test3() {
+    String s = "xaaddy";
+    String t = "xbbccy";
+    Boolean result = false;
+    boolean solution = new easy._201_400._242_valid_anagram.Solution().isAnagram(s, t);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test4() {
+    String s = "axadyd";
+    String t = "xbbccy";
+    Boolean result = false;
+    boolean solution = new easy._201_400._242_valid_anagram.Solution().isAnagram(s, t);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }

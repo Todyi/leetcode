@@ -30,29 +30,51 @@ class Solution {
   //  解答成功:
   //  执行耗时:9 ms,击败了29.97% 的Java用户
   //  内存消耗:40.4 MB,击败了5.16% 的Java用户
+//  public boolean isAnagram(String s, String t) {
+//    if (s == null && t == null) {
+//      return true;
+//    }
+//    if (s == null || t == null) {
+//      return false;
+//    }
+//    if (s.length() != t.length()) {
+//      return false;
+//    }
+//
+//    int[] sMapArray = new int[127];
+//    for (int i = 0; i < s.length(); i++) {
+//      int sChar = s.charAt(i);
+//      int tChar = t.charAt(i);
+//      if (sChar == tChar) {
+//        continue;
+//      }
+//      sMapArray[sChar]++;
+//      sMapArray[tChar]--;
+//    }
+//    for (int i = 0; i < sMapArray.length; i++) {
+//      if (sMapArray[i] != 0) {
+//        return false;
+//      }
+//    }
+//
+//    return true;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.5 MB,击败了13.55% 的Java用户
   public boolean isAnagram(String s, String t) {
-    if (s == null && t == null) {
-      return true;
+
+    int[] sMapArray = new int[26];
+    for (char c : s.toCharArray()) {
+      sMapArray[c - 'a']++;
     }
-    if (s == null || t == null) {
-      return false;
-    }
-    if (s.length() != t.length()) {
-      return false;
+    for (char c : t.toCharArray()) {
+      sMapArray[c - 'a']--;
     }
 
-    int[] sMapArray = new int[127];
-    for (int i = 0; i < s.length(); i++) {
-      int sChar = s.charAt(i);
-      int tChar = t.charAt(i);
-      if (sChar == tChar) {
-        continue;
-      }
-      sMapArray[sChar]++;
-      sMapArray[tChar]--;
-    }
     for (int i = 0; i < sMapArray.length; i++) {
-      if (sMapArray[i] != 0) {
+      if (0 != sMapArray[i]) {
         return false;
       }
     }
