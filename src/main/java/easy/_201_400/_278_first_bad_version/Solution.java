@@ -32,21 +32,21 @@ package easy._201_400._278_first_bad_version;
 public class Solution extends VersionControl {
 
   //  解答成功:
-  //  执行耗时:13 ms,击败了34.06% 的Java用户
+  //  执行耗时:12 ms,击败了98.58% 的Java用户
   //  内存消耗:36.2 MB,击败了5.63% 的Java用户
   public int firstBadVersion(int n) {
-    return firstBadVersion(0, n);
+    return firstBadVersion(1, n);
   }
 
   public int firstBadVersion(int start, int end) {
-    if (end - start == 1) {
-      return isBadVersion(start) ? start : end;
+    if (end == start) {
+      return start;
     }
-    int mid = start + ((end - start) >> 1);
+    int mid = start + ((end - start) / 2);
     if (isBadVersion(mid)) {
       return firstBadVersion(start, mid);
     } else {
-      return firstBadVersion(mid, end);
+      return firstBadVersion(mid + 1, end);
     }
   }
 }
