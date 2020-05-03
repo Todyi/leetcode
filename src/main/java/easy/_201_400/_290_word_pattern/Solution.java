@@ -44,9 +44,34 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了36.04% 的Java用户
   //  内存消耗:38.9 MB,击败了5.41% 的Java用户
+//  public boolean wordPattern(String pattern, String str) {
+//    String[] patternArr = new String[127];
+//    Map<String, Character> patternMap = new HashMap<>();
+//
+//    String[] split = str.split(" ");
+//    char[] charArr = pattern.toCharArray();
+//    if (split.length != charArr.length) {
+//      return false;
+//    }
+//
+//    for (int i = 0; i < split.length; i++) {
+//      String pat = patternArr[charArr[i]];
+//      Character character = patternMap.get(split[i]);
+//      if (pat == null && character == null) {
+//        patternArr[charArr[i]] = split[i];
+//        patternMap.put(split[i], charArr[i]);
+//      } else if (pat == null || !pat.equals(split[i])) {
+//        return false;
+//      }
+//    }
+//
+//    return true;
+//  }
+
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Word Pattern.
+  //  Memory Usage: 36.9 MB, less than 5.41% of Java online submissions for Word Pattern.
   public boolean wordPattern(String pattern, String str) {
-    String[] patternArr = new String[127];
-    Map<String, Character> patternMap = new HashMap<>();
+    Map<Object, Integer> patternMap = new HashMap<>();
 
     String[] split = str.split(" ");
     char[] charArr = pattern.toCharArray();
@@ -54,18 +79,13 @@ class Solution {
       return false;
     }
 
-    for (int i = 0; i < split.length; i++) {
-      String pat = patternArr[charArr[i]];
-      Character character = patternMap.get(split[i]);
-      if (pat == null && character == null) {
-        patternArr[charArr[i]] = split[i];
-        patternMap.put(split[i], charArr[i]);
-      } else if (pat == null || !pat.equals(split[i])) {
+    for (Integer i = 0; i < split.length; i++) {
+      if (patternMap.put(charArr[i], i) != patternMap.put(split[i], i)) {
         return false;
       }
     }
-
     return true;
+
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)

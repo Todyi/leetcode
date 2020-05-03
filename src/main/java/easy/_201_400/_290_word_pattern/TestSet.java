@@ -50,5 +50,13 @@ public class TestSet {
     boolean resolution = new easy._201_400._290_word_pattern.Solution().wordPattern(pattern,str);
     Assert.assertTrue(result.equals(resolution));
   }
+  @Test
+  public void test5() {
+    String pattern = "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd";
+    String str = "s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s t t";
+    Boolean result = true;
+    boolean resolution = new easy._201_400._290_word_pattern.Solution().wordPattern(pattern,str);
+    Assert.assertTrue(result.equals(resolution));
+  }
 
 }
