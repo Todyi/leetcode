@@ -41,7 +41,7 @@ package easy._201_400._299_bulls_and_cows;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:4 ms,击败了91.00% 的Java用户
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
   //  内存消耗:39.2 MB,击败了5.26% 的Java用户
   public String getHint(String secret, String guess) {
     char[] sArr = secret.toCharArray();
@@ -53,18 +53,20 @@ class Solution {
       if (gArr[i] == sArr[i]) {
         a++;
       } else {
-        map[sArr[i] - '0']++;
-        if (map[sArr[i] - '0'] < 1){
+        int s = sArr[i] - '0';
+        map[s]++;
+        if (map[s] < 1) {
           b++;
         }
-        map[gArr[i] - '0']--;
-        if (-1 < map[gArr[i] - '0']){
+        int g = gArr[i] - '0';
+        map[g]--;
+        if (-1 < map[g]) {
           b++;
         }
       }
     }
 
-    return a + "A" + b + "B";
+    return new StringBuilder().append(a).append("A").append(b).append("B").toString();
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
