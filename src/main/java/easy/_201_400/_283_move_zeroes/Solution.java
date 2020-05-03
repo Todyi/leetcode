@@ -21,22 +21,24 @@ package easy._201_400._283_move_zeroes;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:1 ms,击败了25.72% 的Java用户
-  //  内存消耗:42.2 MB,击败了5.59% 的Java用户
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.4 MB,击败了41.96% 的Java用户
   public void moveZeroes(int[] nums) {
-    int[] notZero = new int[nums.length];
-    int i = 0;
-    int j = 0;
-    while (i < nums.length) {
-      if (nums[i] != 0) {
-        notZero[j] = nums[i];
-        j++;
+    int j = Integer.MAX_VALUE;
+    for (int i = 0; i < nums.length; i++) {
+      if (nums[i] == 0 && i < j) {
+        j = i;
       }
-      nums[i] = 0;
-      i++;
-    }
-    for (int k = 0; k < notZero.length; k++) {
-      nums[k] = notZero[k];
+      if (nums[i] != 0 && j < i) {
+        nums[j] = nums[i];
+        nums[i] = 0;
+        while (j < nums.length) {
+          if (nums[j] == 0) {
+            break;
+          }
+          j++;
+        }
+      }
     }
   }
 }

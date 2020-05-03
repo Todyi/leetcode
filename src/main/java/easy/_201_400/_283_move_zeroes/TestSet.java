@@ -15,4 +15,13 @@ public class TestSet {
     Assert.assertTrue(Comparators.isSame(result,input));
   }
 
+
+  @Test
+  public void test1() {
+    int[] input = {0,0,0,3,12};
+    int[] result = {3,12,0,0,0};
+    new easy._201_400._283_move_zeroes.Solution().moveZeroes(input);
+    Assert.assertTrue(Comparators.isSame(result,input));
+  }
+
 }
