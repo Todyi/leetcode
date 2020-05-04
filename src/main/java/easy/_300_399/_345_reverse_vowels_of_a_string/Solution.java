@@ -31,39 +31,73 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了98.98% 的Java用户
   //  内存消耗:39.3 MB,击败了93.10% 的Java用户
-  public String reverseVowels(String s) {
-    char[] sequence = s.toCharArray();
+//  public String reverseVowels(String s) {
+//    char[] sequence = s.toCharArray();
+//
+//    int start = 0;
+//    int end = s.length() - 1;
+//    while (start < end) {
+//      if (!isVowel(sequence[start])) {
+//        start++;
+//      } else if (isVowel(sequence[end])) {
+//        char tmp = sequence[start];
+//        sequence[start] = sequence[end];
+//        sequence[end] = tmp;
+//        start++;
+//        end--;
+//      } else {
+//        end--;
+//      }
+//    }
+//
+//    return new String(sequence);
+//  }
+//
+//  public boolean isVowel(char c) {
+//    return c - '' == 0
+//        || c - 'e' == 0
+//        || c - 'i' == 0
+//        || c - 'o' == 0
+//        || c - 'u' == 0
+//        || c - '' == 0
+//        || c - 'E' == 0
+//        || c - 'I' == 0
+//        || c - 'O' == 0
+//        || c - 'U' == 0;
+//  }
 
-    int start = 0;
-    int end = s.length() - 1;
-    while (start < end) {
-      if (!isVowel(sequence[start])) {
-        start++;
-      } else if (isVowel(sequence[end])) {
-        char tmp = sequence[start];
-        sequence[start] = sequence[end];
-        sequence[end] = tmp;
-        start++;
-        end--;
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.2 MB,击败了96.55% 的Java用户
+  public String reverseVowels(String s) {
+    int[] vowels = new int[128];
+    vowels['a'] = 1;
+    vowels['e'] = 1;
+    vowels['i'] = 1;
+    vowels['o'] = 1;
+    vowels['u'] = 1;
+    vowels['A'] = 1;
+    vowels['E'] = 1;
+    vowels['I'] = 1;
+    vowels['O'] = 1;
+    vowels['U'] = 1;
+    char[] sequence = s.toCharArray();
+    int left = 0;
+    int right = sequence.length - 1;
+    while (left < right) {
+      if (vowels[sequence[left]] < 1) {
+        left++;
+      } else if (vowels[sequence[right]] < 1) {
+        right--;
       } else {
-        end--;
+        char tmp = sequence[left];
+        sequence[left] = sequence[right];
+        sequence[right] = tmp;
+        left++;
+        right--;
       }
     }
-
     return new String(sequence);
-  }
-
-  public boolean isVowel(char c) {
-    return c - 'a' == 0
-        || c - 'e' == 0
-        || c - 'i' == 0
-        || c - 'o' == 0
-        || c - 'u' == 0
-        || c - 'A' == 0
-        || c - 'E' == 0
-        || c - 'I' == 0
-        || c - 'O' == 0
-        || c - 'U' == 0;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
