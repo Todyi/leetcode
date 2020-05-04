@@ -29,7 +29,6 @@ public class TestSet {
 
   @Test
   public void test2() {
-    //[    //[]
     int[] num1 = {61, 24, 20, 58, 95, 53, 17, 32, 45, 85, 70, 20, 83, 62, 35, 89, 5, 95, 12, 86, 58,
         77, 30, 64, 46, 13, 5, 92, 67, 40, 20, 38, 31, 18, 89, 85, 7, 30, 67, 34, 62, 35, 47, 98, 3,
         41, 53, 26, 66, 40, 54, 44, 57, 46, 70, 60, 4, 63, 82, 42, 65, 59, 17, 98, 29, 72, 1, 96,
@@ -44,10 +43,29 @@ public class TestSet {
 
   @Test
   public void test3() {
-    //[    //[]
     int[] num1 = {};
     int[] num2 = {};
     int[] result = {};
+    int[] solution = new easy._300_399._349_intersection_of_two_arrays.Solution()
+        .intersection(num1, num2);
+    Assert.assertTrue(Comparators.isSame(result, solution));
+  }
+
+  @Test
+  public void test4() {
+    int[] num1 = {};
+    int[] num2 = {1};
+    int[] result = {};
+    int[] solution = new easy._300_399._349_intersection_of_two_arrays.Solution()
+        .intersection(num1, num2);
+    Assert.assertTrue(Comparators.isSame(result, solution));
+  }
+
+  @Test
+  public void test5() {
+    int[] num1 = {4,7,9,7,6,7};
+    int[] num2 = {5,0,0,6,1,6,2,2,4};
+    int[] result = {6,4};
     int[] solution = new easy._300_399._349_intersection_of_two_arrays.Solution()
         .intersection(num1, num2);
     Assert.assertTrue(Comparators.isSame(result, solution));
