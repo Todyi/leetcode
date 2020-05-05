@@ -22,30 +22,27 @@ package easy._300_399._387_first_unique_character_in_a_string;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:22 ms,击败了53.79% 的Java用户
-  //  内存消耗:40 MB,击败了6.43% 的Java用户
+  //  执行耗时:4 ms,击败了98.36% 的Java用户
+  //  内存消耗:39.4 MB,击败了51.43% 的Java用户
   public int firstUniqChar(String s) {
     if (s.length() == 1) {
       return 0;
     }
     char[] arr = s.toCharArray();
-    boolean[] map = new boolean[arr.length];
+
+    int[] map = new int[128];
     for (int i = 0; i < arr.length; i++) {
-      for (int j = i + 1; j < arr.length; j++) {
-        if (arr[i] == arr[j]) {
-          map[i] = true;
-          map[j] = true;
-          break;
-        }
-      }
+      map[arr[i]]++;
     }
+    int p = Integer.MAX_VALUE;
     for (int i = 0; i < map.length; i++) {
-      if (!map[i]) {
-        return i;
+      if (1 == map[i]) {
+        p = Math.min(p, s.indexOf((char) i));
       }
+
     }
 
-    return -1;
+    return p == Integer.MAX_VALUE ? -1 : p;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
