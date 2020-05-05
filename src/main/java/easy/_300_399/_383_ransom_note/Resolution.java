@@ -27,18 +27,33 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了97.63% 的Java用户
   //  内存消耗:40 MB,击败了7.69% 的Java用户
+//  public boolean canConstruct(String ransomNote, String magazine) {
+//    int[] map = new int[128];
+//    char[] magazineArr = magazine.toCharArray();
+//    char[] ransom = ransomNote.toCharArray();
+//    for (char c : magazineArr) {
+//      map[c]++;
+//    }
+//    for (char c : ransom) {
+//      if (map[c] < 1) {
+//        return false;
+//      }
+//      map[c]--;
+//    }
+//    return true;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39 MB,击败了84.62% 的Java用户
   public boolean canConstruct(String ransomNote, String magazine) {
     int[] map = new int[128];
-    char[] magazineArr = magazine.toCharArray();
-    char[] ransom = ransomNote.toCharArray();
-    for (char c : magazineArr) {
-      map[c]++;
-    }
-    for (char c : ransom) {
-      if (map[c] < 1) {
+    for (char c : ransomNote.toCharArray()) {
+      int index = magazine.indexOf(c, map[c]);
+      if (index == -1) {
         return false;
       }
-      map[c]--;
+      map[c] = index + 1;
     }
     return true;
   }

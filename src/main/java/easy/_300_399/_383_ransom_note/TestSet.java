@@ -35,4 +35,14 @@ public class TestSet {
         .canConstruct(ransomNote, magazine);
     Assert.assertTrue(result.equals(solution));
   }
+
+  @Test
+  public void test3() {
+    String ransomNote = "fihjjjjei";
+    String magazine = "hjibagacbhadfaefdjaeaebgi";
+    Boolean result = false;
+    boolean solution = new easy._300_399._383_ransom_note.Solution()
+        .canConstruct(ransomNote, magazine);
+    Assert.assertTrue(result.equals(solution));
+  }
 }
