@@ -41,12 +41,45 @@ package easy._300_399._392_is_subsequence;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-
   //  解答成功:
   //  执行耗时:4 ms,击败了87.72% 的Java用户
   //  内存消耗:44.6 MB,击败了100.00% 的Java用户
+//  public boolean isSubsequence(String s, String t) {
+//    if (s.length() == 0 && t.length() == 0) {
+//      return true;
+//    }
+//
+//    if (t.length() == 0) {
+//      return false;
+//    }
+//
+//    if (s.length() == 0) {
+//      return true;
+//    }
+//
+//    char[] tArr = t.toCharArray();
+//    char[] sArr = s.toCharArray();
+//
+//    int tLeft = 0;
+//    int sLeft = 0;
+//
+//    while (sLeft < sArr.length && tLeft < tArr.length) {
+//      if (sArr[sLeft] == tArr[tLeft]) {
+//        sLeft++;
+//        tLeft++;
+//      } else {
+//        tLeft++;
+//      }
+//    }
+//
+//    return sLeft == sArr.length;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:42.1 MB,击败了100.00% 的Java用户
   public boolean isSubsequence(String s, String t) {
-    if (s.length() == 0 && t.length() == 0) {
+    if (s.equals(t)) {
       return true;
     }
 
@@ -57,23 +90,15 @@ class Solution {
     if (s.length() == 0) {
       return true;
     }
-
-    char[] tArr = t.toCharArray();
-    char[] sArr = s.toCharArray();
-
-    int tLeft = 0;
-    int sLeft = 0;
-
-    while (sLeft < sArr.length && tLeft < tArr.length) {
-      if (sArr[sLeft] == tArr[tLeft]) {
-        sLeft++;
-        tLeft++;
-      } else {
-        tLeft++;
+    int index = 0;
+    for (char c : s.toCharArray()) {
+      index = t.indexOf(c, index);
+      if (index++ < 0) {
+        return false;
       }
     }
 
-    return sLeft == sArr.length;
+    return true;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
