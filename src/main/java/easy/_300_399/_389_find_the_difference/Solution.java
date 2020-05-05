@@ -28,13 +28,31 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了99.18% 的Java用户
   //  内存消耗:37.6 MB,击败了12.50% 的Java用户
+//  public char findTheDifference(String s, String t) {
+//    int xor = 0;
+//    for (char c : s.toCharArray()) {
+//      xor ^= c;
+//    }
+//    for (char c : t.toCharArray()) {
+//      xor ^= c;
+//    }
+//    return (char) xor;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:37.5 MB,击败了12.50% 的Java用户
   public char findTheDifference(String s, String t) {
-    int xor = 0;
-    for (char c : s.toCharArray()) {
-      xor ^= c;
+    if (t.length() < s.length()) {
+      return findTheDifference(t, s);
     }
-    for (char c : t.toCharArray()) {
-      xor ^= c;
+    char[] sArr = s.toCharArray();
+    char[] tArr = t.toCharArray();
+    int length = sArr.length;
+    int xor = t.charAt(length);
+
+    for (int i = 0; i < sArr.length; i++) {
+      xor ^= sArr[i] ^ tArr[i];
     }
     return (char) xor;
   }
