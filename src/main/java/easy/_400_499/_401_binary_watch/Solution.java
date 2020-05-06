@@ -32,14 +32,18 @@ import java.util.List;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:13 ms,击败了39.82% 的Java用户
-  //  内存消耗:40 MB,击败了16.67% 的Java用户
+  //  执行耗时:8 ms,击败了70.79% 的Java用户
+  //  内存消耗:38.3 MB,击败了16.67% 的Java用户
   public List<String> readBinaryWatch(int num) {
     List<String> result = new ArrayList<>();
     for (int hour = 0; hour < 12; hour++) {
+      int i = Integer.bitCount(hour);
+      if (num < i){
+        continue;
+      }
       for (int minutes = 0; minutes < 60; minutes++) {
-        if (Integer.bitCount(hour) + Integer.bitCount(minutes) == num) {
-          result.add(String.format("%d:%02d", hour, minutes));
+        if (i + Integer.bitCount(minutes) == num) {
+          result.add(hour+":"+(minutes<10?"0"+minutes:minutes));
         }
       }
     }
