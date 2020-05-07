@@ -48,6 +48,24 @@ public class Comparators {
     return true;
   }
 
+  public static boolean isSame(String[] array0, String[] array1) {
+    if (array0 == null && array1 == null) {
+      return true;
+    }
+    if (array0 == null || array1 == null) {
+      return false;
+    }
+    if (array0.length != array1.length) {
+      return false;
+    }
+    for (int i = 0; i < array0.length; i++) {
+      if (!array0[i].equals(array1[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 
   public static boolean isSame(TreeNode p, TreeNode q) {
     if (p == null && q == null) {
