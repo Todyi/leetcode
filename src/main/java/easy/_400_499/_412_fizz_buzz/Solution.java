@@ -33,32 +33,32 @@ package easy._400_499._412_fizz_buzz;
 //
 
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
-  //  执行耗时:1 ms,击败了99.59% 的Java用户
-  //  内存消耗:40.1 MB,击败了5.40% 的Java用户
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:40.2 MB,击败了5.40% 的Java用户
   public List<String> fizzBuzz(int n) {
-    List<String> list = new ArrayList<>();
-    String[] map = new String[]{"Fizz", "Buzz", "FizzBuzz"};
+    String[] list = new String[n];
+    final String[] map = new String[]{"Fizz", "Buzz", "FizzBuzz"};
     for (int i = 1; i <= n; i++) {
       if (i % 3 == 0) {
         if (i % 5 == 0) {
-          list.add(map[2]);
+          list[i - 1] = map[2];
         } else {
-          list.add(map[0]);
+          list[i - 1] = map[0];
         }
       } else if (i % 5 == 0) {
-        list.add(map[1]);
+        list[i - 1] = map[1];
       } else {
-        list.add(Integer.toString(i));
+        list[i - 1] = Integer.toString(i);
       }
     }
-    return list;
+    return Arrays.asList(list);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
