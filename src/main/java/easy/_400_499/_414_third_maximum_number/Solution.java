@@ -44,41 +44,62 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了89.07% 的Java用户
   //  内存消耗:39.3 MB,击败了86.96% 的Java用户
+//  public int thirdMax(int[] nums) {
+//    int max = Integer.MIN_VALUE, second = Integer.MIN_VALUE, third = Integer.MIN_VALUE;
+//    int intMinCount = 0;
+//    for (int i = 0; i < nums.length; i++) {
+//      if (nums[i] == Integer.MIN_VALUE) {
+//        intMinCount++;
+//        continue;
+//      } else if (max == nums[i] || second == nums[i]) {
+//        continue;
+//      } else if (max < nums[i]) {
+//        if (second < max) {
+//          if (third < second) {
+//            third = second;
+//          }
+//          second = max;
+//        }
+//        max = nums[i];
+//      } else if (second < nums[i]) {
+//        if (third < second) {
+//          third = second;
+//        }
+//        second = nums[i];
+//      } else if (third < nums[i]) {
+//        third = nums[i];
+//      }
+//    }
+//    if (nums.length < 3) {
+//      return max;
+//    }
+//
+//    if (max == second || max == third || second == third || (intMinCount == 0
+//        && third == Integer.MIN_VALUE)) {
+//      return max;
+//    }
+//    return third;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.5 MB,击败了78.26% 的Java用户
   public int thirdMax(int[] nums) {
-    int max = Integer.MIN_VALUE, second = Integer.MIN_VALUE, third = Integer.MIN_VALUE;
-    int intMinCount = 0;
-    for (int i = 0; i < nums.length; i++) {
-      if (nums[i] == Integer.MIN_VALUE) {
-        intMinCount++;
-        continue;
-      } else if (max == nums[i] || second == nums[i]) {
-        continue;
-      } else if (max < nums[i]) {
-        if (second < max) {
-          if (third < second) {
-            third = second;
-          }
-          second = max;
-        }
-        max = nums[i];
-      } else if (second < nums[i]) {
-        if (third < second) {
-          third = second;
-        }
-        second = nums[i];
-      } else if (third < nums[i]) {
-        third = nums[i];
+    long max = Long.MIN_VALUE, second = Long.MIN_VALUE, third = Long.MIN_VALUE;
+    for (int n : nums) {
+      if (max < n) {
+        third = second;
+        second = max;
+        max = n;
+      } else if (second < n && n < max) {
+        third = second;
+        second = n;
+      } else if (third < n && n < second) {
+        third = n;
       }
     }
-    if (nums.length < 3) {
-      return max;
-    }
 
-    if (max == second || max == third || second == third || (intMinCount == 0
-        && third == Integer.MIN_VALUE)) {
-      return max;
-    }
-    return third;
+    return third == Long.MIN_VALUE ? (int) max : (int) third;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
