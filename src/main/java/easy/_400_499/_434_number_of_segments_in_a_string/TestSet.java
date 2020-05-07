@@ -30,5 +30,27 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test3() {
+    String s = " 123 ";
+    Integer result = 1;
+    int solution = new easy._400_499._434_number_of_segments_in_a_string.Solution().countSegments(s);
+    Assert.assertTrue(result.equals(solution));
+  }
+  @Test
+  public void test4() {
+    String s = " 123 321 ^ 1";
+    Integer result = 4;
+    int solution = new easy._400_499._434_number_of_segments_in_a_string.Solution().countSegments(s);
+    Assert.assertTrue(result.equals(solution));
+  }
+  @Test
+  public void test5() {
+    String s = "hello";
+    Integer result = 1;
+    int solution = new easy._400_499._434_number_of_segments_in_a_string.Solution().countSegments(s);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 
 }
