@@ -68,24 +68,27 @@ class Solution {
   //  执行耗时:2 ms,击败了100.00% 的Java用户
   //  内存消耗:39.1 MB,击败了90.91% 的Java用户
   public int pathSum(TreeNode root, int sum) {
-    Map<Integer, Integer> pathSumCountMap = new HashMap<>();
-    return pathSumHelper(root, pathSumCountMap, 0, sum);
+    //use a map to record pathSum
+    Map<Integer, Integer> pathSumMap = new HashMap<>();
+    return pathSumHelper(root, pathSumMap, 0, sum);
   }
 
-  public int pathSumHelper(TreeNode node, Map<Integer, Integer> pathSumCountMap,
+  public int pathSumHelper(TreeNode node, Map<Integer, Integer> pathSumMap,
       int pathSum, int sum) {
     if (node == null) {
       return 0;
     }
     pathSum += node.val;
-    int result = pathSumCountMap.getOrDefault(pathSum - sum, 0);
-    if (pathSum == sum){
-      result++;
-    }
-    pathSumCountMap.put(pathSum, pathSumCountMap.getOrDefault(pathSum, 0) + 1);
-    result += pathSumHelper(node.left, pathSumCountMap, pathSum, sum);
-    result += pathSumHelper(node.right, pathSumCountMap, pathSum, sum);
-    pathSumCountMap.put(pathSum, pathSumCountMap.get(pathSum) - 1);
+    // get the number of valid path, ended at current node
+    int result = (pathSum == sum ? 1 : 0) + pathSumMap.getOrDefault(pathSum - sum, 0);
+
+    // add current path into pathSumMap
+    pathSumMap.put(pathSum, pathSumMap.getOrDefault(pathSum, 0) + 1);
+    //figure out the number of valid path in subTree
+    result += pathSumHelper(node.left, pathSumMap, pathSum, sum);
+    result += pathSumHelper(node.right, pathSumMap, pathSum, sum);
+    // when finish current path, minus current path
+    pathSumMap.put(pathSum, pathSumMap.get(pathSum) - 1);
     return result;
   }
 
