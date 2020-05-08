@@ -31,25 +31,27 @@ import java.util.Map;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:126 ms,击败了45.68% 的Java用户
+  //  执行耗时:115 ms,击败了48.01% 的Java用户
   //  内存消耗:39.1 MB,击败了71.43% 的Java用户
   public int numberOfBoomerangs(int[][] points) {
     int count = 0;
     for (int i = 0; i < points.length; i++) {
-      Map<Double, Integer> map = new HashMap<>();
+      Map<Integer, Integer> map = new HashMap<>();
       for (int j = 0; j < points.length; j++) {
-        double distance = distance(points[i], points[j]);
+        int distance = distance(points[i], points[j]);
         int num = map.getOrDefault(distance, 0);
-        count += num * 2;
+        count += num << 1;
         map.put(distance, num + 1);
       }
     }
     return count;
   }
 
-  public double distance(int[] p1, int[] p2) {
-    return Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1], 2);//actually Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1], 2))
+  public int distance(int[] p1, int[] p2) {
+    return (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1]);
+    //actually Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1], 2))
   }
+
 
 
 }
