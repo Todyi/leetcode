@@ -49,21 +49,8 @@ class Solution {
     if (root == null) {
       return 0;
     }
-    int count = 0;
-    Stack<TreeNode> stack = new Stack<>();
-    stack.push(root);
-    while (true) {
-      if (stack.empty()) {
-        break;
-      }
-      TreeNode node = stack.pop();
-      if (node != null) {
-        count += pathSumHelper(node, sum);
-        stack.push(node.left);
-        stack.push(node.right);
-      }
-    }
-    return count;
+    return pathSumHelper(root, sum) + pathSum(root.left, sum) + pathSum(root.right,
+        sum);
   }
 
   public int pathSumHelper(TreeNode root, int sum) {
