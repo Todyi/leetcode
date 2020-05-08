@@ -33,6 +33,8 @@ package easy._400_499._437_path_sum_iii;
 //leetcode submit region begin(Prohibit modification and deletion)
 
 import common.TreeNode;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -45,21 +47,46 @@ class Solution {
   //  解答成功:
   //  执行耗时:22 ms,击败了33.25% 的Java用户
   //  内存消耗:39.2 MB,击败了88.64% 的Java用户
+//  public int pathSum(TreeNode root, int sum) {
+//    if (root == null) {
+//      return 0;
+//    }
+//    return pathSumHelper(root, sum) + pathSum(root.left, sum) + pathSum(root.right,
+//        sum);
+//  }
+//
+//  public int pathSumHelper(TreeNode root, int sum) {
+//    if (root == null) {
+//      return 0;
+//    }
+//    return (root.val == sum ? 1 : 0)
+//        + pathSumHelper(root.left, sum - root.val)
+//        + pathSumHelper(root.right, sum - root.val);
+//  }
+
+  //  解答成功:
+  //  执行耗时:2 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.1 MB,击败了90.91% 的Java用户
   public int pathSum(TreeNode root, int sum) {
-    if (root == null) {
-      return 0;
-    }
-    return pathSumHelper(root, sum) + pathSum(root.left, sum) + pathSum(root.right,
-        sum);
+    Map<Integer, Integer> pathSumCountMap = new HashMap<>();
+    return pathSumHelper(root, pathSumCountMap, 0, sum);
   }
 
-  public int pathSumHelper(TreeNode root, int sum) {
-    if (root == null) {
+  public int pathSumHelper(TreeNode node, Map<Integer, Integer> pathSumCountMap,
+      int pathSum, int sum) {
+    if (node == null) {
       return 0;
     }
-    return (root.val == sum ? 1 : 0)
-        + pathSumHelper(root.left, sum - root.val)
-        + pathSumHelper(root.right, sum - root.val);
+    pathSum += node.val;
+    int result = pathSumCountMap.getOrDefault(pathSum - sum, 0);
+    if (pathSum == sum){
+      result++;
+    }
+    pathSumCountMap.put(pathSum, pathSumCountMap.getOrDefault(pathSum, 0) + 1);
+    result += pathSumHelper(node.left, pathSumCountMap, pathSum, sum);
+    result += pathSumHelper(node.right, pathSumCountMap, pathSum, sum);
+    pathSumCountMap.put(pathSum, pathSumCountMap.get(pathSum) - 1);
+    return result;
   }
 
 
