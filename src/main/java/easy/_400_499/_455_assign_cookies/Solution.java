@@ -47,22 +47,17 @@ class Solution {
 
   //  解答成功:
   //  执行耗时:6 ms,击败了99.93% 的Java用户
-  //  内存消耗:40.2 MB,击败了100.00% 的Java用户
+  //  内存消耗:39.8 MB,击败了100.00% 的Java用户
   public int findContentChildren(int[] g, int[] s) {
     Arrays.sort(g);
     Arrays.sort(s);
-    int i = 0, j = 0;
     int content = 0;
-    while (true) {
-      if (i < g.length && j < s.length && g[i] <= s[j]) {
+    for (int j = 0; j < s.length; j++) {
+      if (content < g.length && g[content] <= s[j]) {
         content++;
-        i++;
-      }
-      j++;
-      if (s.length < j) {
-        return content;
       }
     }
+    return content;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
