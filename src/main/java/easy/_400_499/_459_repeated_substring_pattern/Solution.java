@@ -38,29 +38,26 @@ import java.util.Arrays;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:1557 ms,击败了5.02% 的Java用户
-  //  内存消耗:40.2 MB,击败了9.52% 的Java用户
+  //  执行耗时:165 ms,击败了17.30% 的Java用户
+  //  内存消耗:39.7 MB,击败了9.52% 的Java用户
   public boolean repeatedSubstringPattern(String s) {
     char[] sArr = s.toCharArray();
     int subLen = 1;
     int half = sArr.length >> 1;
-    boolean isRepeated = false;
     while (subLen <= half) {
-      char[] sub = Arrays.copyOf(sArr, subLen);
-      for (int i = 0; i < sArr.length; i++) {
-        if (sub[i % subLen] != sArr[i]) {
+      boolean isRepeated = true;
+      for (int i = subLen; i < sArr.length; i++) {
+        if (sArr[i % subLen] != sArr[i]) {
           isRepeated = false;
           subLen++;
           break;
         }
-        isRepeated = true;
       }
       if (isRepeated) {
-        break;
+        return subLen <= half && sArr.length % subLen == 0;
       }
     }
-    return isRepeated && subLen <= half && sArr.length % subLen == 0 ? true : false;
-
+    return false;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
