@@ -38,23 +38,27 @@ import java.util.Arrays;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:165 ms,击败了17.30% 的Java用户
-  //  内存消耗:39.7 MB,击败了9.52% 的Java用户
+  //  执行耗时:8 ms,击败了80.14% 的Java用户
+  //  内存消耗:39.5 MB,击败了14.29% 的Java用户
   public boolean repeatedSubstringPattern(String s) {
     char[] sArr = s.toCharArray();
     int subLen = 1;
     int half = sArr.length >> 1;
     while (subLen <= half) {
       boolean isRepeated = true;
-      for (int i = subLen; i < sArr.length; i++) {
-        if (sArr[i % subLen] != sArr[i]) {
-          isRepeated = false;
-          subLen++;
-          break;
+      if (sArr.length % subLen == 0) {
+        for (int i = subLen; i < sArr.length; i++) {
+          if (sArr[i % subLen] != sArr[i]) {
+            isRepeated = false;
+            subLen++;
+            break;
+          }
         }
-      }
-      if (isRepeated) {
-        return subLen <= half && sArr.length % subLen == 0;
+        if (isRepeated) {
+          return subLen <= half;
+        }
+      } else {
+        subLen++;
       }
     }
     return false;
