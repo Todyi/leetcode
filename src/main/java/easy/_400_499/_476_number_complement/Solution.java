@@ -35,23 +35,46 @@ package easy._400_499._476_number_complement;
 // Related Topics Bit Manipulation
 
 
+import java.util.Stack;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
   //  执行耗时:1 ms,击败了27.21% 的Java用户
   //  内存消耗:36.1 MB,击败了8.70% 的Java用户
+//  public int findComplement(int num) {
+//    String binary = Integer.toString(num, 2);
+//    StringBuilder sb = new StringBuilder();
+//    for (int i = 0; i < binary.length(); i++) {
+//      char c = binary.charAt(i) == '0' ? '1' : '0';
+//      if (c == '1' || (c == '0' && 0 < sb.length())) {
+//        sb.append(c);
+//      }
+//    }
+//    return 0 < sb.length() ? Integer.parseInt(sb.toString(), 2) : 0;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:36.4 MB,击败了8.70% 的Java用户
   public int findComplement(int num) {
-    String binary = Integer.toString(num, 2);
-    StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < binary.length(); i++) {
-      char c = binary.charAt(i) == '0' ? '1' : '0';
-      if (c == '1' || (c == '0' && 0 < sb.length())) {
-        sb.append(c);
-      }
+    //5:101 -> bitCount = 3 ->complementBit = 1<<3 -1 = 111(2)
+    //~5:11111111 11111111 11111111 11111010
+    //~5 & 111 = 10(2) = 2
+
+    int tmp = num;
+    int bitCount = 0;
+    while (0 < tmp) {
+      bitCount++;
+      tmp >>= 1;
     }
-    return 0 < sb.length() ? Integer.parseInt(sb.toString(), 2) : 0;
+    int complementBit = (1 << bitCount) - 1;
+    return (~num) & complementBit;
+
   }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
