@@ -14,5 +14,13 @@ public class TestSet {
         .islandPerimeter(grid);
     Assert.assertTrue(result.equals(solution));
   }
+  @Test
+  public void test1() {
+    int[][] grid = {{1,0}};
+    Integer result = 4;
+    int solution = new easy._400_499._463_island_perimeter.Solution()
+        .islandPerimeter(grid);
+    Assert.assertTrue(result.equals(solution));
+  }
 
 }
