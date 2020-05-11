@@ -55,4 +55,14 @@ public class TestSet {
         .licenseKeyFormatting(s,k);
     Assert.assertTrue(result.equals(solution));
   }
+
+  @Test
+  public void test6() {
+    String s = "--a-a-a-a--";
+    int k = 2;
+    String result = "AA-AA";
+    String solution = new easy._400_499._482_license_key_formatting.Solution()
+        .licenseKeyFormatting(s,k);
+    Assert.assertTrue(result.equals(solution));
+  }
 }

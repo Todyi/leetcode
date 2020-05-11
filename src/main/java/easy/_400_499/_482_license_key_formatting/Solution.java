@@ -50,23 +50,25 @@ package easy._400_499._482_license_key_formatting;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:11 ms,击败了60.39% 的Java用户
-  //  内存消耗:40 MB,击败了8.16% 的Java用户
+  //  执行耗时:6 ms,击败了96.83% 的Java用户
+  //  内存消耗:39.2 MB,击败了61.22% 的Java用户
   public String licenseKeyFormatting(String S, int K) {
-    S = S.replaceAll("-", "");
     char[] sArr = S.toCharArray();
     int flag = 0;
     StringBuilder sb = new StringBuilder();
     for (int i = sArr.length - 1; -1 < i; i--) {
+      if (sArr[i] == '-') {
+        continue;
+      }
+      if (flag == 0 && -1 < i && 0 < sb.length()) {
+        sb.append('-');
+      }
       if (96 < sArr[i] && sArr[i] < 123) {//'a'97 'z'122 'a'<= -> 96<, <='z' -> <123
         sb.append((char) (sArr[i] - 32));//'a'97 'A'65 -'a'+'A' = -32
       } else {
         sb.append(sArr[i]);
       }
-      if (flag == K - 1 && i > 0) {
-        sb.append('-');
-      }
-      flag = (flag + 1) % K;//k4 f3
+      flag = (flag + 1) % K;
     }
     return sb.reverse().toString();
   }
