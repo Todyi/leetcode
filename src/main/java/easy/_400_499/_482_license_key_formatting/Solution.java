@@ -52,25 +52,54 @@ class Solution {
   //  解答成功:
   //  执行耗时:6 ms,击败了96.83% 的Java用户
   //  内存消耗:39.2 MB,击败了61.22% 的Java用户
+//  public String licenseKeyFormatting(String S, int K) {
+//    char[] sArr = S.toCharArray();
+//    int flag = 0;
+//    StringBuilder sb = new StringBuilder();
+//    for (int i = sArr.length - 1; -1 < i; i--) {
+//      if (sArr[i] == '-') {
+//        continue;
+//      }
+//      if (flag == 0 && -1 < i && 0 < sb.length()) {
+//        sb.append('-');
+//      }
+//      if (96 < sArr[i] && sArr[i] < 123) {//'a'97 'z'122 'a'<= -> 96<, <='z' -> <123
+//        sb.append((char) (sArr[i] - 32));//'a'97 'A'65 -'a'+'A' = -32
+//      } else {
+//        sb.append(sArr[i]);
+//      }
+//      flag = (flag + 1) % K;
+//    }
+//    return sb.reverse().toString();
+//  }
+
+  //  解答成功:
+  //  执行耗时:3 ms,击败了100.00% 的Java用户
+  //  内存消耗:40 MB,击败了10.20% 的Java用户
   public String licenseKeyFormatting(String S, int K) {
     char[] sArr = S.toCharArray();
-    int flag = 0;
-    StringBuilder sb = new StringBuilder();
-    for (int i = sArr.length - 1; -1 < i; i--) {
-      if (sArr[i] == '-') {
-        continue;
+    char[] tmp = new char[sArr.length];
+    int len = 0, flag = 0;
+    for (char c : sArr) {
+      if (c != '-') {
+        tmp[len++] = 'a' <= c && c <= 'z' ? (char) (c - 32) : c;
       }
-      if (flag == 0 && -1 < i && 0 < sb.length()) {
-        sb.append('-');
-      }
-      if (96 < sArr[i] && sArr[i] < 123) {//'a'97 'z'122 'a'<= -> 96<, <='z' -> <123
-        sb.append((char) (sArr[i] - 32));//'a'97 'A'65 -'a'+'A' = -32
-      } else {
-        sb.append(sArr[i]);
-      }
-      flag = (flag + 1) % K;
     }
-    return sb.reverse().toString();
+    int dashNum = (len - 1) / K;
+    char[] res = new char[len + dashNum];
+    int i = len + dashNum - 1;
+    int j = len - 1;
+    while (0 <= i) {
+      if (flag % K == 0 && i < res.length - 1) {
+        res[i--] = '-';
+        flag = 1;
+      }else {
+        flag++;
+      }
+      res[i--] = tmp[j--];
+    }
+
+    return new String(res);
   }
 
 
