@@ -50,23 +50,45 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了98.93% 的Java用户
   //  内存消耗:40.4 MB,击败了7.41% 的Java用户
-  public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-    Map<Integer, Integer> map = new HashMap<>();
+//  public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+//    Map<Integer, Integer> map = new HashMap<>();
+//
+//    for (int i = 0; i < nums2.length - 1; i++) {
+//      for (int j = i + 1; j < nums2.length; j++) {
+//        if (nums2[i] < nums2[j]) {
+//          map.put(nums2[i], nums2[j]);
+//          break;
+//        }
+//      }
+//    }
+//    for (int i = 0; i < nums1.length; i++) {
+//      nums1[i] = map.getOrDefault(nums1[i], -1);
+//    }
+//
+//    return nums1;
+//  }
 
-    for (int i = 0; i < nums2.length - 1; i++) {
-      for (int j = i + 1; j < nums2.length; j++) {
-        if (nums2[i] < nums2[j]) {
-          map.put(nums2[i], nums2[j]);
+  //  解答成功:
+  //  执行耗时:1 ms,击败了99.90% 的Java用户
+  //  内存消耗:39.4 MB,击败了7.41% 的Java用户
+  public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+    int[] map = new int[10000];
+
+    for (int i = 0; i < nums2.length; i++) {
+      map[nums2[i]] = i;
+    }
+    for (int i = 0; i < nums1.length; i++) {
+      int index = map[nums1[i]];
+      nums1[i] = -1;
+      for (int j = index + 1; j < nums2.length; j++) {
+        if (nums2[index] < nums2[j]) {
+          nums1[i] = nums2[j];
           break;
         }
       }
     }
-    int[] res = new int[nums1.length];
-    for (int i = 0; i < nums1.length; i++) {
-      res[i] = map.getOrDefault(nums1[i], -1);
-    }
 
-    return res;
+    return nums1;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
