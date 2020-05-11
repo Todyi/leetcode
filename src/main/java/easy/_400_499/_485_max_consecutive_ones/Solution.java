@@ -27,22 +27,38 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了13.75% 的Java用户
   //  内存消耗:53.2 MB,击败了5.88% 的Java用户
+//  public int findMaxConsecutiveOnes(int[] nums) {
+//    int maxNum = 0, currentNum = 0;
+//    if (nums[0] == 1) {
+//      maxNum = 1;
+//      currentNum = 1;
+//    }
+//    for (int i = 1; i < nums.length; i++) {
+//      if (nums[i] == 0 && nums[i - 1] == 1) {
+//        maxNum = Math.max(currentNum, maxNum);
+//      } else if (nums[i] == 1 && nums[i - 1] == 1) {
+//        currentNum++;
+//      } else if (nums[i] == 1) {
+//        currentNum = 1;
+//      }
+//    }
+//    return Math.max(currentNum, maxNum);
+//  }
+
+
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Max Consecutive Ones.
+  //  Memory Usage: 41.4 MB, less than 5.88% of Java online submissions for Max Consecutive Ones.
   public int findMaxConsecutiveOnes(int[] nums) {
     int maxNum = 0, currentNum = 0;
-    if (nums[0] == 1) {
-      maxNum = 1;
-      currentNum = 1;
-    }
-    for (int i = 1; i < nums.length; i++) {
-      if (nums[i] == 0 && nums[i - 1] == 1) {
-        maxNum = maxNum < currentNum ? currentNum : maxNum;
-      } else if (nums[i] == 1 && nums[i - 1] == 1) {
+    for (int i = 0; i < nums.length; i++) {
+      if (nums[i] == 0) {
+        maxNum = Math.max(currentNum, maxNum);
+        currentNum = 0;
+      } else {
         currentNum++;
-      } else if (nums[i] == 1) {
-        currentNum = 1;
       }
     }
-    return maxNum < currentNum ? currentNum : maxNum;
+    return Math.max(currentNum, maxNum);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
