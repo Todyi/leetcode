@@ -1,4 +1,4 @@
-package easy._500_599._501_find_mode_in_bianry_search_tree;
+package easy._500_599._501_find_mode_in_binary_search_tree;
 
 //Given a binary search tree (BST) with duplicates, find all the mode(s)
 // (the most frequently occurred element) in the given BST.
