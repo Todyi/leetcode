@@ -31,21 +31,27 @@ import java.util.Arrays;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:4 ms,击败了94.85% 的Java用户
-  //  内存消耗:40.4 MB,击败了100.00% 的Java用户
+  //  执行耗时:3 ms,击败了95.49% 的Java用户
+  //  内存消耗:40.6 MB,击败了100.00% 的Java用户
   public String[] findRelativeRanks(int[] nums) {
-    String[] medal = {"Gold Medal", "Silver Medal", "Bronze Medal"};
     int[] tmp = Arrays.copyOf(nums, nums.length);
     Arrays.sort(tmp);
-    String[] map = new String[tmp[tmp.length - 1] + 1];
+    int[] map = new int[tmp[tmp.length - 1] + 1];
     for (int i = 0; i < tmp.length; i++) {
-      int rank = tmp.length - i;
-      map[tmp[i]] = rank <= 3 ? medal[rank - 1] : Integer.toString(rank);
+      map[tmp[i]] = tmp.length - i;
     }
 
     String[] res = new String[nums.length];
     for (int i = 0; i < nums.length; i++) {
-      res[i] = map[nums[i]];
+      if (3 < map[nums[i]]) {
+        res[i] = Integer.toString(map[nums[i]]);
+      } else if (1 == map[nums[i]]) {
+        res[i] = "Gold Medal";
+      } else if (2 == map[nums[i]]) {
+        res[i] = "Silver Medal";
+      } else {
+        res[i] = "Bronze Medal";
+      }
     }
 
     return res;
