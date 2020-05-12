@@ -38,10 +38,7 @@ package easy._500_599._501_find_mode_in_bianry_search_tree;
 
 import common.TreeNode;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Definition for a binary tree node. public class TreeNode { int val; TreeNode left; TreeNode
@@ -53,33 +50,81 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了52.65% 的Java用户
   //  内存消耗:41.4 MB,击败了7.14% 的Java用户
+//  public int[] findMode(TreeNode root) {
+//    Map<Integer, Integer> map = new HashMap<>();
+//    traverse(root, map);
+//    int maxTimes = Integer.MIN_VALUE;
+//    int maxCount = 0;
+//    int[] res = new int[map.size()];
+//    for (Integer i : map.keySet()) {
+//      int times = map.get(i);
+//      if (times < maxTimes) {
+//        continue;
+//      } else if (maxTimes == times) {
+//        res[maxCount++]++;
+//      } else {
+//        maxTimes = times;
+//        maxCount = 0;
+//        res[maxCount++] = 1;
+//      }
+//    }
+//    return Arrays.copyOf(res, maxCount);
+//  }
+//
+//  public void traverse(TreeNode node, Map<Integer, Integer> map) {
+//    if (node != null) {
+//      map.put(node.val, map.getOrDefault(node.val, 0) + 1);
+//      traverse(node.left, map);
+//      traverse(node.right, map);
+//    }
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.8 MB,击败了28.57% 的Java用户
   public int[] findMode(TreeNode root) {
-    Map<Integer, Integer> map = new HashMap<>();
-    traverse(root, map);
-    int maxTimes = Integer.MIN_VALUE;
-    int maxCount = 0;
-    int[] res = new int[map.size()];
-    for (Integer i : map.keySet()) {
-      int times = map.get(i);
-      if (times < maxTimes) {
-        continue;
-      } else if (maxTimes == times) {
-        res[maxCount++]++;
-      } else {
-        maxTimes = times;
-        maxCount = 0;
-        res[maxCount++] = 1;
-      }
+    List<Integer> resList = new ArrayList<>();
+    int[] count = new int[2];
+    TreeNode[] preNode = new TreeNode[1];
+    inOrder(root, preNode, count, resList);
+
+    int[] res = new int[resList.size()];
+    int index = 0;
+    for (Integer i : resList) {
+      res[index++] = i;
     }
-    return Arrays.copyOf(res, maxCount);
+    return res;
   }
 
-  public void traverse(TreeNode node, Map<Integer, Integer> map) {
-    if (node != null) {
-      map.put(node.val, map.getOrDefault(node.val, 0) + 1);
-      traverse(node.left, map);
-      traverse(node.right, map);
+  //inOrder to count the times of curNode's val occurred
+  //Tree{1, 1, 2, 1, null, 2, 2} will be traversed by sequence{1,1,null,1,1,2,2,2}
+  //count[0] is the times of curNode's val occurred
+  //count[1] is the times of preNode's val occurred
+  public void inOrder(TreeNode curNode, TreeNode[] preNode, int[] count, List<Integer> resList) {
+    if (curNode == null) {
+      return;
     }
+
+    inOrder(curNode.left, preNode, count, resList);
+
+    if (preNode[0] != null && curNode.val == preNode[0].val) {
+      count[0]++;
+    } else {
+      count[0] = 1;
+    }
+
+    if (count[1] <= count[0]) {
+      if (count[1] < count[0]) {
+        resList.clear();
+      }
+      resList.add(curNode.val);
+      count[1] = count[0];
+    }
+
+    preNode[0] = curNode;
+
+    inOrder(curNode.right, preNode, count, resList);
+
   }
 
 }
