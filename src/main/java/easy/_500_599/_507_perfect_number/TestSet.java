@@ -1,7 +1,6 @@
 package easy._500_599._507_perfect_number;
 
 
-import common.Comparators;
 import org.junit.Assert;
 import org.junit.Test;
 
