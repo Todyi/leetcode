@@ -32,5 +32,22 @@ public class TestSet {
         .detectCapitalUse(word);
     Assert.assertTrue(result.equals(solution));
   }
+  @Test
+  public void test3() {
+    String word = "Google";
+    Boolean result = true;
+    boolean solution = new easy._500_599._520_detect_capital.Solution()
+        .detectCapitalUse(word);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test4() {
+    String word = "FFFFFFFFf";
+    Boolean result = false;
+    boolean solution = new easy._500_599._520_detect_capital.Solution()
+        .detectCapitalUse(word);
+    Assert.assertTrue(result.equals(solution));
+  }
 
 }
