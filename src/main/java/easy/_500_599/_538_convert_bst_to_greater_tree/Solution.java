@@ -36,36 +36,50 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了31.78% 的Java用户
   //  内存消耗:39.6 MB,击败了81.25% 的Java用户
+//  public TreeNode convertBST(TreeNode root) {
+//    // value[0]=preNodeSourceValue
+//    // value[1]=preNodeNewValue
+//    // value[2]=sum
+//    Integer[] value = new Integer[3];
+//    value[2] = 0;
+//    sum(root, value);
+//    return root;
+//  }
+//  public void sum(TreeNode node, Integer[] value) {
+//    if (node == null) {
+//      return;
+//    }
+//    sum(node.right, value);
+//    value[2] += node.val;
+//    if (value[0] == null) {
+//      value[0] = node.val;
+//      value[1] = node.val;
+//    } else if (value[0] == node.val) {
+//      node.val = value[1];
+//    } else {//value[0]!=node.val
+//      value[0] = node.val;
+//      node.val = value[2];
+//      value[1] = node.val;
+//    }
+//    sum(node.left, value);
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.7 MB,击败了75.00% 的Java用户
   public TreeNode convertBST(TreeNode root) {
-    // value[0]=preNodeSourceValue
-    // value[1]=preNodeNewValue
-    // value[2]=sum
-    Integer[] value = new Integer[3];
-    value[2] = 0;
-    sum(root, value);
+    traversal(root, 0);
     return root;
   }
 
-  public void sum(TreeNode node, Integer[] value) {
+  public int traversal(TreeNode node, int sum) {
     if (node == null) {
-      return;
+      return sum;
     }
-    sum(node.right, value);
-
-    value[2] += node.val;
-    if (value[0] == null) {
-      value[0] = node.val;
-      value[1] = node.val;
-    } else if (value[0] == node.val) {
-      node.val = value[1];
-    } else {//value[0]!=node.val
-      node.val = value[2];
-      value[1] = node.val;
-    }
-
-    sum(node.left, value);
-
-
+    int tmp = traversal(node.right, sum);
+    tmp += node.val;
+    node.val = tmp;
+    return traversal(node.left, tmp);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)

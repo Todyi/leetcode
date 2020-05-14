@@ -17,4 +17,13 @@ public class TestSet {
     Assert.assertTrue(Comparators.isSame(result, solution));
   }
 
+  @Test
+  public void test1() {
+    TreeNode root = TreeNode.buildTree(new Integer[]{2, 2, 13});
+    TreeNode result = TreeNode.buildTree(new Integer[]{15, 15, 13});
+    TreeNode solution = new easy._500_599._538_convert_bst_to_greater_tree.Solution()
+        .convertBST(root);
+    Assert.assertTrue(Comparators.isSame(result, solution));
+  }
+
 }
