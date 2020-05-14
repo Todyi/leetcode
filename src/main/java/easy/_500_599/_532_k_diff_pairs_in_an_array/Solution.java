@@ -43,8 +43,7 @@ package easy._500_599._532_k_diff_pairs_in_an_array;
 // Related Topics Array Two Pointers
 
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
@@ -52,34 +51,58 @@ class Solution {
   //  解答成功:
   //  执行耗时:7 ms,击败了79.79% 的Java用户
   //  内存消耗:40 MB,击败了89.47% 的Java用户
+//  public int findPairs(int[] nums, int k) {
+//    if (k < 0) {
+//      return 0;
+//    }
+//    Map<Integer, Integer> numMap = new HashMap<>();
+//    int pairs = 0;
+//    for (int i : nums) {
+//      numMap.put(i, numMap.getOrDefault(i, 0) + 1);
+//    }
+//    if (k == 0) {
+//      for (Integer value : numMap.values()) {
+//        if (1 < value) {
+//          pairs++;
+//        }
+//      }
+//    } else {
+//      for (Integer n : numMap.keySet()) {
+//        if (numMap.containsKey(n + k)) {
+//          pairs++;
+//        }
+//      }
+//    }
+//    return pairs;
+//  }
+
+  //  解答成功:
+  //  执行耗时:3 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.9 MB,击败了89.47% 的Java用户
   public int findPairs(int[] nums, int k) {
     if (k < 0) {
       return 0;
     }
-
-    Map<Integer, Integer> numMap = new HashMap<>();
-    int min = Integer.MAX_VALUE;
-    int pairs = 0;
-    for (int i : nums) {
-      if (i < min) {
-        min = i;
+    Arrays.sort(nums);
+    int pairs = 0, l = 0, h = 0;
+    while (h < nums.length) {
+      if (h <= l) {
+        h = l + 1;
+        continue;
       }
-      numMap.put(i, numMap.getOrDefault(i, 0) + 1);
-    }
-    if (k == 0) {
-      for (Integer value : numMap.values()) {
-        if (1 < value) {
-          pairs++;
+      if (nums[l] + k == nums[h]) {
+        pairs++;
+        l++;
+        while (l < nums.length && nums[l - 1] == nums[l]) {
+          l++;
         }
+      } else if (nums[l] + k < nums[h]) {
+        l++;
+      } else {
+        h++;
       }
-    } else {
-      for (Integer n : numMap.keySet()) {
-        if (numMap.containsKey(n + k)) {
-          pairs++;
-        }
-      }
-    }
 
+    }
     return pairs;
   }
 }
