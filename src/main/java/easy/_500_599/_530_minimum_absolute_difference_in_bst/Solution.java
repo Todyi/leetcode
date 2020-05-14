@@ -52,6 +52,8 @@ class Solution {
     return inOrder(root, preNode, Integer.MAX_VALUE);
   }
 
+  //BST{3,2,5,1,null,4,null}, it's inOrder sequence is {1,2,null,3,4,5,null}
+  //the minValue is min(preNode.val - node.val) in o(n)
   public int inOrder(TreeNode node, TreeNode[] preNode, int min) {
     if (node == null) {
       return Integer.MAX_VALUE;
