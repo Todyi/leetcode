@@ -27,8 +27,8 @@ package easy._500_599._541_reverse_string_ii;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:1 ms,击败了75.94% 的Java用户
-  //  内存消耗:39.5 MB,击败了7.41% 的Java用户
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.9 MB,击败了7.41% 的Java用户
   public String reverseStr(String s, int k) {
     if (k < 2) {
       return s;
@@ -36,19 +36,18 @@ class Solution {
     char[] arr = s.toCharArray();
     int i = 0;
     while (i < arr.length) {
-      int start = i;
-      int end = arr.length <= i + k ? arr.length : i + k;
-      int mid = (start + end) >> 1;
-      for (int j = 0; j + start < mid; j++) {
-        char tmp = arr[j + start];
-        arr[j + start] = arr[end - 1 - j];
-        arr[end - 1 - j] = tmp;
-
-      }
-      i = end + k;
+      reverse(arr,i,arr.length < i + k ? arr.length - 1 : i + k - 1);
+      i += 2 * k;
     }
-
     return new String(arr);
+  }
+
+  public void reverse(char[] arr,int start,int end){
+    while (start < end) {
+      char tmp = arr[start];
+      arr[start++] = arr[end];
+      arr[end--] = tmp;
+    }
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
