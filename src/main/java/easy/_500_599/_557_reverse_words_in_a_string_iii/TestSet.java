@@ -15,4 +15,13 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test1() {
+    String s = " Let's take LeetCode contest";
+    String result = " s'teL ekat edoCteeL tsetnoc";
+    String solution = new easy._500_599._557_reverse_words_in_a_string_iii.Solution()
+        .reverseWords(s);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
