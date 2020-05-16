@@ -27,4 +27,14 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test2() {
+    TreeNode s = TreeNode.buildTree(new Integer[]{1});
+    TreeNode t = TreeNode.buildTree(new Integer[]{1});
+    Boolean result = true;
+    boolean solution = new easy._500_599._572_subtree_of_another_tree.Solution()
+        .isSubtree(s, t);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }

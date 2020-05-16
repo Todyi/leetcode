@@ -53,9 +53,7 @@ package easy._500_599._572_subtree_of_another_tree;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-import com.sun.source.tree.Tree;
 import common.TreeNode;
-import java.util.Stack;
 
 /**
  * Definition for a binary tree node. public class TreeNode { int val; TreeNode left; TreeNode
@@ -65,30 +63,23 @@ import java.util.Stack;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:3 ms,击败了98.08% 的Java用户
-  //  内存消耗:39.9 MB,击败了100.00% 的Java用户
+  //  执行耗时:1 ms,击败了98.94% 的Java用户
+  //  内存消耗:39.8 MB,击败了100.00% 的Java用户
   public boolean isSubtree(TreeNode s, TreeNode t) {
-    Stack<TreeNode> stack = new Stack<>();
-    findSameNode(s, t.val, stack);
-
-    while (!stack.empty()) {
-      TreeNode subTree = stack.pop();
-      if (isSame(subTree, t)) {
-        return true;
-      }
-    }
-    return false;
+    return postOrder(s, t, countNode(t));
   }
 
-  public void findSameNode(TreeNode tree, int value, Stack<TreeNode> stack) {
-    if (tree == null) {
-      return;
+  public boolean postOrder(TreeNode s, TreeNode t, int nodeCount) {
+    if (s == null) {
+      return false;
     }
-    if (tree.val == value) {
-      stack.push(tree);
-    }
-    findSameNode(tree.left, value, stack);
-    findSameNode(tree.right, value, stack);
+    return postOrder(s.left, t, nodeCount) || postOrder(s.right, t, nodeCount) || (s.val == t.val
+        && countNode(s) == nodeCount && isSame(s, t));
+  }
+
+
+  public int countNode(TreeNode node) {
+    return node == null ? 0 : 1 + countNode(node.left) + countNode(node.right);
   }
 
   public boolean isSame(TreeNode p, TreeNode q) {
@@ -98,10 +89,7 @@ class Solution {
     if (p == null || q == null) {
       return false;
     }
-    if (p.val == q.val) {
-      return isSame(p.left, q.left) && isSame(p.right, q.right);
-    }
-    return false;
+    return p.val == q.val && isSame(p.left, q.left) && isSame(p.right, q.right);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
