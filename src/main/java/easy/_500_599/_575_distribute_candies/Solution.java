@@ -39,18 +39,21 @@ package easy._500_599._575_distribute_candies;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:8 ms,击败了96.11% 的Java用户
-  //  内存消耗:41.7 MB,击败了100.00% 的Java用户
+  //  执行耗时:4 ms,击败了99.54% 的Java用户
+  //  内存消耗:41 MB,击败了100.00% 的Java用户
   public int distributeCandies(int[] candies) {
-    int[] map = new int[200001];
+    boolean[] map = new boolean[200001];
     int totalKinds = 0, half = candies.length >> 1;
     for (int i : candies) {
-      map[i + 100000]++;
-      if (map[i + 100000] == 1) {
+      if (!map[i + 100000]) {
+        map[i + 100000] = true;
         totalKinds++;
       }
+      if (totalKinds == half) {
+        return half;
+      }
     }
-    return totalKinds < half ? totalKinds : half;
+    return totalKinds;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
