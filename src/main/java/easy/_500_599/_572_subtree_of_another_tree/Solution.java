@@ -62,22 +62,6 @@ import common.TreeNode;
  */
 class Solution {
 
-  //  解答成功:
-  //  执行耗时:1 ms,击败了98.94% 的Java用户
-  //  内存消耗:39.8 MB,击败了100.00% 的Java用户
-  public boolean isSubtree(TreeNode s, TreeNode t) {
-    return postOrder(s, t, countNode(t));
-  }
-
-  public boolean postOrder(TreeNode s, TreeNode t, int nodeCount) {
-    if (s == null) {
-      return false;
-    }
-    return postOrder(s.left, t, nodeCount) || postOrder(s.right, t, nodeCount) || (s.val == t.val
-        && countNode(s) == nodeCount && isSame(s, t));
-  }
-
-
   public int countNode(TreeNode node) {
     return node == null ? 0 : 1 + countNode(node.left) + countNode(node.right);
   }
@@ -90,6 +74,44 @@ class Solution {
       return false;
     }
     return p.val == q.val && isSame(p.left, q.left) && isSame(p.right, q.right);
+  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了98.94% 的Java用户
+  //  内存消耗:39.8 MB,击败了100.00% 的Java用户
+//  public boolean isSubtree(TreeNode s, TreeNode t) {
+//    return postOrder(s, t, countNode(t));
+//  }
+//
+//  public boolean postOrder(TreeNode s, TreeNode t, int nodeCount) {
+//    if (s == null) {
+//      return false;
+//    }
+//    return postOrder(s.left, t, nodeCount) || postOrder(s.right, t, nodeCount) || (s.val == t.val
+//        && countNode(s) == nodeCount && isSame(s, t));
+//  }
+//
+//
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.6 MB,击败了100.00% 的Java用户
+  boolean isSubTree = false;
+  public boolean isSubtree(TreeNode s, TreeNode t) {
+    postOrderCount(s, t, countNode(t));
+    return isSubTree;
+  }
+
+  public int postOrderCount(TreeNode s, TreeNode t, int tNodeCount) {
+    if (s == null) {
+      return 0;
+    }
+    int count = postOrderCount(s.left, t, tNodeCount) + postOrderCount(s.right, t, tNodeCount) + 1;
+    if (s.val == t.val && count == tNodeCount && isSame(s, t)) {
+      isSubTree = true;
+      return 0;
+    }
+    return count;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
