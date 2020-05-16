@@ -69,4 +69,13 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test7() {
+    int[] nums = new int[]{2,1,5,3,4};
+    Integer result = 5;
+    int solution = new easy._500_599._581_shortest_unsorted_continuous_subarray.Solution()
+        .findUnsortedSubarray(nums);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
