@@ -52,9 +52,13 @@ import java.util.Map;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:5 ms,击败了98.75% 的Java用户
-  //  内存消耗:40.1 MB,击败了45.16% 的Java用户
+  //  执行耗时:4 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.5 MB,击败了93.55% 的Java用户
   public String[] findRestaurant(String[] list1, String[] list2) {
+    if (list1.length > list2.length) {
+      return findRestaurant(list2, list1);
+    }
+
     Map<String, Integer> map = new HashMap<>();
 
     for (int i = 0; i < list1.length; i++) {
