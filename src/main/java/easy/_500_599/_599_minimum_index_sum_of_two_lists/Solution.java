@@ -52,35 +52,31 @@ import java.util.Map;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:10 ms,击败了36.92% 的Java用户
+  //  执行耗时:5 ms,击败了98.75% 的Java用户
   //  内存消耗:40.1 MB,击败了45.16% 的Java用户
   public String[] findRestaurant(String[] list1, String[] list2) {
     Map<String, Integer> map = new HashMap<>();
 
     for (int i = 0; i < list1.length; i++) {
-      map.put(list1[i], Integer.MAX_VALUE - 1000 + i);
+      map.put(list1[i], i);
     }
 
-    for (int i = 0; i < list2.length; i++) {
-      if (map.containsKey(list2[i])) {
-        map.put(list2[i], map.get(list2[i]) + 1000 - Integer.MAX_VALUE + i);
-      }
-    }
     int minValue = Integer.MAX_VALUE;
     List<String> list = new ArrayList<>();
-    for (String s : map.keySet()) {
-      int value = map.get(s);
-      if (value == minValue) {
-        list.add(s);
-      } else if (value < minValue) {
-        list.clear();
-        list.add(s);
+    for (int i = 0; i < list2.length && i <= minValue; i++) {
+      if (map.containsKey(list2[i])) {
+        int value = map.get(list2[i]) + i;
+        if (minValue < value) {
+          continue;
+        }
+        if (value < minValue) {
+          list.clear();
+        }
         minValue = value;
+        list.add(list2[i]);
       }
     }
-    String[] res = new String[list.size()];
-    list.toArray(res);
-    return res;
+    return list.toArray(new String[0]);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
