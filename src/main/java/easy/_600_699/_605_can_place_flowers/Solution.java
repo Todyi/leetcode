@@ -38,23 +38,44 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了93.64% 的Java用户
   //  内存消耗:49.4 MB,击败了7.14% 的Java用户
-  public boolean canPlaceFlowers(int[] flowerbed, int n) {
-    if (flowerbed[0] == 0 && ((1 < flowerbed.length && flowerbed[1] == 0)
-        || 1 == flowerbed.length)) {
-      flowerbed[0] = 1;
-      n--;
-    }
+//  public boolean canPlaceFlowers(int[] flowerbed, int n) {
+//    if (flowerbed[0] == 0 && ((1 < flowerbed.length && flowerbed[1] == 0)
+//        || 1 == flowerbed.length)) {
+//      flowerbed[0] = 1;
+//      n--;
+//    }
+//
+//    for (int i = 1; i < flowerbed.length - 1; i++) {
+//      if (flowerbed[i] == 0 && flowerbed[i - 1] == 0 && flowerbed[i + 1] == 0) {
+//        flowerbed[i] = 1;
+//        n--;
+//      }
+//    }
+//
+//    if (flowerbed[flowerbed.length - 1] == 0 && flowerbed[flowerbed.length - 2] == 0) {
+//      n--;
+//    }
+//    return n < 1;
+//  }
 
-    for (int i = 1; i < flowerbed.length - 1; i++) {
-      if (flowerbed[i] == 0 && flowerbed[i - 1] == 0 && flowerbed[i + 1] == 0) {
-        flowerbed[i] = 1;
-        n--;
+  //  解答成功:
+  //  执行耗时:1 ms,击败了93.64% 的Java用户
+  //  内存消耗:49.7 MB,击败了7.14% 的Java用户
+  public boolean canPlaceFlowers(int[] flowerbed, int n) {
+    int i = 0;
+    while (i < flowerbed.length) {
+      if (flowerbed[i] == 1) {
+        i += 2;
+      } else if (i + 1 == flowerbed.length || flowerbed[i + 1] == 0) {
+        if (n-- == 1) {
+          return true;
+        }
+        i += 2;
+      } else {
+        i++;
       }
     }
 
-    if (flowerbed[flowerbed.length - 1] == 0 && flowerbed[flowerbed.length - 2] == 0) {
-      n--;
-    }
     return n < 1;
   }
 }

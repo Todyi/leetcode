@@ -55,11 +55,22 @@ public class TestSet {
         .canPlaceFlowers(flowerbed, n);
     Assert.assertTrue(result.equals(solution));
   }
+
   @Test
   public void test5() {
     int[] flowerbed = {0,0,1,0,0};
     int n = 1;
     Boolean result = true;
+    boolean solution = new easy._600_699._605_can_place_flowers.Solution()
+        .canPlaceFlowers(flowerbed, n);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test6() {
+    int[] flowerbed = {1,0,0,1,0};
+    int n = 1;
+    Boolean result = false;
     boolean solution = new easy._600_699._605_can_place_flowers.Solution()
         .canPlaceFlowers(flowerbed, n);
     Assert.assertTrue(result.equals(solution));
