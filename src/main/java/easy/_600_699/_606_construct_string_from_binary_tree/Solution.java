@@ -43,6 +43,7 @@ package easy._600_699._606_construct_string_from_binary_tree;
 //leetcode submit region begin(Prohibit modification and deletion)
 
 import common.TreeNode;
+import java.util.Stack;
 
 /**
  * Definition for a binary tree node. public class TreeNode { int val; TreeNode left; TreeNode
@@ -51,25 +52,30 @@ import common.TreeNode;
  */
 class Solution {
 
-  //  解答成功:
-  //  执行耗时:4 ms,击败了75.71% 的Java用户
-  //  内存消耗:40.4 MB,击败了31.58% 的Java用户
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Construct String from Binary Tree.
+  //  Memory Usage: 39.2 MB, less than 94.74% of Java online submissions for Construct String from Binary Tree.
   public String tree2str(TreeNode t) {
-    if (t == null) {
-      return "";
-    }
     StringBuilder sb = new StringBuilder();
-    sb.append(t.val);
-    String left = tree2str(t.left);
-    String right = tree2str(t.right);
-    if (!(left.isEmpty() && right.isEmpty())) {
-      sb.append("(").append(left).append(")");
-      if (!right.isEmpty()) {
-        sb.append("(").append(right).append(")");
+    preOrder(t, sb);
+    return sb.toString();
+  }
+
+  public void preOrder(TreeNode node, StringBuilder sb) {
+    if (node == null) {
+      return;
+    }
+    sb.append(node.val);
+    if (node.left == null && node.right == null) {
+    } else {
+      sb.append("(");
+      preOrder(node.left, sb);
+      sb.append(")");
+      if (node.right != null) {
+        sb.append("(");
+        preOrder(node.right, sb);
+        sb.append(")");
       }
     }
-
-    return sb.toString();
   }
 
 }
