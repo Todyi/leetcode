@@ -44,23 +44,14 @@ import common.TreeNode;
  */
 class Solution {
 
-//  解答成功:
-//  执行耗时:1 ms,击败了35.16% 的Java用户
-//  内存消耗:39.5 MB,击败了100.00% 的Java用户
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Merge Two Binary Trees.
+  //  Memory Usage: 39.4 MB, less than 100.00% of Java online submissions for Merge Two Binary Trees.
   public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-    if (treeCount(t1) < treeCount(t2)) {
-      merge(t2, t1);
+    if (t1 == null && t2 != null) {
       return t2;
     }
     merge(t1, t2);
     return t1;
-  }
-
-  public int treeCount(TreeNode t) {
-    if (t == null) {
-      return 0;
-    }
-    return treeCount(t.left) + treeCount(t.right) + 1;
   }
 
   public void merge(TreeNode t1, TreeNode t2) {
