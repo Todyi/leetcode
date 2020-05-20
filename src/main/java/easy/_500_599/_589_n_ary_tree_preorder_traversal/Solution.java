@@ -67,28 +67,23 @@ import java.util.Stack;
 
 class Solution {
 
-  //  解答成功:
-  //  执行耗时:5 ms,击败了7.69% 的Java用户
-  //  内存消耗:42.9 MB,击败了100.00% 的Java用户
+  //  Runtime: 2 ms, faster than 54.12% of Java online submissions for N-ary Tree Preorder Traversal.
+  //  Memory Usage: 39.4 MB, less than 100.00% of Java online submissions for N-ary Tree Preorder Traversal.
   public List<Integer> preorder(Node root) {
     List<Integer> res = new ArrayList<>();
-    if (root == null) {
-      return res;
-    }
     Stack<Node> stack = new Stack<>();
     stack.push(root);
     while (!stack.isEmpty()) {
       Node node = stack.pop();
       while (node != null) {
         res.add(node.val);
-        List<Node> children = node.children;
-        if (children != null && 0 < children.size()) {
-          node = children.get(0);
-          for (int i = children.size() - 1; i > 0; i--) {
-            stack.push(children.get(i));
+        if (node.children != null && 0 < node.children.size()) {
+          for (int i = node.children.size() - 1; i > 0; i--) {
+            stack.push(node.children.get(i));
           }
+          node = node.children.get(0);
         } else {
-          node = null;
+          break;
         }
       }
     }
