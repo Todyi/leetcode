@@ -69,25 +69,45 @@ class Solution {
 
   //  Runtime: 2 ms, faster than 54.12% of Java online submissions for N-ary Tree Preorder Traversal.
   //  Memory Usage: 39.4 MB, less than 100.00% of Java online submissions for N-ary Tree Preorder Traversal.
+//  public List<Integer> preorder(Node root) {
+//    List<Integer> res = new ArrayList<>();
+//    Stack<Node> stack = new Stack<>();
+//    stack.push(root);
+//    while (!stack.isEmpty()) {
+//      Node node = stack.pop();
+//      while (node != null) {
+//        res.add(node.val);
+//        if (node.children != null && 0 < node.children.size()) {
+//          for (int i = node.children.size() - 1; i > 0; i--) {
+//            stack.push(node.children.get(i));
+//          }
+//          node = node.children.get(0);
+//        } else {
+//          break;
+//        }
+//      }
+//    }
+//    return res;
+//  }
+
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for N-ary Tree Preorder Traversal.
+  //  Memory Usage: 40.8 MB, less than 100.00% of Java online submissions for N-ary Tree Preorder Traversal.
   public List<Integer> preorder(Node root) {
     List<Integer> res = new ArrayList<>();
-    Stack<Node> stack = new Stack<>();
-    stack.push(root);
-    while (!stack.isEmpty()) {
-      Node node = stack.pop();
-      while (node != null) {
-        res.add(node.val);
-        if (node.children != null && 0 < node.children.size()) {
-          for (int i = node.children.size() - 1; i > 0; i--) {
-            stack.push(node.children.get(i));
-          }
-          node = node.children.get(0);
-        } else {
-          break;
-        }
+    preOrder(root, res);
+    return res;
+  }
+
+  public void preOrder(Node node, List<Integer> list) {
+    if (node == null) {
+      return;
+    }
+    list.add(node.val);
+    if (node.children != null) {
+      for (Node child : node.children) {
+        preOrder(child, list);
       }
     }
-    return res;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
