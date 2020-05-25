@@ -27,18 +27,41 @@ package easy._600_699._633_sum_of_square_numbers;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
+  //  解答成功:
+  //  执行耗时:4 ms,击败了45.82% 的Java用户
+  //  内存消耗:36 MB,击败了7.14% 的Java用户
+//  public boolean judgeSquareSum(int c) {
+//    int flag = (int) Math.sqrt(c);
+//    if (flag * flag == c) {
+//      return true;
+//    }
+//    for (int a = 1; a <= flag; a++) {
+//      int b = (int) Math.sqrt(c - (a * a));
+//      if (a * a + b * b == c) {
+//        return true;
+//      }
+//    }
+//    return false;
+//  }
+
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:36.5 MB,击败了7.14% 的Java用户
   public boolean judgeSquareSum(int c) {
-    int flag = (int) Math.sqrt(c);
-    if (flag * flag == c) {
-      return true;
-    }
-    for (int a = 1; a <= flag; a++) {
-      int b = (int) Math.sqrt(c - (a * a));
-      if (a * a + b * b == c) {
-        return true;
+    for (int i = 2; i * i <= c; i++) {
+      int count = 0;
+      if (c % i == 0) {
+        while (c % i == 0) {
+          count++;
+          c /= i;
+        }
+        if (i % 4 == 3 && count % 2 != 0) {
+          return false;
+        }
       }
     }
-    return false;
+    return c % 4 != 3;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
