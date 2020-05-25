@@ -24,4 +24,22 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test2() {
+    int[] nums = {1, 2, 3};
+    Integer result = 6;
+    int solution = new easy._600_699._628_maximum_product_of_three_numbers.Solution()
+        .maximumProduct(nums);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test3() {
+    int[] nums = {0,0,0,4};
+    Integer result = 0;
+    int solution = new easy._600_699._628_maximum_product_of_three_numbers.Solution()
+        .maximumProduct(nums);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
