@@ -59,6 +59,11 @@ class Solution {
     // if and only if the prime factorization of n, 
     // every prime of the form (4k+3) occurs an even number of times.
     // proof:http://math.uga.edu/~pete/4400twosquares.pdf
+
+    //Theorem: If n = (2^k)(p1^k1)...(pr^Kr)(q1^m1)...(qs^ms) is the prime factorization of n,
+    // where pi ≡ 1 (mod 4) and qi ≡ 3 (mod 4) for every i ,
+    // then n = a^2 + b^2 for some integers a, b ⇔ mi is even for every i .
+    // proof:https://www.math.unl.edu/~mbrittenham2/classwk/445f04/days/0924.pdf
     for (int i = 2; i * i <= c; i++) {
       int count = 0;
       if (c % i == 0) {
@@ -73,6 +78,7 @@ class Solution {
     }
     return c % 4 != 3;
   }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

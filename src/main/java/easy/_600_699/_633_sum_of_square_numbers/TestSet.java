@@ -60,4 +60,22 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test6() {
+    int c = 1000;
+    Boolean result = true;
+    boolean solution = new easy._600_699._633_sum_of_square_numbers.Solution()
+        .judgeSquareSum(c);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test7() {
+    int c = 900000;
+    Boolean result = true;
+    boolean solution = new easy._600_699._633_sum_of_square_numbers.Solution()
+        .judgeSquareSum(c);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
