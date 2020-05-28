@@ -30,21 +30,21 @@ package easy._600_699._643_maximum_average_subarray_i;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:2 ms,击败了93.13% 的Java用户
-  //  内存消耗:43.1 MB,击败了53.85% 的Java用户
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:43.6 MB,击败了23.08% 的Java用户
   public double findMaxAverage(int[] nums, int k) {
-    double max = 0D;
+    int max = 0;
     for (int i = 0; i < k; i++) {
       max += nums[i];
     }
-    double sum = max;
+    int sum = max;
     for (int i = k; i < nums.length; i++) {
       sum += nums[i] - nums[i - k];
       if (max < sum) {
         max = sum;
       }
     }
-    return max / k;
+    return 1.0 * max / k;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
