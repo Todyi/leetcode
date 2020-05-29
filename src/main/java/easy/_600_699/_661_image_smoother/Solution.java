@@ -35,65 +35,57 @@ package easy._600_699._661_image_smoother;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:5 ms,击败了92.51% 的Java用户
-  //  内存消耗:40 MB,击败了93.75% 的Java用户
+  //  执行耗时:4 ms,击败了97.74% 的Java用户
+  //  内存消耗:40.4 MB,击败了87.50% 的Java用户
   public int[][] imageSmoother(int[][] M) {
     int[][] res = new int[M.length][M[0].length];
-    int count, sum;
-    boolean left, right, up, down;
     for (int i = 0; i < res.length; i++) {
       for (int j = 0; j < res[0].length; j++) {
-        count = 1;
-        sum = M[i][j];
-        left = false;
-        right = false;
-        up = false;
-        down = false;
-        if (0 < i) {
-          count++;
-          sum += M[i - 1][j];
-          left = true;
-        }
-        if (i < res.length - 1) {
-          count++;
-          sum += M[i + 1][j];
-          right = true;
-        }
-        if (0 < j) {
-          count++;
-          sum += M[i][j - 1];
-          up = true;
-        }
-        if (j < res[0].length - 1) {
-          count++;
-          sum += M[i][j + 1];
-          down = true;
-        }
-        if (left) {
-          if (up) {
-            count++;
-            sum += M[i - 1][j - 1];
-          }
-          if (down) {
-            count++;
-            sum += M[i - 1][j + 1];
-          }
-        }
-        if (right) {
-          if (up) {
-            count++;
-            sum += M[i + 1][j - 1];
-          }
-          if (down) {
-            count++;
-            sum += M[i + 1][j + 1];
-          }
-        }
-        res[i][j] = sum / count;
+        res[i][j] = findAvg(M, i, j);
       }
     }
-
     return res;
+  }
+
+  public int findAvg(int[][] M, int i, int j) {
+    int one = 0, two = 0, three = 0, four = 0, five = M[i][j], six = 0, seven = 0, eight = 0, nine = 0, count = 1;
+    if (0 < i && 0 < j) {
+      one = M[i - 1][j - 1];
+      count++;
+    }
+
+    if (0 < i) {
+      two = M[i - 1][j];
+      count++;
+    }
+
+    if (0 < i && j < M[0].length - 1) {
+      three = M[i - 1][j + 1];
+      count++;
+    }
+
+    if (0 < j) {
+      four = M[i][j - 1];
+      count++;
+    }
+
+    if (j < M[0].length - 1) {
+      six = M[i][j + 1];
+      count++;
+    }
+    if (i < M.length - 1 && 0 < j) {
+      seven = M[i + 1][j - 1];
+      count++;
+    }
+    if (i < M.length - 1) {
+      eight = M[i + 1][j];
+      count++;
+    }
+    if (i < M.length - 1 && j < M[0].length - 1) {
+      nine = M[i + 1][j + 1];
+      count++;
+    }
+    return (one + two + three + four + five + six + seven + eight + nine) / count;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
