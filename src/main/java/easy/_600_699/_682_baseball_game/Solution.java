@@ -65,32 +65,30 @@ package easy._600_699._682_baseball_game;
 // Related Topics Stack
 
 
-import java.util.Stack;
-
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
-  //  执行耗时:2 ms,击败了87.53% 的Java用户
-  //  内存消耗:39.2 MB,击败了7.69% 的Java用户
+  //  执行耗时:1 ms,击败了99.67% 的Java用户
+  //  内存消耗:37.5 MB,击败了7.69% 的Java用户
   public int calPoints(String[] ops) {
-    Stack<Integer> pointStack = new Stack<>();
-    int sum = 0, lastRound, thisRound;
+    int[] points = new int[ops.length];
+    int sum = 0, flag = -1;
     for (String op : ops) {
       if (op.equals("+")) {
-        lastRound = pointStack.pop();
-        thisRound = lastRound + pointStack.peek();
-        sum += thisRound;
-        pointStack.push(lastRound);
-        pointStack.push(thisRound);
+        flag++;
+        points[flag] = points[flag - 1] + points[flag - 2];
+        sum += points[flag];
       } else if (op.equals("D")) {
-        pointStack.push(pointStack.peek() * 2);
-        sum += pointStack.peek();
+        flag++;
+        points[flag] = points[flag - 1] * 2;
+        sum += points[flag];
       } else if (op.equals("C")) {
-        sum -= pointStack.pop();
+        sum -= points[flag--];
       } else {
-        pointStack.push(Integer.valueOf(op));
-        sum += pointStack.peek();
+        flag++;
+        points[flag] = Integer.parseInt(op);
+        sum += points[flag];
       }
     }
     return sum;
