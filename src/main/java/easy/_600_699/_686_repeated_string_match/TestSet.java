@@ -86,4 +86,25 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test8() {
+    String A = "aba";
+    String B = "babbbbaabbababbaaaaababbaaabbbbaaabbbababbbbabaabababaabaaabbbabababbbabababaababaaaaabbabaaaabaaaab";
+    Integer result = -1;
+    int solution = new easy._600_699._686_repeated_string_match.Solution()
+        .repeatedStringMatch(A, B);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test9() {
+    //0ms submission cannot pass this test
+    String A = "abc";
+    String B = "abcabcabcabcabcabcedfabcabcabc";
+    Integer result = -1;
+    int solution = new easy._600_699._686_repeated_string_match.Solution()
+        .repeatedStringMatch(A, B);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
