@@ -58,26 +58,61 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了96.88% 的Java用户
   //  内存消耗:42 MB,击败了89.77% 的Java用户
+//  int max = 0;
+//
+//  public int longestUnivaluePath(TreeNode root) {
+//    if (root == null) {
+//      return 0;
+//    }
+//    dfs(root, -1);
+//    return max;
+//  }
+//
+//  public int dfs(TreeNode root, int pathValue) {
+//    if (root == null) {
+//      return 0;
+//    }
+//    int left = dfs(root.left, root.val), right = dfs(root.right, root.val);
+//    max = Math.max(max, left + right);
+//    if (root.val == pathValue) {
+//      return 1 + Math.max(left, right);
+//    }
+//    return 0;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:42 MB,击败了85.19% 的Java用户
   int max = 0;
 
   public int longestUnivaluePath(TreeNode root) {
     if (root == null) {
       return 0;
     }
-    dfs(root, -1);
+    dfs(root);
     return max;
   }
 
-  public int dfs(TreeNode root, int pathValue) {
+  public int dfs(TreeNode root) {
     if (root == null) {
       return 0;
     }
-    int left = dfs(root.left, root.val), right = dfs(root.right, root.val);
-    max = Math.max(max, left + right);
-    if (root.val == pathValue) {
-      return 1 + Math.max(left, right);
+    if (root.left == null && root.right == null) {
+      return 1;
     }
-    return 0;
+
+    int l = dfs(root.left), r = dfs(root.right);
+
+    if (root.left != null && root.left.val != root.val) {
+      l = 0;
+    }
+    if (root.right != null && root.right.val != root.val) {
+      r = 0;
+    }
+
+    max = Math.max(max, l + r);
+    return Math.max(l, r) + 1;
+
   }
 
 }
