@@ -30,4 +30,17 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test1() {
+    List<Employee> employees = arrayToList(new Employee[]{
+        new Employee(101, 3, arrayToList(new Integer[]{})),
+        new Employee(2, 5, arrayToList(new Integer[]{101}))
+    });
+    int id = 101;
+    Integer result = 3;
+    int solution = new easy._600_699._690_employee_importance.Solution()
+        .getImportance(employees, id);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }

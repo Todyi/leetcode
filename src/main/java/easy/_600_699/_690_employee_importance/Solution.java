@@ -52,29 +52,25 @@ import java.util.Map;
 
 class Solution {
 
-  //  Runtime: 5 ms, faster than 54.20% of Java online submissions for Employee Importance.
-  //  Memory Usage: 41 MB, less than 34.15% of Java online submissions for Employee Importance.
+  //  Runtime: 4 ms, faster than 99.69% of Java online submissions for Employee Importance.
+  //  Memory Usage: 40.4 MB, less than 92.85% of Java online submissions for Employee Importance.
   public int getImportance(List<Employee> employees, int id) {
-    Map<Integer, Employee> map = new HashMap<>();
-    Employee target = null;
+    Employee[] map = new Employee[10000];
     for (Employee employee : employees) {
-      if (id == employee.id) {
-        target = employee;
-      }
-      map.put(employee.id, employee);
+      map[employee.id] = employee;
     }
+    Employee target = map[id];
     int sum = target.importance;
     while (0 < target.subordinates.size()) {
       int i = target.subordinates.get(0);
       target.subordinates.remove(0);
-      if (map.containsKey(i)) {
-        Employee e = map.get(i);
-        map.remove(i);
+      if (map[i] != null) {
+        Employee e = map[i];
+        map[i] = null;
         target.subordinates.addAll(e.subordinates);
         sum += e.importance;
       }
     }
-
     return sum;
   }
 }
