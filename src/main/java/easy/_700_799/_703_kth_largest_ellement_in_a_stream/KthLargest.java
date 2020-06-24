@@ -34,8 +34,8 @@ class KthLargest {
   int[] arr;
 
   //  解答成功:
-  //  执行耗时:203 ms,击败了11.75% 的Java用户
-  //  内存消耗:45.2 MB,击败了31.57% 的Java用户
+  //  执行耗时:50 ms,击败了13.44% 的Java用户
+  //  内存消耗:43.6 MB,击败了91.74% 的Java用户
   public KthLargest(int k, int[] nums) {
     this.arr = new int[k];
     Arrays.sort(nums);
@@ -50,8 +50,22 @@ class KthLargest {
 
   public int add(int val) {
     if (arr[0] < val) {
-      arr[0] = val;
-      Arrays.sort(arr);
+      for (int i = 0; i < arr.length - 1; i++) {
+        if (arr[i] < val) {
+          if (arr[i + 1] < val) {
+            arr[i] = arr[i + 1];
+          } else {
+            arr[i] = val;
+            break;
+          }
+        } else {
+          arr[i] = val;
+          break;
+        }
+      }
+      if (arr[arr.length - 1] <= val) {
+        arr[arr.length - 1] = val;
+      }
     }
     return arr[0];
   }

@@ -36,4 +36,19 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution.toString()));
   }
 
+  @Test
+  public void test2() {
+    int k = 2;
+    int[] arr = {0};
+    KthLargest kthLargest = new KthLargest(k, arr);
+    StringBuilder solution = new StringBuilder();
+    solution.append(kthLargest.add(-1));
+    solution.append(kthLargest.add(1));
+    solution.append(kthLargest.add(-2));
+    solution.append(kthLargest.add(-4));
+    solution.append(kthLargest.add(4));
+    String result = "-10001";
+    Assert.assertTrue(result.equals(solution.toString()));
+  }
+
 }
