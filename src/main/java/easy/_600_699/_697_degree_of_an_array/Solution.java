@@ -38,8 +38,8 @@ import java.util.Map;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:22 ms,击败了39.40% 的Java用户
-  //  内存消耗:52.2 MB,击败了10.44% 的Java用户
+  //  执行耗时:14 ms,击败了81.99% 的Java用户
+  //  内存消耗:44.7 MB,击败了25.03% 的Java用户
   public int findShortestSubArray(int[] nums) {
     Map<Integer, Integer[]> map = new HashMap<>();
     int degree = Integer.MIN_VALUE, len = Integer.MAX_VALUE;
