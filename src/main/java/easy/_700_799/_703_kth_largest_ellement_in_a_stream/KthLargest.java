@@ -26,48 +26,52 @@ package easy._700_799._703_kth_largest_ellement_in_a_stream;
 // Related Topics Heap
 
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class KthLargest {
 
-  int[] arr;
+  List<Integer> arr;
+  int k;
 
   //  解答成功:
-  //  执行耗时:50 ms,击败了13.44% 的Java用户
-  //  内存消耗:43.6 MB,击败了91.74% 的Java用户
+  //  执行耗时:23 ms,击败了28.06% 的Java用户
+  //  内存消耗:45.3 MB,击败了28.86% 的Java用户
   public KthLargest(int k, int[] nums) {
-    this.arr = new int[k];
-    Arrays.sort(nums);
-    for (int i = 0; i < arr.length; i++) {
-      if (nums != null && -1 < nums.length - 1 - i) {
-        arr[k - 1 - i] = nums[nums.length - 1 - i];
-      } else {
-        arr[k - 1 - i] = Integer.MIN_VALUE;
-      }
+    this.k = k - 1;
+    this.arr = new ArrayList<>();
+    for (int i = 0; i < k; i++) {
+      arr.add(Integer.MIN_VALUE);
+    }
+    for (int i = 0; i < nums.length; i++) {
+      add(nums[i]);
     }
   }
 
   public int add(int val) {
-    if (arr[0] < val) {
-      for (int i = 0; i < arr.length - 1; i++) {
-        if (arr[i] < val) {
-          if (arr[i + 1] < val) {
-            arr[i] = arr[i + 1];
-          } else {
-            arr[i] = val;
-            break;
-          }
+    if (arr.get(k) < val) {
+      int l = 0, r = k, mid = (l + r) / 2;
+      while (l <= r) {
+        if (val < arr.get(mid)) {
+          l = mid;
+        } else if (arr.get(mid) < val) {
+          r = mid;
         } else {
-          arr[i] = val;
+          arr.add(mid, val);
+          arr.remove(k + 1);
+          break;
+        }
+        mid = (l + r) / 2;
+        if (r - l == 1 || l == r) {
+          mid = arr.get(l) <= val ? l : r;
+          arr.add(mid, val);
+          arr.remove(k + 1);
           break;
         }
       }
-      if (arr[arr.length - 1] <= val) {
-        arr[arr.length - 1] = val;
-      }
     }
-    return arr[0];
+    return arr.get(k);
   }
 }
 
