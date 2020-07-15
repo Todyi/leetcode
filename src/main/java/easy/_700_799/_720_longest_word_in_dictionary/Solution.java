@@ -42,21 +42,18 @@ import java.util.Map;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:39 ms,击败了14.73% 的Java用户
-  //  内存消耗:46.2 MB,击败了11.68% 的Java用户
+  //  执行耗时:15 ms,击败了59.17% 的Java用户
+  //  内存消耗:39.7 MB,击败了74.01% 的Java用户
   public String longestWord(String[] words) {
-    String res = words[0].substring(0, 1);
     Arrays.sort(words);
-    Map<String, String>[] map = new HashMap[26];
+    String res = words[0].substring(0, 1);
+    Map<String, String> map = new HashMap<>();
+    map.put("", null);
     for (String word : words) {
-      int x = word.charAt(0) - 'a';
-      if (map[x] == null) {
-        map[x] = new HashMap<>();
-      }
-      if (word.length() == 1 || map[x].containsKey(word.substring(0, word.length() - 1))) {
-        map[x].put(word, null);
-        if (res.length() < word.length() || (res.length() == word.length() && 0 < res
-            .compareTo(word))) {
+      if (map.containsKey(word.substring(0, word.length() - 1))) {
+        map.put(word, null);
+        if (res.length() < word.length()
+            || (res.length() == word.length() && 0 < res.compareTo(word))) {
           res = word;
         }
       }
