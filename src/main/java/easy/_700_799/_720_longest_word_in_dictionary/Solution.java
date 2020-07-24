@@ -34,32 +34,85 @@ package easy._700_799._720_longest_word_in_dictionary;
 // Related Topics Hash Table Trie
 
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
   //  执行耗时:15 ms,击败了59.17% 的Java用户
   //  内存消耗:39.7 MB,击败了74.01% 的Java用户
+//  public String longestWord(String[] words) {
+//    Arrays.sort(words);
+//    String res = words[0].substring(0, 1);
+//    Map<String, String> map = new HashMap<>();
+//    map.put("", null);
+//    for (String word : words) {
+//      if (map.containsKey(word.substring(0, word.length() - 1))) {
+//        map.put(word, null);
+//        if (res.length() < word.length()
+//            || (res.length() == word.length() && 0 < res.compareTo(word))) {
+//          res = word;
+//        }
+//      }
+//    }
+//    return res;
+//  }
+
+  //  解答成功:
+  //  执行耗时:4 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.7 MB,击败了57.20% 的Java用户
   public String longestWord(String[] words) {
-    Arrays.sort(words);
-    String res = words[0].substring(0, 1);
-    Map<String, String> map = new HashMap<>();
-    map.put("", null);
+    Node root = new Node();
+    root.word = "";
     for (String word : words) {
-      if (map.containsKey(word.substring(0, word.length() - 1))) {
-        map.put(word, null);
-        if (res.length() < word.length()
-            || (res.length() == word.length() && 0 < res.compareTo(word))) {
-          res = word;
+      root.addWord(word);
+    }
+    return root.getLongestWord();
+  }
+
+  class Node {
+
+    public String word;
+    public Node[] children;
+
+    public Node() {
+    }
+
+    public void addWord(String word) {
+      Node node = this;
+      for (int i = 0; i < word.length(); i++) {
+        int j = word.charAt(i) - 'a';
+        if (node.children == null) {
+          node.children = new Node[26];
+        }
+        if (node.children[j] == null) {
+          node.children[j] = new Node();
+        }
+        node = node.children[j];
+      }
+      node.word = word;
+    }
+
+    public String getLongestWord() {
+      if (this.word == null) {
+        return null;
+      }
+      String res = this.word;
+      if (this.children != null) {
+        for (int i = 0; i < this.children.length; i++) {
+          if (this.children[i] == null) {
+            continue;
+          }
+          String childLongestWord = this.children[i].getLongestWord();
+          if (childLongestWord != null && res.length() < childLongestWord.length()) {
+            res = childLongestWord;
+          }
         }
       }
+      return res;
     }
-    return res;
   }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
