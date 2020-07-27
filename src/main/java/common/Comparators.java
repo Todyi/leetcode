@@ -41,7 +41,7 @@ public class Comparators {
       return false;
     }
     for (int i = 0; i < array0.length; i++) {
-      if (array0[i] != array1[i]) {
+      if (!array0[i].equals(array1[i])) {
         return false;
       }
     }
