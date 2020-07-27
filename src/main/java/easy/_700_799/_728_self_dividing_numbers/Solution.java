@@ -33,36 +33,61 @@ class Solution {
   //  解答成功:
   //  执行耗时:8 ms,击败了13.20% 的Java用户
   //  内存消耗:39.5 MB,击败了5.34% 的Java用户
+//  public List<Integer> selfDividingNumbers(int left, int right) {
+//    List<Integer> res = new ArrayList<>();
+//    for (Integer i = left; i <= right; i++) {
+//      if (i.toString().indexOf('0') != -1) {
+//        continue;
+//      }
+//      if (i % lcm(i.toString()) == 0) {
+//        res.add(i);
+//      }
+//    }
+//    return res;
+//  }
+//
+//  public int gcd(int i, int j) {
+//    return i % j == 0 ? j : gcd(j, i % j);
+//  }
+//
+//  public int lcm(int i, int j) {
+//    int res = i * j / gcd(i, j);
+//    return res;
+//  }
+//
+//  public int lcm(String num) {
+//    char[] numArr = num.toCharArray();
+//    int lcm = 1;
+//    for (int i = 0; i < numArr.length; i++) {
+//      int n = numArr[i] - '1' + 1;
+//      lcm = lcm(lcm, n);
+//    }
+//    return lcm;
+//  }
+
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:37 MB,击败了60.23% 的Java用户
   public List<Integer> selfDividingNumbers(int left, int right) {
     List<Integer> res = new ArrayList<>();
-    for (Integer i = left; i <= right; i++) {
-      if (i.toString().indexOf('0') != -1) {
-        continue;
-      }
-      if (i % lcm(i.toString()) == 0) {
+    for (int i = left; i <= right; i++) {
+      if (check(i)) {
         res.add(i);
       }
     }
     return res;
   }
 
-  public int gcd(int i, int j) {
-    return i % j == 0 ? j : gcd(j, i % j);
-  }
-
-  public int lcm(int i, int j) {
-    int res = i * j / gcd(i, j);
-    return res;
-  }
-
-  public int lcm(String num) {
-    char[] numArr = num.toCharArray();
-    int lcm = 1;
-    for (int i = 0; i < numArr.length; i++) {
-      int n = numArr[i] - '1' + 1;
-      lcm = lcm(lcm, n);
+  public boolean check(int num) {
+    int tmp = num;
+    while (0 < tmp) {
+      if (tmp % 10 == 0 || num % (tmp % 10) != 0) {
+        return false;
+      }
+      tmp /= 10;
     }
-    return lcm;
+    return true;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
