@@ -30,6 +30,24 @@ public class Comparators {
     return true;
   }
 
+  public static boolean isSame(int[][] array0, int[][] array1) {
+    if (array0 == null && array1 == null) {
+      return true;
+    }
+    if (array0 == null || array1 == null) {
+      return false;
+    }
+    if (array0.length != array1.length) {
+      return false;
+    }
+    for (int i = 0; i < array0.length; i++) {
+      if (!isSame(array0[i],array1[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public static boolean isSame(Integer[] array0, Integer[] array1) {
     if (array0 == null && array1 == null) {
       return true;
