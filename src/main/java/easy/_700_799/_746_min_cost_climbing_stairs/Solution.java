@@ -39,20 +39,33 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了88.00% 的Java用户
   //  内存消耗:39.2 MB,击败了39.20% 的Java用户
-  public int minCostClimbingStairs(int[] cost) {
-    Integer[] minCost = new Integer[cost.length];
-    return Math
-        .min(minCost(cost, minCost, cost.length - 1), minCost(cost, minCost, cost.length - 2));
-  }
+//  public int minCostClimbingStairs(int[] cost) {
+//    Integer[] minCost = new Integer[cost.length];
+//    return Math
+//        .min(minCost(cost, minCost, cost.length - 1), minCost(cost, minCost, cost.length - 2));
+//  }
+//
+//  public int minCost(int[] cost, Integer[] minCost, int x) {
+//    if (x < 0) {
+//      return 0;
+//    }
+//    if (minCost[x] == null) {
+//      minCost[x] = cost[x] + Math.min(minCost(cost, minCost, x - 1), minCost(cost, minCost, x - 2));
+//    }
+//    return minCost[x];
+//  }
 
-  public int minCost(int[] cost, Integer[] minCost, int x) {
-    if (x < 0) {
-      return 0;
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.3 MB,击败了33.40% 的Java用户
+  public int minCostClimbingStairs(int[] cost) {
+    int c1 = 0, c2 = 0;
+    for (int v : cost) {
+      int sum = v + Math.min(c1, c2);
+      c1 = c2;
+      c2 = sum;
     }
-    if (minCost[x] == null) {
-      minCost[x] = cost[x] + Math.min(minCost(cost, minCost, x - 1), minCost(cost, minCost, x - 2));
-    }
-    return minCost[x];
+    return Math.min(c1, c2);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
