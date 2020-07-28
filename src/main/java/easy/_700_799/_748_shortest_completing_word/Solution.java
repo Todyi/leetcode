@@ -53,39 +53,69 @@ class Solution {
 
   //  Runtime: 4 ms, faster than 75.40% of Java online submissions for Shortest Completing Word.
   //  Memory Usage: 40.1 MB, less than 27.03% of Java online submissions for Shortest Completing Word.
+//  public String shortestCompletingWord(String licensePlate, String[] words) {
+//    int[] plateMap = new int[26];
+//    licensePlate = licensePlate.toLowerCase();
+//    for (char c : licensePlate.toCharArray()) {
+//      if ('a' <= c && c <= 'z') {
+//        plateMap[c - 'a']++;
+//      }
+//    }
+//    String theWord = null;
+//    int minWordLen = Integer.MAX_VALUE;
+//    for (int i = 0; i < words.length; i++) {
+//      String word = words[i].toLowerCase();
+//      int[] wordMap = new int[26];
+//      for (char c : word.toCharArray()) {
+//        wordMap[c - 'a']++;
+//      }
+//      if (isContains(plateMap, wordMap)) {
+//        if (words[i].length() < minWordLen) {
+//          theWord = words[i];
+//          minWordLen = theWord.length();
+//        }
+//      }
+//    }
+//    return theWord;
+//  }
+//
+//  public boolean isContains(int[] plate, int[] word) {
+//    for (int i = 0; i < plate.length; i++) {
+//      if (word[i] < plate[i]) {
+//        return false;
+//      }
+//    }
+//    return true;
+//  }
+
+  //  解答成功:
+  //  执行耗时:2 ms,击败了99.64% 的Java用户
+  //  内存消耗:39.9 MB,击败了51.35% 的Java用户
+  int[] prime = {2, 3, 5, 7, 11, 13, 17, 19,
+      23, 29, 31, 37, 41, 43, 47, 53,
+      59, 61, 67, 71, 73, 79, 83, 89,
+      97, 101};
+
   public String shortestCompletingWord(String licensePlate, String[] words) {
-    int[] plateMap = new int[26];
-    licensePlate = licensePlate.toLowerCase();
-    for (char c : licensePlate.toCharArray()) {
-      if ('a' <= c && c <= 'z') {
-        plateMap[c - 'a']++;
-      }
-    }
-    String theWord = null;
-    int minWordLen = Integer.MAX_VALUE;
-    for (int i = 0; i < words.length; i++) {
-      String word = words[i].toLowerCase();
-      int[] wordMap = new int[26];
-      for (char c : word.toCharArray()) {
-        wordMap[c - 'a']++;
-      }
-      if (isContains(plateMap, wordMap)) {
-        if (words[i].length() < minWordLen) {
-          theWord = words[i];
-          minWordLen = theWord.length();
-        }
+    long plateWeight = weight(licensePlate);
+    String theWord = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (String word : words) {
+      if (word.length() < theWord.length() && 0 == weight(word) % plateWeight) {
+        theWord = word;
       }
     }
     return theWord;
   }
 
-  public boolean isContains(int[] plate, int[] word) {
-    for (int i = 0; i < plate.length; i++) {
-      if (word[i] < plate[i]) {
-        return false;
+  public long weight(String word) {
+    long weight = 1;
+    char[] arr = word.toLowerCase().toCharArray();
+    for (char c : arr) {
+      if ('a' <= c && c <= 'z') {
+        weight *= prime[c - 'a'];
       }
     }
-    return true;
+    return weight;
   }
 
 }

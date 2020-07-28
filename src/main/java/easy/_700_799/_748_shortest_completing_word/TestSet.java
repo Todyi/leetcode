@@ -29,8 +29,20 @@ public class TestSet {
   @Test
   public void test2() {
     String licensePlate = "Ah71752";
-    String[] words = {"suggest","letter","of","husband","easy","education","drug","prevent","writer","old"};
+    String[] words = {"suggest", "letter", "of", "husband", "easy", "education", "drug", "prevent",
+        "writer", "old"};
     String result = "husband";
+    String solution = new easy._700_799._748_shortest_completing_word.Solution()
+        .shortestCompletingWord(licensePlate, words);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test3() {
+    String licensePlate = "iMSlpe4";
+    String[] words = {"claim", "consumer", "student", "camera", "public", "never", "wonder",
+        "simple", "thought", "use"};
+    String result = "simple";
     String solution = new easy._700_799._748_shortest_completing_word.Solution()
         .shortestCompletingWord(licensePlate, words);
     Assert.assertTrue(result.equals(solution));
