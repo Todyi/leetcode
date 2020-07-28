@@ -41,28 +41,20 @@ package easy._700_799._762_prime_number_of_set_bits_in_binary_representation;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  //  解答成功:
-  //  执行耗时:6 ms,击败了76.82% 的Java用户
-  //  内存消耗:36.9 MB,击败了15.15% 的Java用户
-  int[] prime = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+  //  Runtime: 2 ms, faster than 99.74% of Java online submissions for Prime Number of Set Bits in Binary Representation.
+  //  Memory Usage: 36.3 MB, less than 53.03% of Java online submissions for Prime Number of Set Bits in Binary Representation.
+  int[] prime = {
+      0, 0, 1, 1, 0, 1, 0, 1,
+      0, 0, 0, 1, 0, 1, 0, 0,
+      0, 1, 0, 1, 0, 0, 0, 1,
+      0, 0, 0, 0, 0, 1, 0, 1};
 
   public int countPrimeSetBits(int L, int R) {
     int count = 0;
     for (int i = L; i <= R; i++) {
-      if (isPrime(Integer.bitCount(i))) {
-        count++;
-      }
+      count += prime[Integer.bitCount(i)];
     }
     return count;
-  }
-
-  public boolean isPrime(int num) {
-    for (int i : prime) {
-      if (num == i) {
-        return true;
-      }
-    }
-    return false;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
