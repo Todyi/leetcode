@@ -49,12 +49,34 @@ class Solution {
       0, 1, 0, 1, 0, 0, 0, 1,
       0, 0, 0, 0, 0, 1, 0, 1};
 
+//  public int countPrimeSetBits(int L, int R) {
+//    int count = 0;
+//    for (int i = L; i <= R; i++) {
+//      count += prime[Integer.bitCount(i)];
+//    }
+//    return count;
+//  }
+
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Prime Number of Set Bits in Binary Representation.
+  //  Memory Usage: 36.2 MB, less than 57.58% of Java online submissions for Prime Number of Set Bits in Binary Representation.
   public int countPrimeSetBits(int L, int R) {
-    int count = 0;
-    for (int i = L; i <= R; i++) {
-      count += prime[Integer.bitCount(i)];
+    int tmp = L, count = 0, prime = 0b10100000100010100010100010101100;
+    while (tmp != 0) {
+      tmp = tmp & (tmp - 1);
+      count++;
     }
-    return count;
+    int num = (prime >>> count) & 1;
+
+    for (int i = L + 1; i <= R; i++) {
+      tmp = i;
+      count++;
+      while (0 == (tmp & 1)) {
+        count--;
+        tmp >>>= 1;
+      }
+      num += (prime >>> count) & 1;
+    }
+    return num;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
