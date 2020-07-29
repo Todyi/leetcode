@@ -34,8 +34,8 @@ import java.util.Map;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  //  Runtime: 86 ms, faster than 5.09% of Java online submissions for Letter Case Permutation.
-  //  Memory Usage: 41.2 MB, less than 5.52% of Java online submissions for Letter Case Permutation.
+  //  Runtime: 81 ms, faster than 5.13% of Java online submissions for Letter Case Permutation.
+  //  Memory Usage: 40.9 MB, less than 6.13% of Java online submissions for Letter Case Permutation.
   public List<String> letterCasePermutation(String S) {
     List<String> res = new ArrayList<>();
     Map<String, Object> map = new HashMap<>();
@@ -51,12 +51,16 @@ class Solution {
     for (int i = x; i < s.length(); i++) {
       char c = s.charAt(i);
       if (Character.isLetter(c)) {
-        map.put(s, null);
+        if (!map.containsKey(s)) {
+          map.put(s, null);
+        }
         addStr(s, i + 1, map);
         char[] arr = s.toCharArray();
         arr[i] = Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
         s = String.valueOf(arr);
-        map.put(s, null);
+        if (!map.containsKey(s)) {
+          map.put(s, null);
+        }
         addStr(s, i + 1, map);
       }
     }
