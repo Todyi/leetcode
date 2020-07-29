@@ -64,16 +64,29 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了89.01% 的Java用户
   //  内存消耗:39.7 MB,击败了26.37% 的Java用户
-  public boolean isToeplitzMatrix(int[][] matrix) {
-    int matrixLen = matrix.length, subLen = matrix[0].length;
+//  public boolean isToeplitzMatrix(int[][] matrix) {
+//    int matrixLen = matrix.length, subLen = matrix[0].length;
+//
+//    Integer[] map = new Integer[matrixLen + subLen - 1];
+//    for (int i = 0; i < matrixLen; i++) {
+//      for (int j = 0; j < subLen; j++) {
+//        int index = j + matrixLen - i - 1;
+//        if (map[index] == null) {
+//          map[index] = matrix[i][j];
+//        } else if (matrix[i][j] != map[index]) {
+//          return false;
+//        }
+//      }
+//    }
+//    return true;
+//  }
 
-    Integer[] map = new Integer[matrixLen + subLen - 1];
-    for (int i = 0; i < matrixLen; i++) {
-      for (int j = 0; j < subLen; j++) {
-        int index = j + matrixLen - i - 1;
-        if (map[index] == null) {
-          map[index] = matrix[i][j];
-        } else if (matrix[i][j] != map[index]) {
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Toeplitz Matrix.
+  //  Memory Usage: 39.7 MB, less than 28.57% of Java online submissions for Toeplitz Matrix.
+  public boolean isToeplitzMatrix(int[][] matrix) {
+    for (int i = 1; i < matrix.length; i++) {
+      for (int j = 1; j < matrix[i].length; j++) {
+        if (matrix[i][j] != matrix[i - 1][j - 1]) {
           return false;
         }
       }
