@@ -38,14 +38,26 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了77.22% 的Java用户
   //  内存消耗:39.3 MB,击败了15.00% 的Java用户
+//  public int numJewelsInStones(String J, String S) {
+//    int[] map = new int[256];
+//    int count = 0;
+//    for (char c : J.toCharArray()) {
+//      map[c]++;
+//    }
+//    for (char c : S.toCharArray()) {
+//      if (0 < map[c]) {
+//        count++;
+//      }
+//    }
+//    return count;
+//  }
+
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Jewels and Stones.
+  //  Memory Usage: 38.3 MB, less than 25.00% of Java online submissions for Jewels and Stones.
   public int numJewelsInStones(String J, String S) {
-    int[] map = new int[256];
     int count = 0;
-    for (char c : J.toCharArray()) {
-      map[c]++;
-    }
-    for (char c : S.toCharArray()) {
-      if (0 < map[c]) {
+    for (int i = 0; i < S.length(); i++) {
+      if (J.indexOf(S.charAt(i)) != -1) {
         count++;
       }
     }
