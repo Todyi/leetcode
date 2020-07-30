@@ -69,23 +69,47 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了70.50% 的Java用户
   //  内存消耗:40.2 MB,击败了53.54% 的Java用户
+//  public List<String> letterCasePermutation(String S) {
+//    List<String> res = new ArrayList<>();
+//    res.add(S);
+//    char c;
+//    int count;
+//    for (int i = 0; i < S.length(); i++) {
+//      c = S.charAt(i);
+//      if (Character.isLetter(c)) {
+//        count = res.size();
+//        for (int j = 0; j < count; j++) {
+//          char[] arr = res.get(j).toCharArray();
+//          arr[i] = Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
+//          res.add(String.valueOf(arr));
+//        }
+//      }
+//    }
+//    return res;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:40.5 MB,击败了17.32% 的Java用户
   public List<String> letterCasePermutation(String S) {
     List<String> res = new ArrayList<>();
-    res.add(S);
-    char c;
-    int count;
-    for (int i = 0; i < S.length(); i++) {
-      c = S.charAt(i);
-      if (Character.isLetter(c)) {
-        count = res.size();
-        for (int j = 0; j < count; j++) {
-          char[] arr = res.get(j).toCharArray();
-          arr[i] = Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
-          res.add(String.valueOf(arr));
-        }
-      }
-    }
+    addStr(S.toCharArray(), 0, res);
     return res;
+  }
+
+  public void addStr(char[] arr, int x, List<String> res) {
+    if (x == arr.length) {
+      res.add(new String(arr));
+      return;
+    }
+    if (Character.isDigit(arr[x])) {
+      addStr(arr, x + 1, res);
+    } else {
+      arr[x] = Character.toUpperCase(arr[x]);
+      addStr(arr, x + 1, res);
+      arr[x] = Character.toLowerCase(arr[x]);
+      addStr(arr, x + 1, res);
+    }
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
