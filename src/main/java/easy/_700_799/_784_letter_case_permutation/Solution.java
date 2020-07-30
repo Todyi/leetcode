@@ -36,34 +36,56 @@ class Solution {
 
   //  Runtime: 81 ms, faster than 5.13% of Java online submissions for Letter Case Permutation.
   //  Memory Usage: 40.9 MB, less than 6.13% of Java online submissions for Letter Case Permutation.
+//  public List<String> letterCasePermutation(String S) {
+//    List<String> res = new ArrayList<>();
+//    Map<String, Object> map = new HashMap<>();
+//    map.put(S, null);
+//    addStr(S, 0, map);
+//    map.forEach((k, v) -> {
+//      res.add(k);
+//    });
+//    return res;
+//  }
+//
+//  public void addStr(String s, int x, Map<String, Object> map) {
+//    for (int i = x; i < s.length(); i++) {
+//      char c = s.charAt(i);
+//      if (Character.isLetter(c)) {
+//        if (!map.containsKey(s)) {
+//          map.put(s, null);
+//        }
+//        addStr(s, i + 1, map);
+//        char[] arr = s.toCharArray();
+//        arr[i] = Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
+//        s = String.valueOf(arr);
+//        if (!map.containsKey(s)) {
+//          map.put(s, null);
+//        }
+//        addStr(s, i + 1, map);
+//      }
+//    }
+//  }
+
+  //  解答成功:
+  //  执行耗时:3 ms,击败了70.50% 的Java用户
+  //  内存消耗:40.2 MB,击败了53.54% 的Java用户
   public List<String> letterCasePermutation(String S) {
     List<String> res = new ArrayList<>();
-    Map<String, Object> map = new HashMap<>();
-    map.put(S, null);
-    addStr(S, 0, map);
-    map.forEach((k, v) -> {
-      res.add(k);
-    });
-    return res;
-  }
-
-  public void addStr(String s, int x, Map<String, Object> map) {
-    for (int i = x; i < s.length(); i++) {
-      char c = s.charAt(i);
+    res.add(S);
+    char c;
+    int count;
+    for (int i = 0; i < S.length(); i++) {
+      c = S.charAt(i);
       if (Character.isLetter(c)) {
-        if (!map.containsKey(s)) {
-          map.put(s, null);
+        count = res.size();
+        for (int j = 0; j < count; j++) {
+          char[] arr = res.get(j).toCharArray();
+          arr[i] = Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
+          res.add(String.valueOf(arr));
         }
-        addStr(s, i + 1, map);
-        char[] arr = s.toCharArray();
-        arr[i] = Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c);
-        s = String.valueOf(arr);
-        if (!map.containsKey(s)) {
-          map.put(s, null);
-        }
-        addStr(s, i + 1, map);
       }
     }
+    return res;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
