@@ -32,22 +32,20 @@ package easy._700_799._788_rotated_digits;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  //  解答成功:
-  //  执行耗时:13 ms,击败了24.25% 的Java用户
-  //  内存消耗:38.9 MB,击败了27.08% 的Java用户
+  //  Runtime: 6 ms, faster than 61.14% of Java online submissions for Rotated Digits.
+  //  Memory Usage: 36.2 MB, less than 52.08% of Java online submissions for Rotated Digits.
   public int rotatedDigits(int N) {
     int count = 0;
-    String notValid = "347";
-    String valid = "2569";
+    int[] notValid = {3, 4, 7};
+    int[] valid = {2, 5, 6, 9};
     for (int i = 1; i <= N; i++) {
       int tmp = i;
       boolean isValid = false;
       while (tmp != 0) {
-        String digit = String.valueOf(tmp % 10);
-        if (notValid.indexOf(digit) != -1) {
+        if (isContain(notValid, tmp % 10)) {
           isValid = false;
           break;
-        } else if (valid.indexOf(digit) != -1) {
+        } else if (isContain(valid, tmp % 10)) {
           isValid = true;
         }
         tmp /= 10;
@@ -57,6 +55,15 @@ class Solution {
       }
     }
     return count;
+  }
+
+  public boolean isContain(int[] arr, int x) {
+    for (int i : arr) {
+      if (i == x) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
