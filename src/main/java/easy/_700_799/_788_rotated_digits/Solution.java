@@ -34,36 +34,67 @@ class Solution {
 
   //  Runtime: 6 ms, faster than 61.14% of Java online submissions for Rotated Digits.
   //  Memory Usage: 36.2 MB, less than 52.08% of Java online submissions for Rotated Digits.
+//  public int rotatedDigits(int N) {
+//    int count = 0;
+//    int[] notValid = {3, 4, 7};
+//    int[] valid = {2, 5, 6, 9};
+//    for (int i = 1; i <= N; i++) {
+//      int tmp = i;
+//      boolean isValid = false;
+//      while (tmp != 0) {
+//        if (isContain(notValid, tmp % 10)) {
+//          isValid = false;
+//          break;
+//        } else if (isContain(valid, tmp % 10)) {
+//          isValid = true;
+//        }
+//        tmp /= 10;
+//      }
+//      if (isValid) {
+//        count++;
+//      }
+//    }
+//    return count;
+//  }
+//
+//  public boolean isContain(int[] arr, int x) {
+//    for (int i : arr) {
+//      if (i == x) {
+//        return true;
+//      }
+//    }
+//    return false;
+//  }
+
+  //  解答成功:
+  //  执行耗时:2 ms,击败了95.23% 的Java用户
+  //  内存消耗:36.9 MB,击败了33.33% 的Java用户
   public int rotatedDigits(int N) {
     int count = 0;
-    int[] notValid = {3, 4, 7};
-    int[] valid = {2, 5, 6, 9};
-    for (int i = 1; i <= N; i++) {
-      int tmp = i;
-      boolean isValid = false;
-      while (tmp != 0) {
-        if (isContain(notValid, tmp % 10)) {
-          isValid = false;
-          break;
-        } else if (isContain(valid, tmp % 10)) {
-          isValid = true;
+    //map[i] == 0 ->i is invalid
+    //map[i] == 1 ->i is valid and rotated to itself
+    //map[i] == 2 ->i is valid
+    int[] map = new int[N + 1];
+    for (int i = 0; i <= N; i++) {
+      if (i < 10) {
+        if (i == 2 || i == 5 || i == 6 || i == 9) {
+          map[i] = 2;
+          count++;
+        } else if (i == 0 || i == 1 || i == 8) {
+          map[i] = 1;
         }
-        tmp /= 10;
+      } else {
+        int a = map[i / 10], b = map[i % 10];
+        if (a == 1 && b == 1) {
+          map[i] = 1;
+        } else if (1 <= a && 1 <= b) {
+          map[i] = 2;
+          count++;
+        }
       }
-      if (isValid) {
-        count++;
-      }
+
     }
     return count;
-  }
-
-  public boolean isContain(int[] arr, int x) {
-    for (int i : arr) {
-      if (i == x) {
-        return true;
-      }
-    }
-    return false;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
