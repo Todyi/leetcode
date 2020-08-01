@@ -30,13 +30,14 @@ class Solution {
   //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Rotate String.
   //  Memory Usage: 37.3 MB, less than 51.04% of Java online submissions for Rotate String.
   public boolean rotateString(String A, String B) {
-    String doubleA = A + A;
-    int x = doubleA.indexOf(B);
-    if (A.length() != B.length() || x == -1) {
-      return false;
-    }
-    doubleA = doubleA.substring(0, x) + doubleA.substring(x + B.length());
-    return doubleA.equals(A);
+//    String doubleA = A + A;
+//    int x = doubleA.indexOf(B);
+//    if (A.length() != B.length() || x == -1) {
+//      return false;
+//    }
+//    doubleA = doubleA.substring(0, x) + doubleA.substring(x + B.length());
+//    return doubleA.equals(A);
+    return A.length() == B.length() && (A + A).contains(B);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
