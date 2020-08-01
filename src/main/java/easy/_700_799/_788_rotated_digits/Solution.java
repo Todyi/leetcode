@@ -69,32 +69,70 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了95.23% 的Java用户
   //  内存消耗:36.9 MB,击败了33.33% 的Java用户
+//  public int rotatedDigits(int N) {
+//    int count = 0;
+//    //map[i] == 0 ->i is invalid
+//    //map[i] == 1 ->i is valid and rotated to itself
+//    //map[i] == 2 ->i is valid
+//    int[] map = new int[N + 1];
+//    for (int i = 0; i <= N; i++) {
+//      if (i < 10) {
+//        if (i == 2 || i == 5 || i == 6 || i == 9) {
+//          map[i] = 2;
+//          count++;
+//        } else if (i == 0 || i == 1 || i == 8) {
+//          map[i] = 1;
+//        }
+//      } else {
+//        int a = map[i / 10], b = map[i % 10];
+//        if (a == 1 && b == 1) {
+//          map[i] = 1;
+//        } else if (1 <= a && 1 <= b) {
+//          map[i] = 2;
+//          count++;
+//        }
+//      }
+//
+//    }
+//    return count;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:36 MB,击败了75.00% 的Java用户
   public int rotatedDigits(int N) {
-    int count = 0;
-    //map[i] == 0 ->i is invalid
-    //map[i] == 1 ->i is valid and rotated to itself
-    //map[i] == 2 ->i is valid
-    int[] map = new int[N + 1];
-    for (int i = 0; i <= N; i++) {
-      if (i < 10) {
-        if (i == 2 || i == 5 || i == 6 || i == 9) {
-          map[i] = 2;
-          count++;
-        } else if (i == 0 || i == 1 || i == 8) {
-          map[i] = 1;
-        }
-      } else {
-        int a = map[i / 10], b = map[i % 10];
-        if (a == 1 && b == 1) {
-          map[i] = 1;
-        } else if (1 <= a && 1 <= b) {
-          map[i] = 2;
-          count++;
+    char[] arr = String.valueOf(N).toCharArray();
+    //k:String.valueOf(N).charAt(k)
+    //map[k][0][0]:valid numbers(no matter arr[k] < digit or not)
+    //map[k][1][0]:valid numbers
+    //map[k][0][1]: good numbers(no matter arr[k] < digit or not)
+    //map[k][1][1]: good numbers
+    int[][][] map = new int[arr.length + 1][2][2];
+    map[arr.length][0][0] = map[arr.length][1][0] = 1;
+    for (int k = arr.length - 1; k >= 0; k--) {
+      for (int limit = 0; limit < 2; limit++) {//0no limit,1digit <= arr[k]
+        for (int validOrGood = 0; validOrGood < 2; validOrGood++) {//0valid,1good
+          int num = 0;
+          for (char c = '0'; c <= (limit == 1 ? arr[k] : '9'); c++) {
+            if (c == '3' || c == '4' || c == '7') {
+              continue;
+            }
+            // we need to care the limit just when c == arr[k]
+            int limitNum = c == arr[k] ? limit : 0;
+            int validOrGoodNum = c == '2' || c == '5' || c == '6' || c == '9' ? 0 : validOrGood;
+            num += map[k + 1][limitNum][validOrGoodNum];
+          }
+          map[k][limit][validOrGood] = num;
         }
       }
 
     }
-    return count;
+    return map[0][1][1];
+  }
+
+  public static void main(String[] args) {
+    String a = "123";
+    System.out.println(a.charAt(0));
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)

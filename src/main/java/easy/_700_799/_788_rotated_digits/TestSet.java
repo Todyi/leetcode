@@ -26,7 +26,7 @@ public class TestSet {
 
   @Test
   public void test2() {
-    int N = 15;//2,5,6,9,12,15,16,19,20
+    int N = 15;//2,5,6,9,12,15
     Integer result = 6;
     int solution = new easy._700_799._788_rotated_digits.Solution()
         .rotatedDigits(N);
