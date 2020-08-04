@@ -58,31 +58,37 @@ package easy._800_899._811_subdomain_visit_count;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
-  //  执行耗时:12 ms,击败了92.84% 的Java用户
-  //  内存消耗:40.7 MB,击败了16.99% 的Java用户
+  //  执行耗时:4 ms,击败了100.00% 的Java用户
+  //  内存消耗:40 MB,击败了71.24% 的Java用户
+  HashMap<String, Integer> map = new HashMap<>();
+  int count;
+
   public List<String> subdomainVisits(String[] cpdomains) {
-    Map<String, Integer> map = new HashMap<>();
+
     for (String domainStr : cpdomains) {
-      subDomain(domainStr.substring(domainStr.indexOf(' ') + 1),
-          Integer.valueOf(domainStr.substring(0, domainStr.indexOf(' '))), map);
+      int space = domainStr.indexOf(' ');
+      count = Integer.parseInt(domainStr.substring(0, space));
+      subDomain(domainStr.substring(space + 1));
     }
+
     List<String> res = new ArrayList<>();
     map.forEach((k, v) -> {
-      res.add(v + " " + k);
+      StringBuilder sb = new StringBuilder();
+      res.add(sb.append(v).append(' ').append(k).toString());
     });
     return res;
   }
 
-  public void subDomain(String domain, int count, Map<String, Integer> map) {
+  public void subDomain(String domain) {
     map.put(domain, map.getOrDefault(domain, 0) + count);
-    if (-1 < domain.indexOf('.')) {
-      subDomain(domain.substring(domain.indexOf('.') + 1), count, map);
+    int dot = domain.indexOf('.');
+    if (-1 < dot) {
+      subDomain(domain.substring(dot + 1));
     }
   }
 }
