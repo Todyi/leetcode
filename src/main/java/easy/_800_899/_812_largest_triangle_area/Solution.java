@@ -47,6 +47,18 @@ class Solution {
   }
 
   public double area(int[] i, int[] j, int[] k) {
+    //X × Y = Z Y × X = -Z
+    //→AB × →AC 
+    //= (x1X+y1Y)×(x2X+y2Y)
+    //=x1X×x2X+x1X×y2Y+y1Y×x2X+y1Y×y2Y
+    //=x1x2(X×X)+x1y2(X×Y)+x2y1((Y×X))+y1y2(Y×Y)
+    //=0+x1y2Z-x2y1Z+0
+    //=(x1y2-x2y1)Z
+
+    //A(x1,y1) B(x2,y2) C(x3,y3)
+    //→AB(x2-x1,y2-y1) →AC(x3-x1,y3-y1)
+    
+    //area(A,B,C) = |→AC × →AB|/2
     return Math.abs(((j[0] - i[0]) * (k[1] - i[1]) - (j[1] - i[1]) * (k[0] - i[0])) / 2D);
   }
 }
