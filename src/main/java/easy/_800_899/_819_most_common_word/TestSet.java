@@ -46,4 +46,14 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test4() {
+    String paragraph = "Bob. hIt, baLl";
+    String[] banned = {"bob", "hit"};
+    String result = "ball";
+    String solution = new easy._800_899._819_most_common_word.Solution()
+        .mostCommonWord(paragraph, banned);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
