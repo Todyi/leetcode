@@ -49,19 +49,22 @@ package easy._800_899._849_maximize_distance_to_closest_person;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:2 ms,击败了86.42% 的Java用户
-  //  内存消耗:41.4 MB,击败了77.81% 的Java用户
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:41.7 MB,击败了58.44% 的Java用户
   public int maxDistToClosest(int[] seats) {
     int lastSeated = nextSeated(seats, 0);
     int maxDistance = lastSeated;
     while (true) {
       int nextSeated = nextSeated(seats, lastSeated + 1);
       if (lastSeated < nextSeated) {
-        maxDistance = Math.max(maxDistance, (nextSeated - lastSeated) / 2);
+        if (maxDistance < (nextSeated - lastSeated) / 2) {
+          maxDistance = (nextSeated - lastSeated) / 2;
+        }
         lastSeated = nextSeated;
-        nextSeated = nextSeated(seats, lastSeated + 1);
       } else {
-        maxDistance = Math.max(maxDistance, seats.length - 1 - lastSeated);
+        if (maxDistance < seats.length - 1 - lastSeated) {
+          maxDistance = seats.length - 1 - lastSeated;
+        }
         break;
       }
     }
@@ -74,7 +77,7 @@ class Solution {
         return i;
       }
     }
-    return Integer.MIN_VALUE;
+    return -1;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
