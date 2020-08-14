@@ -66,16 +66,15 @@ package easy._800_899._859_buddy_strings;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:2 ms,击败了79.89% 的Java用户
-  //  内存消耗:39 MB,击败了94.67% 的Java用户
+  //  执行耗时:1 ms,击败了98.81% 的Java用户
+  //  内存消耗:39.1 MB,击败了90.91% 的Java用户
   public boolean buddyStrings(String A, String B) {
     if (A.length() != B.length()) {
       return false;
     }
     char[] aArr = A.toCharArray();
     char[] bArr = B.toCharArray();
-    int count = 0;
-    long multiA = 1, multiB = 1;
+    int count = 0, multiA = 1, multiB = 1;
     boolean duplicate = false;
 
     for (int i = 0; i < aArr.length; i++) {
