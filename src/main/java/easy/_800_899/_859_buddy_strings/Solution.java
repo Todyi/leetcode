@@ -66,30 +66,35 @@ package easy._800_899._859_buddy_strings;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:1 ms,击败了98.81% 的Java用户
-  //  内存消耗:39.1 MB,击败了90.91% 的Java用户
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.6 MB,击败了53.30% 的Java用户
   public boolean buddyStrings(String A, String B) {
     if (A.length() != B.length()) {
       return false;
     }
     char[] aArr = A.toCharArray();
-    char[] bArr = B.toCharArray();
-    int count = 0, multiA = 1, multiB = 1;
-    boolean duplicate = false;
 
-    for (int i = 0; i < aArr.length; i++) {
+    int multiA = 1;
+    if (A.equals(B)) {
+      for (int i = 0; i < aArr.length; i++) {
+        if (multiA % aArr[i] == 0) {
+          return true;
+        }
+        multiA *= aArr[i];
+      }
+      return false;
+    }
+
+    char[] bArr = B.toCharArray();
+    int count = 0, diffA = 0, diffB = 0;
+    for (int i = 0; i < aArr.length && count < 3; i++) {
       if (aArr[i] != bArr[i]) {
+        diffA += aArr[i];
+        diffB += bArr[i];
         count++;
       }
-      if (!duplicate) {
-        if (multiA % aArr[i] == 0) {
-          duplicate = true;
-        }
-      }
-      multiA *= aArr[i];
-      multiB *= bArr[i];
     }
-    return multiA == multiB && (count == 2 || (count == 0 && duplicate));
+    return count == 2 && diffA == diffB;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
