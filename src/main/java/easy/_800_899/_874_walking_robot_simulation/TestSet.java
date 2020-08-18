@@ -1,7 +1,6 @@
 package easy._800_899._874_walking_robot_simulation;
 
 
-import common.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 

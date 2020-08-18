@@ -60,73 +60,40 @@ import java.util.Set;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:28 ms,击败了67.88% 的Java用户
-  //  内存消耗:45.5 MB,击败了62.40% 的Java用户
+  //  执行耗时:10 ms,击败了96.08% 的Java用户
+  //  内存消耗:44.6 MB,击败了92.43% 的Java用户
   public int robotSim(int[] commands, int[][] obstacles) {
     int x = 0, y = 0, direction = 0;//0north,1west,2south,3east
     int[][] step = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
-
     Set obsMap = new HashSet();
-    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < obstacles.length; i++) {
-      obsMap.add(sb.append(obstacles[i][0])
-          .append('-')
-          .append(obstacles[i][1])
-          .toString());
-      sb.setLength(0);
+      long tmp = ((long) obstacles[i][0] << 32) + obstacles[i][1];
+      obsMap.add(tmp);
     }
     int result = 0;
     for (int cmd : commands) {
       if (cmd == -2) {
-        direction = (direction + 1) % 4;
+        direction++;
       } else if (cmd == -1) {
-        direction = (direction + 3) % 4;
+        direction += 3;
       } else {
         for (int i = 0; i < cmd; i++) {
-          sb.setLength(0);
-          if (obsMap.contains(
-              sb.append(x + step[direction][0]).append('-').append(y + step[direction][1])
-                  .toString())) {
+          long tmp = ((long) (x + step[direction][0]) << 32) + (y + step[direction][1]);
+          if (obsMap.contains(tmp)) {
             break;
           }
           x += step[direction][0];
           y += step[direction][1];
-          if (result < x * x + y * y) {
-            result = x * x + y * y;
-          }
         }
+        result = Math.max(result, x * x + y * y);
+      }
+      if (3 < direction) {
+        direction %= 4;
       }
     }
-    return Math.max(result, x * x + y * y);
+    return result;
   }
-//  public int robotSim(int[] commands, int[][] obstacles) {
-//    int x = 0, y = 0, direction = 0;//0north,1west,2south,3east
-//    int[][] step = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
-//    Set obsMap = new HashSet();
-//    for (int i = 0; i < obstacles.length; i++) {
-//      obsMap.add(obstacles[i][0] + ',' + obstacles[i][1]);
-//    }
-//    int result = 0;
-//    for (int cmd : commands) {
-//      if (cmd == -2) {
-//        direction = (direction + 1) % 4;
-//      } else if (cmd == -1) {
-//        direction = (direction + 3) % 4;
-//      } else {
-//        for (int i = 0; i < cmd; i++) {
-//          int obsX = x + step[direction][0];
-//          int obsY = y + step[direction][1];
-//          if (obsMap.contains(obsX + ',' + obsY)) {
-//            break;
-//          }
-//          x = obsX;
-//          y = obsY;
-//          result = Math.max(result, x * x + y * y);
-//        }
-//      }
-//    }
-//    return Math.max(result, x * x + y * y);
-//  }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
