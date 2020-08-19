@@ -131,28 +131,68 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了58.13% 的Java用户
   //  内存消耗:39 MB,击败了94.21% 的Java用户
-  public int projectionArea(int[][] grid) {
-    int xy = 0, xz = 0, yz = 0;
-    int[] mapX = new int[51];
-    int[] mapY = new int[51];
-    for (int x = 0; x < grid.length; x++) {
-      for (int y = 0; y < grid[x].length; y++) {
-        if (0 < grid[x][y]) {
-          xy++;
-          if (mapX[x] < grid[x][y]) {
-            xz += grid[x][y] - mapX[x];
-            mapX[x] = grid[x][y];
-          }
-          if (mapY[y] < grid[x][y]) {
-            yz += grid[x][y] - mapY[y];
-            mapY[y] = grid[x][y];
-          }
-        }
-      }
+//  public int projectionArea(int[][] grid) {
+//    int xy = 0, xz = 0, yz = 0;
+//    int[] mapX = new int[51];
+//    int[] mapY = new int[51];
+//    for (int x = 0; x < grid.length; x++) {
+//      for (int y = 0; y < grid[x].length; y++) {
+//        if (0 < grid[x][y]) {
+//          xy++;
+//          if (mapX[x] < grid[x][y]) {
+//            xz += grid[x][y] - mapX[x];
+//            mapX[x] = grid[x][y];
+//          }
+//          if (mapY[y] < grid[x][y]) {
+//            yz += grid[x][y] - mapY[y];
+//            mapY[y] = grid[x][y];
+//          }
+//        }
+//      }
+//
+//    }
+//    return xy + xz + yz;
+//  }
 
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.1 MB,击败了84.57% 的Java用户
+  int area = 0;
+  int xy = 0;
+
+  public int projectionArea(int[][] grid) {
+
+    for (int i = 0; i < grid.length; i++) {
+      area += getMaxX(grid[i]);
+      area += getMaxY(grid, i);
     }
-    return xy + xz + yz;
+    return area + xy;
   }
+
+  public int getMaxX(int[] Z) {
+    int max = 0;
+    for (int z : Z) {
+      if (0 < z) {
+        xy++;
+      }
+      if (max < z) {
+        max = z;
+      }
+    }
+    return max;
+  }
+
+  public int getMaxY(int[][] grid, int y) {
+    int max = 0;
+    for (int[] Z : grid) {
+      if (max < Z[y]) {
+        max = Z[y];
+      }
+    }
+    return max;
+  }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
