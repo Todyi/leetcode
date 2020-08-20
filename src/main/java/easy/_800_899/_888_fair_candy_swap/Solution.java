@@ -73,28 +73,29 @@ import java.util.Set;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  //  Runtime: 8 ms, faster than 98.44% of Java online submissions for Fair Candy Swap.
-  //  Memory Usage: 41.6 MB, less than 41.35% of Java online submissions for Fair Candy Swap.
+  //  Runtime: 2 ms, faster than 100.00% of Java online submissions for Fair Candy Swap.
+  //  Memory Usage: 40.7 MB, less than 93.75% of Java online submissions for Fair Candy Swap.
   public int[] fairCandySwap(int[] A, int[] B) {
-    Set map = new HashSet();
+    int[] map = new int[100001];
     int diff = 0;
-    for (int i = 0; i < A.length; i++) {
-      diff += A[i];
+    for (int i : A) {
+      diff += i;
     }
-    for (int i = 0; i < B.length; i++) {
-      map.add(B[i]);
-      diff -= B[i];
+    for (int i : B) {
+      map[i]++;
+      diff -= i;
     }
     diff /= 2;
-    for (int i = 0; i < A.length; i++) {
+    for (int i : A) {
       /*
       diff = aSum - bSum
       aSum - A[i] + target = bSum + A[i] - target
       2target = bSum + A[i] - (aSum - A[i])
       target = A[i] - diff/2
       */
-      if (map.contains(A[i] - diff)) {
-        return new int[]{A[i], A[i] - diff};
+      int target = i - diff;
+      if (0 < target && target < 100001 && 0 < map[target]) {
+        return new int[]{i, target};
       }
     }
     return null;
