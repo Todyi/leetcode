@@ -78,25 +78,21 @@ package easy._800_899._892_surface_area_of_3d_shapes;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:3 ms,击败了79.48% 的Java用户
-  //  内存消耗:39.4 MB,击败了54.85% 的Java用户
+  //  执行耗时:2 ms,击败了97.39% 的Java用户
+  //  内存消耗:39 MB,击败了89.55% 的Java用户
   public int surfaceArea(int[][] grid) {
     int num = 0;
     int adjoin = 0;
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[i].length; j++) {
-        if (0 < grid[i][j] && 0 < j && 0 < grid[i][j - 1]) {
+        num += grid[i][j];
+        if (0 < j) {
           adjoin += Math.min(grid[i][j - 1], grid[i][j]);
         }
-      }
-      for (int k = 0; k < grid.length; k++) {
-        if (0 < grid[k][i]) {
-          num += grid[k][i];
-          if (1 < grid[k][i]) {
-            adjoin += grid[k][i] - 1;
-          }
-          if (0 < k && 0 < grid[k - 1][i]) {
-            adjoin += Math.min(grid[k - 1][i], grid[k][i]);
+        if (0 < grid[i][j]) {
+          adjoin += grid[i][j] - 1;
+          if (0 < i) {
+            adjoin += Math.min(grid[i - 1][j], grid[i][j]);
           }
         }
       }
