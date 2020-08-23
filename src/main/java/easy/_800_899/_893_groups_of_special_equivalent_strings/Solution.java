@@ -76,20 +76,47 @@ class Solution {
 
   //  Runtime: 3 ms, faster than 96.23% of Java online submissions for Groups of Special-Equivalent Strings.
   //  Memory Usage: 39.5 MB, less than 78.16% of Java online submissions for Groups of Special-Equivalent Strings.
+//  public int numSpecialEquivGroups(String[] A) {
+//    Set map = new HashSet();
+//    for (String s : A) {
+//      char[] arr = s.toCharArray();
+//      int odd = 1, even = 1;
+//      for (int i = 0; i < arr.length; i += 2) {
+//        odd *= arr[i];
+//      }
+//      for (int i = 1; i < arr.length; i += 2) {
+//        even *= arr[i];
+//      }
+//      map.add(new StringBuilder().append(odd).append(" ").append(even).toString());
+//    }
+//    return map.size();
+//  }
+
+
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Groups of Special-Equivalent Strings.
+  //  Memory Usage: 39.1 MB, less than 95.86% of Java online submissions for Groups of Special-Equivalent Strings.
   public int numSpecialEquivGroups(String[] A) {
-    Set map = new HashSet();
+    int result = 0;
+    Set<String> set = new HashSet<>();
     for (String s : A) {
-      char[] arr = s.toCharArray();
-      int odd = 1, even = 1;
-      for (int i = 0; i < arr.length; i += 2) {
-        odd *= arr[i];
+      if (set.add(sort(s.toCharArray()))) {
+        result++;
       }
-      for (int i = 1; i < arr.length; i += 2) {
-        even *= arr[i];
-      }
-      map.add(new StringBuilder().append(odd).append(" ").append(even).toString());
     }
-    return map.size();
+    return result;
+  }
+
+  public String sort(char[] array) {
+    for (int i = 0; i < array.length; i++) {
+      for (int j = i + 2; j < array.length; j += 2) {
+        if (array[j] < array[i]) {
+          char tmp = array[i];
+          array[i] = array[j];
+          array[j] = tmp;
+        }
+      }
+    }
+    return String.valueOf(array);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
