@@ -36,21 +36,44 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了99.63% 的Java用户
   //  内存消耗:45.7 MB,击败了24.76% 的Java用户
+//  public int[] sortArrayByParity(int[] A) {
+//    int j = 1;
+//    for (int i = 0; i < A.length; i++) {
+//      if (A[i] % 2 == 1) {
+//        for (j = j < i + 1 ? i + 1 : j; j < A.length; j++) {
+//          if (A[j] % 2 == 0) {
+//            int tmp = A[j];
+//            A[j] = A[i];
+//            A[i] = tmp;
+//            break;
+//          }
+//          if (j == A.length - 1) {
+//            return A;
+//          }
+//        }
+//      }
+//    }
+//    return A;
+//  }
+
+
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Sort Array By Parity.
+  //  Memory Usage: 40.8 MB, less than 63.62% of Java online submissions for Sort Array By Parity.
   public int[] sortArrayByParity(int[] A) {
-    int j = 1;
-    for (int i = 0; i < A.length; i++) {
-      if (A[i] % 2 == 1) {
-        for (j = j < i + 1 ? i + 1 : j; j < A.length; j++) {
-          if (A[j] % 2 == 0) {
-            int tmp = A[j];
-            A[j] = A[i];
-            A[i] = tmp;
-            break;
-          }
-          if (j == A.length - 1) {
-            return A;
-          }
+    int s = 0;
+    int e = A.length - 1;
+    int temp;
+    while (s < e) {
+      if ((A[s] & 1) == 1) {
+        if ((A[e] & 1) == 0) {
+          temp = A[s];
+          A[s++] = A[e];
+          A[e--] = temp;
+        } else {
+          e--;
         }
+      } else {
+        s++;
       }
     }
     return A;
