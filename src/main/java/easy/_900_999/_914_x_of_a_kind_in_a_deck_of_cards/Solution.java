@@ -67,31 +67,57 @@ class Solution {
 
   //  Runtime: 1 ms, faster than 100.00% of Java online submissions for X of a Kind in a Deck of Cards.
   //  Memory Usage: 39.9 MB, less than 58.25% of Java online submissions for X of a Kind in a Deck of Cards.
+//  public boolean hasGroupsSizeX(int[] deck) {
+////    int[] map = new int[10001];
+//    int[] map = new int[53];
+//    int[] prime = {2, 3, 5, 7, 11, 13, 17, 19, 23};
+//    int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE, idx = 0;
+//    for (int i : deck) {
+//      map[i]++;
+//      if (max < i) {
+//        max = i;
+//      }
+//      if (i < min) {
+//        min = i;
+//      }
+//    }
+//    for (int i = min; i <= max; i++) {
+//      while (idx < prime.length) {
+//        if (map[i] % prime[idx] == 0) {
+//          break;
+//        }
+//        idx++;
+//        i = min;
+//      }
+//    }
+//    return idx < prime.length;
+//  }
+
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for X of a Kind in a Deck of Cards.
+  //  Memory Usage: 39.9 MB, less than 54.85% of Java online submissions for X of a Kind in a Deck of Cards.
   public boolean hasGroupsSizeX(int[] deck) {
 //    int[] map = new int[10001];
     int[] map = new int[53];
-    int[] prime = {2, 3, 5, 7, 11, 13, 17, 19, 23};
-    int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE, idx = 0;
+    int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE, g = 0;
     for (int i : deck) {
-      map[i]++;
       if (max < i) {
         max = i;
       }
       if (i < min) {
         min = i;
       }
+      map[i]++;
     }
     for (int i = min; i <= max; i++) {
-      while (idx < prime.length) {
-        if (map[i] % prime[idx] == 0) {
-          break;
-        }
-        idx++;
-        i = min;
-      }
+      g = gcd(g, map[i]);
     }
-    return idx < prime.length;
+    return g != 1;
   }
+
+  public int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+  }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
