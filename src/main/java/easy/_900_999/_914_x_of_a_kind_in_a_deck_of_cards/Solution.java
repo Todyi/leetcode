@@ -65,10 +65,11 @@ package easy._900_999._914_x_of_a_kind_in_a_deck_of_cards;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  //  Runtime: 2 ms, faster than 99.30% of Java online submissions for X of a Kind in a Deck of Cards.
-  //  Memory Usage: 40.2 MB, less than 43.41% of Java online submissions for X of a Kind in a Deck of Cards.
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for X of a Kind in a Deck of Cards.
+  //  Memory Usage: 39.9 MB, less than 58.25% of Java online submissions for X of a Kind in a Deck of Cards.
   public boolean hasGroupsSizeX(int[] deck) {
-    int[] map = new int[10001];
+//    int[] map = new int[10001];
+    int[] map = new int[53];
     int[] prime = {2, 3, 5, 7, 11, 13, 17, 19, 23};
     int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE, idx = 0;
     for (int i : deck) {
