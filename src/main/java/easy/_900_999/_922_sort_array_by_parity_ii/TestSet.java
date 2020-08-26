@@ -19,8 +19,8 @@ public class TestSet {
   @Test
   public void test1() {
     int[] A = {2, 3, 1, 1, 4, 0, 0, 4, 3, 3};
-//    int[] result = {2, 3, 0, 1, 4, 1, 0, 3, 4, 3};
-    int[] result = {2, 3, 4, 1, 4, 3, 0, 1, 0, 3};
+    int[] result = {2, 3, 0, 1, 4, 1, 0, 3, 4, 3};
+//    int[] result = {2, 3, 4, 1, 4, 3, 0, 1, 0, 3};
     int[] solution = new easy._900_999._922_sort_array_by_parity_ii.Solution()
         .sortArrayByParityII(A);
     Assert.assertTrue(Comparators.isSame(result, solution));
