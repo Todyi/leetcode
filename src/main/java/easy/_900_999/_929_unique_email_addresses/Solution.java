@@ -55,22 +55,58 @@ import java.util.HashSet;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
+  //  解答成功:
+  //  执行耗时:8 ms,击败了88.45% 的Java用户
+  //  内存消耗:39.6 MB,击败了83.80% 的Java用户
+//  public int numUniqueEmails(String[] emails) {
+//    HashSet set = new HashSet();
+//    for (String email : emails) {
+//      String[] emailArr = email.split("@");
+//      StringBuilder sb = new StringBuilder();
+//      char[] preArr = emailArr[0].toCharArray();
+//      for (int i = 0; i < preArr.length; i++) {
+//        if (preArr[i] == '+') {
+//          break;
+//        } else if (preArr[i] != '.') {
+//          sb.append(preArr[i]);
+//        }
+//      }
+//      set.add(sb.append('@').append(emailArr[1]).toString());
+//    }
+//    return set.size();
+//  }
+
+  //  Runtime: 3 ms, faster than 100.00% of Java online submissions for Unique Email Addresses.
+  //  Memory Usage: 39.3 MB, less than 95.43% of Java online submissions for Unique Email Addresses.
   public int numUniqueEmails(String[] emails) {
-    HashSet set = new HashSet();
+    HashSet<String> uniqueSet = new HashSet<String>();
     for (String email : emails) {
-      String[] emailArr = email.split("@");
-      StringBuilder sb = new StringBuilder();
-      char[] preArr = emailArr[0].toCharArray();
-      for (int i = 0; i < preArr.length; i++) {
-        if (preArr[i] == '+'){
-          break;
-        }else if (preArr[i] != '.'){
-          sb.append(preArr[i]);
-        }
-      }
-      set.add(sb.append('@').append(emailArr[1]).toString());
+      uniqueSet.add(simplifyEmail(email));
+
     }
-    return set.size();
+    return uniqueSet.size();
+  }
+
+  private String simplifyEmail(String email) {
+    int i = -1;
+    int x = 0;
+    char c;
+    boolean plusSign = false;
+    char[] simpleEmailChars = new char[email.length()];
+    while ((c = email.charAt(++i)) != '@') {
+      if (plusSign) {
+        continue;
+      }
+      if (c == '+') {
+        plusSign = true;
+      } else if (c != '.') {
+        simpleEmailChars[x++] = c;
+      }
+    }
+    while (i < email.length()) {
+      simpleEmailChars[x++] = email.charAt(i++);
+    }
+    return new String(simpleEmailChars, 0, x);
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
