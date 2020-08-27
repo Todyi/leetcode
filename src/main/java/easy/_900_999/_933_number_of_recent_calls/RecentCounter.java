@@ -35,15 +35,15 @@ package easy._900_999._933_number_of_recent_calls;
 // 👍 311 👎 1760
 
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class RecentCounter {
 
   //  解答成功:
-  //  执行耗时:19 ms,击败了90.76% 的Java用户
-  //  内存消耗:48.2 MB,击败了65.67% 的Java用户
-  ArrayList<Integer> reqList = new ArrayList<>();
+  //  执行耗时:18 ms,击败了98.33% 的Java用户
+  //  内存消耗:48.2 MB,击败了71.39% 的Java用户
+  LinkedList<Integer> reqList = new LinkedList<>();
 
   public RecentCounter() {
 
@@ -51,14 +51,8 @@ class RecentCounter {
 
   public int ping(int t) {
     reqList.add(t);
-    int firstReq;
-    while (true) {
-      firstReq = reqList.get(0);
-      if (firstReq + 3000 < t) {
-        reqList.remove(0);
-      } else {
-        break;
-      }
+    while (reqList.peek() + 3000 < t) {
+      reqList.remove();
     }
     return reqList.size();
   }
