@@ -43,19 +43,40 @@ class RecentCounter {
   //  解答成功:
   //  执行耗时:18 ms,击败了98.33% 的Java用户
   //  内存消耗:48.2 MB,击败了71.39% 的Java用户
-  LinkedList<Integer> reqList = new LinkedList<>();
+//  LinkedList<Integer> reqList = new LinkedList<>();
+//
+//  public RecentCounter() {
+//
+//  }
+//
+//  public int ping(int t) {
+//    reqList.add(t);
+//    while (reqList.peek() + 3000 < t) {
+//      reqList.remove();
+//    }
+//    return reqList.size();
+//  }
+
+  //  解答成功:
+  //  执行耗时:17 ms,击败了99.38% 的Java用户
+  //  内存消耗:48.4 MB,击败了55.02% 的Java用户
+  int[] map = new int[10000];
+  int current = 0;
+  int last = 0;
 
   public RecentCounter() {
 
   }
 
   public int ping(int t) {
-    reqList.add(t);
-    while (reqList.peek() + 3000 < t) {
-      reqList.remove();
+    map[current++] = t;
+    while (map[last] + 3000 < t) {
+      last++;
     }
-    return reqList.size();
+    return current - last;
   }
+
+
 }
 
 /**
