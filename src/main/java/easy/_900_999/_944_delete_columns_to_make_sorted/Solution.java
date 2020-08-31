@@ -62,23 +62,47 @@ class Solution {
   //  解答成功:
   //  执行耗时:5 ms,击败了96.75% 的Java用户
   //  内存消耗:39.6 MB,击败了83.01% 的Java用户
-  public int minDeletionSize(String[] A) {
-    int count = 0, strLen = A[0].length(), num = A.length;
-    char[][] arr = new char[num][strLen];
+//  public int minDeletionSize(String[] A) {
+//    int count = 0, strLen = A[0].length(), num = A.length;
+//    char[][] arr = new char[num][strLen];
+//
+//    for (int i = 0; i < A.length; i++) {
+//      arr[i] = A[i].toCharArray();
+//    }
+//
+//    for (int idx = 0; idx < strLen; idx++) {
+//      for (int i = 1; i < num; i++) {
+//        if (arr[i][idx] < arr[i - 1][idx]) {
+//          count++;
+//          break;
+//        }
+//      }
+//    }
+//    return count;
+//  }
 
-    for (int i = 0; i < A.length; i++) {
-      arr[i] = A[i].toCharArray();
-    }
+  //  解答成功:
+  //  执行耗时:3 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.6 MB,击败了83.01% 的Java用户
+  public int minDeletionSize(String[] A) {
+    int count = 0, strLen = A[0].length();
 
     for (int idx = 0; idx < strLen; idx++) {
-      for (int i = 1; i < num; i++) {
-        if (arr[i][idx] < arr[i - 1][idx]) {
-          count++;
-          break;
-        }
-      }
+      count += isDeleteColumn(A, idx);
     }
     return count;
+  }
+
+  public int isDeleteColumn(String[] A, int column) {
+    int max = A[0].charAt(column), value;
+    for (int i = 1; i < A.length; i++) {
+      value = A[i].charAt(column);
+      if (value < max) {
+        return 1;
+      }
+      max = value;
+    }
+    return 0;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
