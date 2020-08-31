@@ -37,7 +37,6 @@ package easy._900_999._937_recorder_data_in_log_files;
 // 👍 705 👎 2136
 
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -45,29 +44,31 @@ import java.util.TreeMap;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:5 ms,击败了78.83% 的Java用户
-  //  内存消耗:39.3 MB,击败了98.31% 的Java用户
+  //  执行耗时:4 ms,击败了84.44% 的Java用户
+  //  内存消耗:39.3 MB,击败了99.14% 的Java用户
   public String[] reorderLogFiles(String[] logs) {
-    ArrayList<String> digitList = new ArrayList<>();
     TreeMap<String, String> letterMap = new TreeMap<>();
-    for (String log : logs) {
-      if (Character.isDigit(log.charAt(log.length() - 1))) {
-        digitList.add(log);
-      } else {
-        letterMap.put(log.substring(log.indexOf(" ")) + log, log);
+    for (int i = 0; i < logs.length; i++) {
+      if (!Character.isDigit(logs[i].charAt(logs[i].length() - 1))) {
+        int split = logs[i].indexOf(" ");
+        letterMap.put(logs[i].substring(split) + logs[i].substring(0, split), logs[i]);
+        logs[i] = null;
       }
     }
     int i = 0;
+    String[] res = new String[logs.length];
     Set<String> keys = letterMap.keySet();
     for (String key : keys) {
-      logs[i++] = letterMap.get(key);
+      res[i++] = letterMap.get(key);
     }
 
-    for (String s : digitList) {
-      logs[i++] = s;
+    for (String s : logs) {
+      if (s != null) {
+        res[i++] = s;
+      }
     }
 
-    return logs;
+    return res;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
