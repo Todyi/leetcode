@@ -52,4 +52,13 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test5() {
+    int[] A = {3, 4, 15, 2, 9, 4};
+    Integer result = 11;
+    int solution = new easy._900_999._976_largest_perimeter_triangle.Solution()
+        .largestPerimeter(A);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }

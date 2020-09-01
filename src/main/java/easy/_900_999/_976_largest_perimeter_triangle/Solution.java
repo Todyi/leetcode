@@ -66,15 +66,43 @@ class Solution {
   //  解答成功:
   //  执行耗时:7 ms,击败了80.30% 的Java用户
   //  内存消耗:40.4 MB,击败了70.39% 的Java用户
+//  public int largestPerimeter(int[] A) {
+//    Arrays.sort(A);
+//    for (int i = A.length - 1; i > 1; i--) {
+//      if (A[i] < A[i - 1] + A[i - 2]) {
+//        return A[i] + A[i - 1] + A[i - 2];
+//      }
+//    }
+//    return 0;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.7 MB,击败了98.98% 的Java用户
   public int largestPerimeter(int[] A) {
-    Arrays.sort(A);
+    moveMax(A, A.length - 1);
+    moveMax(A, A.length - 2);
+    moveMax(A, A.length - 3);
     for (int i = A.length - 1; i > 1; i--) {
       if (A[i] < A[i - 1] + A[i - 2]) {
         return A[i] + A[i - 1] + A[i - 2];
       }
+      moveMax(A, i - 3);
     }
     return 0;
   }
+
+  public void moveMax(int[] A, int i) {
+    for (int k = i - 1; k >= 0; k--) {
+      if (A[i] < A[k]) {
+        int tmp = A[i];
+        A[i] = A[k];
+        A[k] = tmp;
+      }
+    }
+  }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
