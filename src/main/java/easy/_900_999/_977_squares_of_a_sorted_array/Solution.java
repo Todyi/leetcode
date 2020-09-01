@@ -43,12 +43,32 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了40.39% 的Java用户
   //  内存消耗:40.9 MB,击败了91.96% 的Java用户
+//  public int[] sortedSquares(int[] A) {
+//    for (int i = 0; i < A.length; i++) {
+//      A[i] = A[i] * A[i];
+//    }
+//    Arrays.sort(A);
+//    return A;
+//  }
+
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Squares of a Sorted Array.
+  //  Memory Usage: 41.8 MB, less than 40.75% of Java online submissions for Squares of a Sorted Array.
   public int[] sortedSquares(int[] A) {
-    for (int i = 0; i < A.length; i++) {
-      A[i] = A[i] * A[i];
+    int len = A.length, lSquare, rSquare;
+    int l = 0, r = len - 1, i = len - 1;
+    int[] res = new int[len];
+    while (l <= r) {
+      lSquare = A[l] * A[l];
+      rSquare = A[r] * A[r];
+      if (lSquare < rSquare) {
+        res[i--] = rSquare;
+        r--;
+      } else {
+        res[i--] = lSquare;
+        l++;
+      }
     }
-    Arrays.sort(A);
-    return A;
+    return res;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
