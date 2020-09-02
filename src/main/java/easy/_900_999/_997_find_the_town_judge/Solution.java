@@ -49,33 +49,35 @@ package easy._900_999._997_find_the_town_judge;
 // 👍 1003 👎 98
 
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
   //  执行耗时:3 ms,击败了90.75% 的Java用户
-  //  内存消耗:46.7 MB,击败了98.03% 的Java用户
+  //  内存消耗:46.8 MB,击败了97.83% 的Java用户
   public int findJudge(int N, int[][] trust) {
     if (N == 1) {
       return 1;
     }
 
+    boolean[] notJudge = new boolean[N + 1];
     int[] map = new int[N + 1];
+    int count = 0;
     for (int[] pairs : trust) {
-      map[pairs[0]]--;
+      if (!notJudge[pairs[0]]) {
+        notJudge[pairs[0]] = true;
+        count++;
+      }
       map[pairs[1]]++;
     }
-    for (int i = 1; i < map.length; i++) {
-      if (map[i] + 1 == N) {
+    if (count + 1 < N) {
+      return -1;
+    }
+    for (int i = 0; i < notJudge.length; i++) {
+      if (!notJudge[i] && map[i] + 1 == N) {
         return i;
       }
     }
-
     return -1;
   }
 }
