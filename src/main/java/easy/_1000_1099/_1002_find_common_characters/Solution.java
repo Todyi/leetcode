@@ -45,8 +45,8 @@ import java.util.List;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  //  Runtime: 4 ms, faster than 82.64% of Java online submissions for Find Common Characters.
-  //  Memory Usage: 39.9 MB, less than 60.47% of Java online submissions for Find Common Characters.
+  //  Runtime: 2 ms, faster than 98.80% of Java online submissions for Find Common Characters.
+  //  Memory Usage: 39.4 MB, less than 94.84% of Java online submissions for Find Common Characters.
   public List<String> commonChars(String[] A) {
     String[] str = {
         "a", "b", "c", "d", "e", "f", "g",
@@ -55,30 +55,13 @@ class Solution {
         "u", "v", "w", "x", "y", "z",
     };
     List<String> res = new ArrayList<>();
-    int[] map = new int[26];
-    char[] arr = A[0].toCharArray();
-    for (char c : arr) {
-      map[c - 'a']++;
-    }
+    int[] map = mark(A[0]);
     for (int i = 1; i < A.length; i++) {
-      arr = A[i].toCharArray();
-      int[] tmp = new int[26];
-      for (char c : arr) {
-        if (0 < map[c - 'a']) {
-          tmp[c - 'a']++;
-        }
-      }
+      int[] tmp = mark(A[i]);
       for (int j = 0; j < 26; j++) {
-        if (0 < map[j]) {
-          if (0 < tmp[j]) {
-            map[j] = Math.min(map[j], tmp[j]);
-          } else {
-            map[j] = 0;
-          }
-        }
+        map[j] = Math.min(map[j], tmp[j]);
       }
     }
-
     for (int i = 0; i < 26; i++) {
       if (0 < map[i]) {
         for (int j = 0; j < map[i]; j++) {
@@ -86,7 +69,15 @@ class Solution {
         }
       }
     }
+    return res;
+  }
 
+  public int[] mark(String s) {
+    int[] res = new int[26];
+    char[] arr = s.toCharArray();
+    for (char c : arr) {
+      res[c - 'a']++;
+    }
     return res;
   }
 
