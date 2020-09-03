@@ -58,27 +58,54 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了99.88% 的Java用户
   //  内存消耗:38.8 MB,击败了93.12% 的Java用户
-  public int largestSumAfterKNegations(int[] A, int K) {
-    Arrays.sort(A);
-    int idx = 0;
-    while (0 < K && A[idx] < 0) {
-      A[idx] = -A[idx];
-      idx++;
-      K--;
-    }
-    if ((K & 1) == 1) {
-      if (0 < idx && A[idx - 1] < A[idx]) {
-        A[idx - 1] = -A[idx - 1];
-      } else {
-        A[idx] = -A[idx];
-      }
-    }
+//  public int largestSumAfterKNegations(int[] A, int K) {
+//    Arrays.sort(A);
+//    int idx = 0;
+//    while (0 < K && A[idx] < 0) {
+//      A[idx] = -A[idx];
+//      idx++;
+//      K--;
+//    }
+//    if ((K & 1) == 1) {
+//      if (0 < idx && A[idx - 1] < A[idx]) {
+//        A[idx - 1] = -A[idx - 1];
+//      } else {
+//        A[idx] = -A[idx];
+//      }
+//    }
+//
+//    int sum = 0;
+//    for (int i : A) {
+//      sum += i;
+//    }
+//    return sum;
+//  }
 
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Maximize Sum Of Array After K Negations.
+  //  Memory Usage: 39.1 MB, less than 65.01% of Java online submissions for Maximize Sum Of Array After K Negations.
+  public int largestSumAfterKNegations(int[] A, int K) {
+    int[] tmp = new int[201];
     int sum = 0;
     for (int i : A) {
       sum += i;
+      tmp[i + 100]++;
     }
-    return sum;
+    int i = 0;
+    for (; i < 101 && 0 < K; i++) {
+      while (0 < tmp[i] && 0 < K) {
+        sum -= 2 * (i - 100);
+        tmp[i]--;
+        tmp[200 - i]++;
+        K--;
+      }
+    }
+    if ((K & 1) == 0) {
+      return sum;
+    }
+    while (tmp[i] == 0) {
+      i++;
+    }
+    return sum - 2 * (i - 100);
   }
 
 }
