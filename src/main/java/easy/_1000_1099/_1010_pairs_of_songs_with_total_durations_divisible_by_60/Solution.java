@@ -49,20 +49,41 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了85.95% 的Java用户
   //  内存消耗:44.6 MB,击败了95.59% 的Java用户
-  public int numPairsDivisibleBy60(int[] time) {
-    int count = 0, max = Integer.MIN_VALUE;
-    int[] map = new int[501];
-    for (int i : time) {
-      if (max < i) {
-        max = i;
-      }
-      int tmp = 60 - (i % 60);
-      while (tmp <= max) {
-        count += map[tmp];
-        tmp += 60;
-      }
-      map[i]++;
+//  public int numPairsDivisibleBy60(int[] time) {
+//    int count = 0, max = Integer.MIN_VALUE;
+//    int[] map = new int[501];
+//    for (int i : time) {
+//      if (max < i) {
+//        max = i;
+//      }
+//      int tmp = 60 - (i % 60);
+//      while (tmp <= max) {
+//        count += map[tmp];
+//        tmp += 60;
+//      }
+//      map[i]++;
+//
+//    }
+//    return count;
+//  }
 
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:44.8 MB,击败了88.89% 的Java用户
+  public int numPairsDivisibleBy60(int[] time) {
+    int[] map = new int[60];
+    for (int i = 0; i < time.length; i++) {
+      time[i] %= 60;
+    }
+    for (int i : time) {
+      map[i]++;
+    }
+    //better than for (int i : time) map[i % 60]++;
+
+    //C(n,2)=n(n-1)/2
+    int count = map[0] * (map[0] - 1) / 2 + map[30] * (map[30] - 1) / 2;
+    for (int i = 1; i < 30; i++) {
+      count += map[i] * map[60 - i];
     }
     return count;
   }
