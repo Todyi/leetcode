@@ -59,55 +59,53 @@ package easy._1000_1099._1042_flower_planting_with_no_adjacent;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  //  Runtime: 9 ms, faster than 97.65% of Java online submissions for Flower Planting With No Adjacent.
-  //  Memory Usage: 47.6 MB, less than 94.08% of Java online submissions for Flower Planting With No Adjacent.
+  //  解答成功:
+  //  执行耗时:8 ms,击败了98.05% 的Java用户
+  //  内存消耗:47.3 MB,击败了96.51% 的Java用户
+  int[] res = null;
+  int[][] map = null;
+
   public int[] gardenNoAdj(int N, int[][] paths) {
-    int[] res = new int[N];
-    res[0] = 1;
-
-    int[][] map = new int[N + 1][5];
-    int[][] typeMap = new int[N + 1][5];
-
-    for (int[] path : paths) {
-      if (path[0] < path[1]) {
-        map[path[0]][++map[path[0]][0]] = path[1];
-      } else {
-        map[path[1]][++map[path[1]][0]] = path[0];
+    res = new int[N];
+    if (N < 5) {
+      int i = 0;
+      while (i < N) {
+        res[i] = ++i;
       }
+      return res;
     }
 
-    for (int gardenFrom = 1; gardenFrom < map.length; gardenFrom++) {
-      int idx = 1;
-      fillType(res, gardenFrom, typeMap[gardenFrom]);
-      while (idx < 4) {
-        int gardenTo = map[gardenFrom][idx++];
-        if (gardenTo != 0) {
-          fillType(res, gardenTo, typeMap[gardenTo]);
-          typeMap[gardenTo][res[gardenFrom - 1]] = gardenFrom;
+    int len = N + 1;
+    map = new int[len][5];
+
+    for (int[] path : paths) {
+      map[path[0]][++map[path[0]][0]] = path[1];
+      map[path[1]][++map[path[1]][0]] = path[0];
+    }
+
+    for (int garden = 1; garden < len; garden++) {
+      for (int color = 1; color < 5; color++) {
+        if (check(garden, color)) {
+          res[garden - 1] = color;
+          break;
         }
       }
     }
-    
+
     return res;
   }
 
-  private void fillType(int[] res, int garden, int[] type) {
-    if (res[garden - 1] != 0) {
-      if (type[res[garden - 1]] == 0) {
-        type[res[garden - 1]] = garden;
-        return;
-      } else if (type[res[garden - 1]] == garden) {
-        return;
+  public boolean check(int gardenFrom, int color) {
+    int gardenTo = 1;
+    while (gardenTo <= map[gardenFrom][0]) {
+      if (res[map[gardenFrom][gardenTo++] - 1] == color) {
+        return false;
       }
     }
-    for (int j = 1; j < type.length; j++) {
-      if (type[j] == 0) {
-        type[j] = garden;
-        res[garden - 1] = j;
-        break;
-      }
-    }
+    return true;
   }
+
+
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
