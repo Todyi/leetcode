@@ -62,49 +62,101 @@ class Solution {
   //  解答成功:
   //  执行耗时:8 ms,击败了98.05% 的Java用户
   //  内存消耗:47.3 MB,击败了96.51% 的Java用户
-  int[] res = null;
-  int[][] map = null;
+//  int[] res = null;
+//  int[][] map = null;
+//
+//  public int[] gardenNoAdj(int N, int[][] paths) {
+//    res = new int[N];
+//    if (N < 5) {
+//      int i = 0;
+//      while (i < N) {
+//        res[i] = ++i;
+//      }
+//      return res;
+//    }
+//
+//    int len = N + 1;
+//    map = new int[len][5];
+//
+//    for (int[] path : paths) {
+//      map[path[0]][++map[path[0]][0]] = path[1];
+//      map[path[1]][++map[path[1]][0]] = path[0];
+//    }
+//
+//    for (int garden = 1; garden < len; garden++) {
+//      for (int color = 1; color < 5; color++) {
+//        if (check(garden, color)) {
+//          res[garden - 1] = color;
+//          break;
+//        }
+//      }
+//    }
+//
+//    return res;
+//  }
+//
+//  public boolean check(int gardenFrom, int color) {
+//    int gardenTo = 1;
+//    while (gardenTo <= map[gardenFrom][0]) {
+//      if (res[map[gardenFrom][gardenTo++] - 1] == color) {
+//        return false;
+//      }
+//    }
+//    return true;
+//  }
+
+
+  //  Runtime: 4 ms, faster than 100.00% of Java online submissions for Flower Planting With No Adjacent.
+  //  Memory Usage: 48.9 MB, less than 67.32% of Java online submissions for Flower Planting With No Adjacent.
+  int n = 0;
+  int[][] nums = new int[][]{};
 
   public int[] gardenNoAdj(int N, int[][] paths) {
-    res = new int[N];
-    if (N < 5) {
-      int i = 0;
-      while (i < N) {
-        res[i] = ++i;
+    n = N;
+    if (N <= 4) {
+      int[] res = new int[N];
+      for (int i = 1; i <= N; i++) {
+        res[i - 1] = i;
       }
       return res;
     }
-
-    int len = N + 1;
-    map = new int[len][5];
-
-    for (int[] path : paths) {
-      map[path[0]][++map[path[0]][0]] = path[1];
-      map[path[1]][++map[path[1]][0]] = path[0];
+    nums = new int[3][n + 1];
+    for (int i = 0; i < paths.length; i++) {
+      int a = paths[i][0];
+      int b = paths[i][1];
+      int j = 0;
+      while (nums[j][a] != 0) {
+        j++;
+      }
+      nums[j][a] = b;
+      j = 0;
+      while (nums[j][b] != 0) {
+        j++;
+      }
+      nums[j][b] = a;
     }
-
-    for (int garden = 1; garden < len; garden++) {
-      for (int color = 1; color < 5; color++) {
-        if (check(garden, color)) {
-          res[garden - 1] = color;
+    int[] res = new int[n];
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= 4; j++) {
+        if (check(i, j, res)) {
+          res[i - 1] = j;
           break;
         }
       }
     }
-
     return res;
   }
 
-  public boolean check(int gardenFrom, int color) {
-    int gardenTo = 1;
-    while (gardenTo <= map[gardenFrom][0]) {
-      if (res[map[gardenFrom][gardenTo++] - 1] == color) {
+  public boolean check(int pos, int color, int[] res) {
+    int i = 0;
+    while (i < 3 && nums[i][pos] != 0) {
+      if (res[nums[i][pos] - 1] == color) {
         return false;
       }
+      i++;
     }
     return true;
   }
-
 
 
 }
