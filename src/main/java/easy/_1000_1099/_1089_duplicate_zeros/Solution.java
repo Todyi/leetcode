@@ -43,32 +43,51 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了94.13% 的Java用户
   //  内存消耗:40.2 MB,击败了33.59% 的Java用户
-  class Node {
+//  class Node {
+//
+//    int i;
+//    Node next;
+//
+//    public Node(int i) {
+//      this.i = i;
+//    }
+//  }
+//
+//  public void duplicateZeros(int[] arr) {
+//    Node header = null;
+//    Node tail = null;
+//    for (int i = 0; i < arr.length; i++) {
+//      if (header != null) {
+//        tail.next = new Node(arr[i]);
+//        tail = tail.next;
+//        if (arr[i] == 0) {
+//          tail.next = new Node(0);
+//          tail = tail.next;
+//        }
+//        arr[i] = header.i;
+//        header = header.next;
+//      } else if (arr[i] == 0) {
+//        header = new Node(0);
+//        tail = header;
+//      }
+//    }
+//  }
 
-    int i;
-    Node next;
-
-    public Node(int i) {
-      this.i = i;
-    }
-  }
-
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.6 MB,击败了72.71% 的Java用户
   public void duplicateZeros(int[] arr) {
-    Node header = null;
-    Node tail = null;
-    for (int i = 0; i < arr.length; i++) {
-      if (header != null) {
-        tail.next = new Node(arr[i]);
-        tail = tail.next;
-        if (arr[i] == 0) {
-          tail.next = new Node(0);
-          tail = tail.next;
+    int[] tmp = arr.clone();
+    int idx = 0, len = arr.length;
+    for (int i = 0; idx < len; i++) {
+      if (tmp[i] == 0) {
+        arr[idx++] = 0;
+        if (idx == len) {
+          return;
         }
-        arr[i] = header.i;
-        header = header.next;
-      } else if (arr[i] == 0) {
-        header = new Node(0);
-        tail = header;
+        arr[idx++] = 0;
+      } else {
+        arr[idx++] = tmp[i];
       }
     }
   }

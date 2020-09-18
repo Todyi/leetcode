@@ -23,4 +23,12 @@ public class TestSet {
     Assert.assertTrue(Comparators.isSame(result, arr));
   }
 
+  @Test
+  public void test2() {
+    int[] arr = {0, 0, 0, 0, 0, 0, 0};
+    int[] result = {0, 0, 0, 0, 0, 0, 0};
+    new easy._1000_1099._1089_duplicate_zeros.Solution().duplicateZeros(arr);
+    Assert.assertTrue(Comparators.isSame(result, arr));
+  }
+
 }
