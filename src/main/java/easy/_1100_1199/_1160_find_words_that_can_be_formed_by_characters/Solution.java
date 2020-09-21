@@ -44,8 +44,8 @@ package easy._1100_1199._1160_find_words_that_can_be_formed_by_characters;
 class Solution {
 
   //  解答成功:
-  //  执行耗时:4 ms,击败了97.55% 的Java用户
-  //  内存消耗:39.8 MB,击败了87.28% 的Java用户
+  //  执行耗时:2 ms,击败了100.00% 的Java用户
+  //  内存消耗:40 MB,击败了59.82% 的Java用户
   public int countCharacters(String[] words, String chars) {
     int[] map = new int[26];
     for (int i = 0; i < chars.length(); i++) {
@@ -53,14 +53,16 @@ class Solution {
     }
     int res = 0;
     for (String word : words) {
-      res += addWordLen(word, map.clone());
+      res += addWordLen(word, map);
     }
     return res;
   }
 
   public int addWordLen(String word, int[] map) {
+    int[] tmp = new int[26];
     for (int i = 0; i < word.length(); i++) {
-      if (--map[word.charAt(i) - 'a'] < 0) {
+      int idx = word.charAt(i) - 'a';
+      if (map[idx] < ++tmp[idx]) {
         return 0;
       }
     }
