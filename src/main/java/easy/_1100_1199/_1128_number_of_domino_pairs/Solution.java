@@ -28,20 +28,41 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了99.43% 的Java用户
   //  内存消耗:48.8 MB,击败了67.36% 的Java用户
+//  public int numEquivDominoPairs(int[][] dominoes) {
+//    int[][] map = new int[10][10];
+//    for (int[] domino : dominoes) {
+//      if (domino[0] < domino[1]) {
+//        map[domino[0]][domino[1]]++;
+//      } else {
+//        map[domino[1]][domino[0]]++;
+//      }
+//    }
+//    int count = 0;
+//    for (int i = 1; i < map.length; i++) {
+//      for (int j = 1; j < map[i].length; j++) {
+//        if (1 < map[i][j]) {
+//          count += map[i][j] * (map[i][j] - 1) / 2;
+//        }
+//      }
+//    }
+//
+//    return count;
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:48.6 MB,击败了87.82% 的Java用户
   public int numEquivDominoPairs(int[][] dominoes) {
     int[][] map = new int[10][10];
     for (int[] domino : dominoes) {
-      if (domino[0] < domino[1]) {
-        map[domino[0]][domino[1]]++;
-      } else {
-        map[domino[1]][domino[0]]++;
-      }
+      map[domino[0]][domino[1]]++;
     }
     int count = 0;
     for (int i = 1; i < map.length; i++) {
-      for (int j = 1; j < map[i].length; j++) {
-        if (1 < map[i][j]) {
-          count += map[i][j] * (map[i][j] - 1) / 2;
+      for (int j = 1; j <= i; j++) {
+        int num = j < i ? map[i][j] + map[j][i] : map[i][j];
+        if (1 < num) {
+          count += num * (num - 1) / 2;
         }
       }
     }
