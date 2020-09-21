@@ -42,37 +42,65 @@ package easy._1100_1199._1114_print_in_order;
 //you see is mainly to ensure our tests' comprehensiveness.
 // 👍 557 👎 96
 
-
-import java.util.concurrent.Semaphore;
-
 //leetcode submit region begin(Prohibit modification and deletion)
+//class Foo {
+//
+//  //  Runtime: 9 ms, faster than 96.73% of Java online submissions for Print in Order.
+//  //  Memory Usage: 38.8 MB, less than 83.20% of Java online submissions for Print in Order.
+//  Semaphore lock2, lock3;
+//
+//  public Foo() {
+//    lock2 = new Semaphore(0);
+//    lock3 = new Semaphore(0);
+//  }
+//
+//  public void first(Runnable printFirst) throws InterruptedException {
+//    // printFirst.run() outputs "first". Do not change or remove this line.
+//    printFirst.run();
+//    lock2.release();
+//  }
+//
+//  public void second(Runnable printSecond) throws InterruptedException {
+//    // printSecond.run() outputs "second". Do not change or remove this line.
+//    lock2.acquire();
+//    printSecond.run();
+//    lock3.release();
+//  }
+//
+//  public void third(Runnable printThird) throws InterruptedException {
+//    lock3.acquire();
+//    // printThird.run() outputs "third". Do not change or remove this line.
+//    printThird.run();
+//  }
+//}
+
 class Foo {
 
   //  Runtime: 9 ms, faster than 96.73% of Java online submissions for Print in Order.
-  //  Memory Usage: 38.8 MB, less than 83.20% of Java online submissions for Print in Order.
-  Semaphore lock2, lock3;
+  //  Memory Usage: 39 MB, less than 64.23% of Java online submissions for Print in Order.
+  volatile int lock = 0;
 
   public Foo() {
-    lock2 = new Semaphore(0);
-    lock3 = new Semaphore(0);
   }
 
   public void first(Runnable printFirst) throws InterruptedException {
     // printFirst.run() outputs "first". Do not change or remove this line.
     printFirst.run();
-    lock2.release();
+    lock++;
   }
 
   public void second(Runnable printSecond) throws InterruptedException {
     // printSecond.run() outputs "second". Do not change or remove this line.
-    lock2.acquire();
+    while (lock != 1) {
+    }
     printSecond.run();
-    lock3.release();
+    lock++;
   }
 
   public void third(Runnable printThird) throws InterruptedException {
-    lock3.acquire();
     // printThird.run() outputs "third". Do not change or remove this line.
+    while (lock != 2) {
+    }
     printThird.run();
   }
 }
