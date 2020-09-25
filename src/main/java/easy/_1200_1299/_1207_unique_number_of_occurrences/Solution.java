@@ -37,29 +37,54 @@ package easy._1200_1299._1207_unique_number_of_occurrences;
 // 👍 477 👎 21
 
 
+import java.util.Arrays;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
   //  执行耗时:1 ms,击败了99.83% 的Java用户
   //  内存消耗:38.8 MB,击败了31.05% 的Java用户
-  public boolean uniqueOccurrences(int[] arr) {
-    int[] map = new int[2001];
-    for (int i : arr) {
-      map[i + 1000]++;
-    }
+//  public boolean uniqueOccurrences(int[] arr) {
+//    int[] map = new int[2001];
+//    for (int i : arr) {
+//      map[i + 1000]++;
+//    }
+//
+//    boolean[] uniqueMap = new boolean[arr.length];
+//    for (int i : map) {
+//      if (0 < i) {
+//        if (!uniqueMap[i]) {
+//          uniqueMap[i] = true;
+//        } else {
+//          return false;
+//        }
+//      }
+//    }
+//    return true;
+//  }
 
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:37.3 MB,击败了89.50% 的Java用户
+  public boolean uniqueOccurrences(int[] arr) {
+    Arrays.sort(arr);
+    int count = 0, cur = arr[0];
     boolean[] uniqueMap = new boolean[arr.length];
-    for (int i : map) {
-      if (0 < i) {
-        if (!uniqueMap[i]) {
-          uniqueMap[i] = true;
+    for (int i : arr) {
+      if (i != cur) {
+        if (!uniqueMap[count]) {
+          uniqueMap[count] = true;
         } else {
           return false;
         }
+        cur = i;
+        count = 1;
+      } else {
+        count++;
       }
     }
-    return true;
+    return !uniqueMap[count];
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
