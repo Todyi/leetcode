@@ -47,38 +47,64 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了90.90% 的Java用户
   //  内存消耗:37.3 MB,击败了86.38% 的Java用户
-  int count = 0;
+//  int count = 0;
+//
+//  public int oddCells(int n, int m, int[][] indices) {
+//    int[][] map = new int[n][m];
+//    for (int[] idx : indices) {
+//      addRow(idx[0], map);
+//      addColumn(idx[1], map);
+//    }
+//    return count;
+//  }
+//
+//  public void addRow(int row, int[][] map) {
+//    for (int i = 0; i < map[row].length; i++) {
+//      map[row][i]++;
+//      if ((map[row][i] & 1) == 0) {
+//        count--;
+//      } else {
+//        count++;
+//      }
+//    }
+//  }
+//
+//  public void addColumn(int column, int[][] map) {
+//    for (int i = 0; i < map.length; i++) {
+//      map[i][column]++;
+//      if ((map[i][column] & 1) == 0) {
+//        count--;
+//      } else {
+//        count++;
+//      }
+//    }
+//  }
 
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:37.1 MB,击败了97.34% 的Java用户
   public int oddCells(int n, int m, int[][] indices) {
-    int[][] map = new int[n][m];
+    boolean[] row = new boolean[n];
+    boolean[] column = new boolean[m];
     for (int[] idx : indices) {
-      addRow(idx[0], map);
-      addColumn(idx[1], map);
+      row[idx[0]] = !row[idx[0]];
+      column[idx[1]] = !column[idx[1]];
     }
-    return count;
-  }
-
-  public void addRow(int row, int[][] map) {
-    for (int i = 0; i < map[row].length; i++) {
-      map[row][i]++;
-      if ((map[row][i] & 1) == 0) {
-        count--;
-      } else {
-        count++;
+    int oddRowNum = 0, oddColumnNum = 0;
+    for (boolean r : row) {
+      if (r) {
+        oddRowNum++;
       }
     }
-  }
-
-  public void addColumn(int column, int[][] map) {
-    for (int i = 0; i < map.length; i++) {
-      map[i][column]++;
-      if ((map[i][column] & 1) == 0) {
-        count--;
-      } else {
-        count++;
+    for (boolean c : column) {
+      if (c) {
+        oddColumnNum++;
       }
     }
+
+    return oddRowNum * m + oddColumnNum * n - 2 * oddRowNum * oddColumnNum;
   }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
