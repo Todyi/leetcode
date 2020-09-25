@@ -65,21 +65,45 @@ class Solution {
   //  解答成功:
   //  执行耗时:4 ms,击败了96.85% 的Java用户
   //  内存消耗:40.1 MB,击败了68.09% 的Java用户
+//  public List<List<Integer>> shiftGrid(int[][] grid, int k) {
+//    List<List<Integer>> res = new ArrayList<>();
+//    int m = grid.length, n = grid[0].length, len = m * n;
+//    k %= len;
+//    int r = k == 0 ? 0 : (len - k) / n, c = k == 0 ? 0 : len - k - r * n;
+//    while (res.size() < m) {
+//      List<Integer> row = new ArrayList<>();
+//      while (row.size() < n) {
+//        row.add(grid[r][c++]);
+//        if (c == n) {
+//          c = 0;
+//          if (++r == m) {
+//            r = 0;
+//          }
+//        }
+//      }
+//      res.add(row);
+//    }
+//    return res;
+//  }
+
+
+  //  解答成功:
+  //  执行耗时:3 ms,击败了100.00% 的Java用户
+  //  内存消耗:40.3 MB,击败了48.61% 的Java用户
   public List<List<Integer>> shiftGrid(int[][] grid, int k) {
     List<List<Integer>> res = new ArrayList<>();
     int m = grid.length, n = grid[0].length, len = m * n;
-    k %= len;
-    int r = k == 0 ? 0 : (len - k) / n, c = k == 0 ? 0 : len - k - r * n;
-    while (res.size() < m) {
+    int[] tmp = new int[len];
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        tmp[(i * n + j + k) % len] = grid[i][j];
+      }
+    }
+    int idx = 0;
+    for (int i = 0; i < m; i++) {
       List<Integer> row = new ArrayList<>();
-      while (row.size() < n) {
-        row.add(grid[r][c++]);
-        if (c == n) {
-          c = 0;
-          if (++r == m) {
-            r = 0;
-          }
-        }
+      for (int j = 0; j < n; j++) {
+        row.add(tmp[idx++]);
       }
       res.add(row);
     }
