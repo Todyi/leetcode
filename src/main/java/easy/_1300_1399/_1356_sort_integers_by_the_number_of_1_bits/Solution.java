@@ -65,36 +65,66 @@ class Solution {
 
   //  Runtime: 7 ms, faster than 86.93% of Java online submissions for Sort Integers by The Number of 1 Bits.
   //  Memory Usage: 39 MB, less than 100.00% of Java online submissions for Sort Integers by The Number of 1 Bits.
-  public int[] sortByBits(int[] arr) {
-    int len = arr.length;
-    int[] bits = new int[len];
-    for (int i = 0; i < len; i++) {
-      bits[i] = Integer.bitCount(arr[i]);
-    }
-    sort(bits, arr, len);
+//  public int[] sortByBits(int[] arr) {
+//    int len = arr.length;
+//    int[] bits = new int[len];
+//    for (int i = 0; i < len; i++) {
+//      bits[i] = Integer.bitCount(arr[i]);
+//    }
+//    sort(bits, arr, len);
+//
+//    return arr;
+//  }
+//
+//  public void sort(int[] bits, int[] arr, int len) {
+//    int round = -1, idx, minNum, minBit;
+//    while ((idx = ++round) < len) {
+//      minNum = arr[round];
+//      minBit = bits[round];
+//      for (int i = round + 1; i < len; i++) {
+//        if (bits[i] < minBit || (bits[i] == minBit && arr[i] < minNum)) {
+//          idx = i;
+//          minBit = bits[i];
+//          minNum = arr[i];
+//        }
+//      }
+//      if (minNum != arr[round]) {
+//        arr[idx] = arr[round];
+//        bits[idx] = bits[round];
+//        arr[round] = minNum;
+//        bits[round] = minBit;
+//      }
+//    }
+//  }
 
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Sort Integers by The Number of 1 Bits.
+  //  Memory Usage: 39.2 MB, less than 98.11% of Java online submissions for Sort Integers by The Number of 1 Bits.
+  public int[] sortByBits(int[] arr) {
+    quickSort(arr, 0, arr.length - 1);
     return arr;
   }
 
-  public void sort(int[] bits, int[] arr, int len) {
-    int round = -1, idx, minNum, minBit;
-    while ((idx = ++round) < len) {
-      minNum = arr[round];
-      minBit = bits[round];
-      for (int i = round + 1; i < len; i++) {
-        if (bits[i] < minBit || (bits[i] == minBit && arr[i] < minNum)) {
-          idx = i;
-          minBit = bits[i];
-          minNum = arr[i];
-        }
-      }
-      if (minNum != arr[round]) {
-        arr[idx] = arr[round];
-        bits[idx] = bits[round];
-        arr[round] = minNum;
-        bits[round] = minBit;
+  public void quickSort(int[] arr, int l, int r) {
+    if (r <= l) {
+      return;
+    }
+    int pivot = Integer.bitCount(arr[r]), idx = l;
+    for (int i = l; i < r; i++) {
+      int tmp = Integer.bitCount(arr[i]);
+      if (tmp < pivot || (tmp == pivot && arr[i] < arr[r])) {
+        swap(idx++, i, arr);
       }
     }
+    swap(idx, r, arr);
+    quickSort(arr, l, idx - 1);
+    quickSort(arr, idx + 1, r);
+
+  }
+
+  public void swap(int i, int j, int[] arr) {
+    int numTmp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = numTmp;
   }
 
 
