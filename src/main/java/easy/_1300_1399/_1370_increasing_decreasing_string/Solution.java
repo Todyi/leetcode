@@ -78,51 +78,88 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了70.15% 的Java用户
   //  内存消耗:38.9 MB,击败了98.90% 的Java用户
+//  public String sortString(String s) {
+//    int[] map = new int[26];
+//    char[] arr = s.toCharArray();
+//    int pre = -1, tmp, idx = 0, len = arr.length;
+//    boolean smallest = true;
+//    StringBuilder sb = new StringBuilder();
+//    for (int i = 0; i < arr.length; i++) {
+//      map[arr[i] - 'a']++;
+//
+//    }
+//    while (idx < len) {
+//      if (smallest) {
+//        tmp = pickSmallest(pre, map);
+//      } else {
+//        tmp = pickLargest(pre, map);
+//      }
+//      if (tmp == -1) {
+//        smallest = !smallest;
+//        pre = smallest ? -1 : 27;
+//      } else {
+//        sb.append((char) ((pre = tmp) + 'a'));
+//        idx++;
+//      }
+//    }
+//    return sb.toString();
+//  }
+//
+//  public int pickSmallest(int pre, int[] map) {
+//    for (int i = 0; i < map.length; i++) {
+//      if (pre < i && 0 < map[i]) {
+//        map[i]--;
+//        return i;
+//      }
+//    }
+//    return -1;
+//  }
+//
+//  public int pickLargest(int pre, int[] map) {
+//    for (int i = map.length - 1; i >= 0; i--) {
+//      if (i < pre && 0 < map[i]) {
+//        map[i]--;
+//        return i;
+//      }
+//    }
+//    return -1;
+//  }
+
+  //  解答成功:
+  //  执行耗时:2 ms,击败了100.00% 的Java用户
+  //  内存消耗:39 MB,击败了95.49% 的Java用户
   public String sortString(String s) {
     int[] map = new int[26];
     char[] arr = s.toCharArray();
-    int pre = -1, tmp, idx = 0, len = arr.length;
-    boolean smallest = true;
+    int len = arr.length;
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < arr.length; i++) {
       map[arr[i] - 'a']++;
 
     }
-    while (idx < len) {
-      if (smallest) {
-        tmp = pickSmallest(pre, map);
-      } else {
-        tmp = pickLargest(pre, map);
-      }
-      if (tmp == -1) {
-        smallest = !smallest;
-        pre = smallest ? -1 : 27;
-      } else {
-        sb.append((char) ((pre = tmp) + 'a'));
-        idx++;
-      }
+    while (sb.length() < len) {
+      addSmallToLarge(sb, map);
+      addLargeToSmall(sb, map);
     }
     return sb.toString();
   }
 
-  public int pickSmallest(int pre, int[] map) {
+  public void addSmallToLarge(StringBuilder sb, int[] map) {
     for (int i = 0; i < map.length; i++) {
-      if (pre < i && 0 < map[i]) {
+      if (0 < map[i]) {
+        sb.append((char) (i + 'a'));
         map[i]--;
-        return i;
       }
     }
-    return -1;
   }
 
-  public int pickLargest(int pre, int[] map) {
+  public void addLargeToSmall(StringBuilder sb, int[] map) {
     for (int i = map.length - 1; i >= 0; i--) {
-      if (i < pre && 0 < map[i]) {
+      if (0 < map[i]) {
+        sb.append((char) (i + 'a'));
         map[i]--;
-        return i;
       }
     }
-    return -1;
   }
 
 }
