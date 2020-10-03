@@ -51,30 +51,73 @@ import java.util.List;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-  public List<Integer> luckyNumbers(int[][] matrix) {
-    int row = matrix.length, column = matrix[0].length;
-    List<Integer> res = new ArrayList<>();
+  //  解答成功:
+  //  执行耗时:1 ms,击败了98.45% 的Java用户
+  //  内存消耗:39.4 MB,击败了97.23% 的Java用户
+//  public List<Integer> luckyNumbers(int[][] matrix) {
+//    int row = matrix.length, column = matrix[0].length;
+//    List<Integer> res = new ArrayList<>();
+//
+//    for (int[] rowArr : matrix) {
+//      int columnIdx = 0, min = rowArr[0];
+//      for (int j = 1; j < column; j++) {
+//        if (rowArr[j] < min) {
+//          columnIdx = j;
+//          min = rowArr[j];
+//        }
+//      }
+//      boolean isMax = true;
+//      for (int j = 0; j < row; j++) {
+//        if (min < matrix[j][columnIdx]) {
+//          isMax = false;
+//          break;
+//        }
+//      }
+//      if (isMax) {
+//        res.add(min);
+//      }
+//    }
+//    return res;
+//  }
 
-    for (int[] rowArr : matrix) {
-      int columnIdx = 0, min = rowArr[0];
-      for (int j = 1; j < column; j++) {
-        if (rowArr[j] < min) {
-          columnIdx = j;
-          min = rowArr[j];
+  //  Runtime: 0 ms, faster than 100.00% of Java online submissions for Lucky Numbers in a Matrix.
+  //  Memory Usage: 39.3 MB, less than 98.12% of Java online submissions for Lucky Numbers in a Matrix.
+  public List<Integer> luckyNumbers(int[][] matrix) {
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+      return new ArrayList<Integer>();
+    }
+
+    // speed : 100%
+    int row = matrix.length;
+    List<Integer> rst = new ArrayList<>();
+    boolean flag = true;
+    for (int[] currRow : matrix) {
+      int minIdx = minPosInRow(currRow); // find min in current row
+      for (int i = 0; i < row; i++) { // check col of min
+        if (matrix[i][minIdx] > currRow[minIdx]) {
+          flag = false;
+          break; // condition not met, go to next row to save time
         }
       }
-      boolean isMax = true;
-      for (int j = 0; j < row; j++) {
-        if (min < matrix[j][columnIdx]) {
-          isMax = false;
-          break;
-        }
+      if (flag) {
+        rst.add(currRow[minIdx]);
       }
-      if (isMax) {
-        res.add(min);
+      flag = true;
+    }
+
+    return rst;
+  }
+
+  public int minPosInRow(int[] row) {
+    int min = row[0];
+    int pos = 0;
+    for (int i = 0; i < row.length; i++) {
+      if (row[i] < min) {
+        min = row[i];
+        pos = i;
       }
     }
-    return res;
+    return pos;
   }
 
 }
