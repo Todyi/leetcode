@@ -13,7 +13,7 @@ public class TestSet {
     int[] target = {1, 3};
     int n = 3;
     String[] result = {"Push", "Push", "Pop", "Push"};
-    List<String> solution = new Solution()
+    List<String> solution = new easy._1400_1499._1441_build_an_array_with_stack_opeartions.Solution()
         .buildArray(target, n);
     String[] solutionArr = new String[solution.size()];
     solution.toArray(solutionArr);
@@ -25,7 +25,7 @@ public class TestSet {
     int[] target = {1, 2, 3};
     int n = 3;
     String[] result = {"Push", "Push", "Push"};
-    List<String> solution = new Solution()
+    List<String> solution = new easy._1400_1499._1441_build_an_array_with_stack_opeartions.Solution()
         .buildArray(target, n);
     String[] solutionArr = new String[solution.size()];
     solution.toArray(solutionArr);
@@ -37,7 +37,7 @@ public class TestSet {
     int[] target = {1, 2};
     int n = 4;
     String[] result = {"Push", "Push"};
-    List<String> solution = new Solution()
+    List<String> solution = new easy._1400_1499._1441_build_an_array_with_stack_opeartions.Solution()
         .buildArray(target, n);
     String[] solutionArr = new String[solution.size()];
     solution.toArray(solutionArr);
@@ -49,7 +49,7 @@ public class TestSet {
     int[] target = {2, 3, 4};
     int n = 4;
     String[] result = {"Push", "Pop", "Push", "Push", "Push"};
-    List<String> solution = new Solution()
+    List<String> solution = new easy._1400_1499._1441_build_an_array_with_stack_opeartions.Solution()
         .buildArray(target, n);
     String[] solutionArr = new String[solution.size()];
     solution.toArray(solutionArr);
