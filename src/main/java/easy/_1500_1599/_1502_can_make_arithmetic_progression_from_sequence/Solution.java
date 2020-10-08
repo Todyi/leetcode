@@ -35,19 +35,34 @@ package easy._1500_1599._1502_can_make_arithmetic_progression_from_sequence;
 // 👍 194 👎 13
 
 
-import java.util.Arrays;
-
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
   //  解答成功:
   //  执行耗时:1 ms,击败了93.63% 的Java用户
   //  内存消耗:38.2 MB,击败了93.80% 的Java用户
+//  public boolean canMakeArithmeticProgression(int[] arr) {
+//    if (arr.length < 3) {
+//      return true;
+//    }
+//    Arrays.sort(arr);
+//    int diff = arr[1] - arr[0];
+//    for (int i = 2; i < arr.length; i++) {
+//      if (diff != arr[i] - arr[i - 1]) {
+//        return false;
+//      }
+//    }
+//    return true;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:37.7 MB,击败了99.97% 的Java用户
   public boolean canMakeArithmeticProgression(int[] arr) {
     if (arr.length < 3) {
       return true;
     }
-    Arrays.sort(arr);
+    sort(arr, 0, arr.length - 1);
     int diff = arr[1] - arr[0];
     for (int i = 2; i < arr.length; i++) {
       if (diff != arr[i] - arr[i - 1]) {
@@ -55,6 +70,26 @@ class Solution {
       }
     }
     return true;
+  }
+
+  public void swap(int[] arr, int i, int j) {
+    int tmp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = tmp;
+  }
+
+  public void sort(int[] arr, int l, int r) {
+    if (l < r) {
+      int pivot = arr[r], idx = l - 1;
+      for (int i = l; i < r; i++) {
+        if (arr[i] < pivot) {
+          swap(arr, i, ++idx);
+        }
+      }
+      swap(arr, ++idx, r);
+      sort(arr, l, idx - 1);
+      sort(arr, idx + 1, r);
+    }
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
