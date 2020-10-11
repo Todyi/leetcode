@@ -57,18 +57,32 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了81.56% 的Java用户
   //  内存消耗:36.8 MB,击败了11.77% 的Java用户
-  public int sumOddLengthSubarrays(int[] arr) {
-    for (int i = 1; i < arr.length; i++) {
-      arr[i] += arr[i - 1];
-    }
-    int len = (arr.length & 1) == 0 ? arr.length - 1 : arr.length, sum = arr[arr.length - 1];
-    for (int subLen = 3; subLen <= len; subLen += 2) {
-      sum += arr[subLen - 1];
-      for (int i = subLen; i < arr.length; i++) {
-        sum += arr[i] - arr[i - subLen];
-      }
-    }
+//  public int sumOddLengthSubarrays(int[] arr) {
+//    for (int i = 1; i < arr.length; i++) {
+//      arr[i] += arr[i - 1];
+//    }
+//    int len = (arr.length & 1) == 0 ? arr.length - 1 : arr.length, sum = arr[arr.length - 1];
+//    for (int subLen = 3; subLen <= len; subLen += 2) {
+//      sum += arr[subLen - 1];
+//      for (int i = subLen; i < arr.length; i++) {
+//        sum += arr[i] - arr[i - subLen];
+//      }
+//    }
+//    return sum;
+//  }
 
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:36.5 MB,击败了11.77% 的Java用户
+  public int sumOddLengthSubarrays(int[] arr) {
+    int sum = 0, n = arr.length;
+    for (int i = 0; i < n; i++) {
+      //https://web.stanford.edu/class/cs9/sample_probs/SubarraySums.pdf
+      //every single n's add times = (n – i)i + (n – i) = (n – i)(i + 1)
+      //when odd subArrays ,it's ⌈time/2⌉ = (times+1)/2
+      int sumTimes = ((n - i) * (i + 1) + 1) / 2;
+      sum += arr[i] * sumTimes;
+    }
     return sum;
   }
 }
