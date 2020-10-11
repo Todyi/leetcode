@@ -30,4 +30,16 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test2() {
+    int[] arr = {7,3,7,3,12,1,12,2,3};
+    int a = 5;
+    int b = 8;
+    int c = 1;
+    Integer result = 12;
+    int solution = new easy._1500_1599._1534_count_good_triplets.Solution()
+        .countGoodTriplets(arr, a, b, c);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
