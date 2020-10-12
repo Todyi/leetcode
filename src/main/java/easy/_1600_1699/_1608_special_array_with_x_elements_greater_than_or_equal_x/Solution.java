@@ -63,14 +63,35 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了84.82% 的Java用户
   //  内存消耗:37.1 MB,击败了36.05% 的Java用户
+//  public int specialArray(int[] nums) {
+//    int[] map = new int[1001];
+//    int max = 0;
+//    for (int n : nums) {
+//      map[n]++;
+//    }
+//    for (int i = 999; i >= 0; i--) {
+//      if (i == (map[i] += map[i + 1])) {
+//        return i;
+//      }
+//    }
+//    return -1;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:36.9 MB,击败了36.05% 的Java用户
   public int specialArray(int[] nums) {
     int[] map = new int[1001];
-    int max = 0;
+    int len = nums.length, sum = 0;
     for (int n : nums) {
-      map[n]++;
+      if (len < n) {
+        map[len]++;
+      } else {
+        map[n]++;
+      }
     }
-    for (int i = 999; i >= 0; i--) {
-      if (i == (map[i] += map[i + 1])) {
+    for (int i = len; i >= 0; i--) {
+      if (i == (sum += map[i])) {
         return i;
       }
     }
