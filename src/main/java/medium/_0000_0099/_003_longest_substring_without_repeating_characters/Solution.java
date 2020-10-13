@@ -52,37 +52,64 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了99.86% 的Java用户
   //  内存消耗:39.2 MB,击败了6.28% 的Java用户
+//  public int lengthOfLongestSubstring(String s) {
+//    if (s.length() < 2) {
+//      return s.length();
+//    }
+//    Integer[] map = new Integer[256];
+//    char[] arr = s.toCharArray();
+//    int res = 1, cur = 1, tmp;
+//    map[arr[0]] = 0;
+//    //0123456789 i
+//    //abcdeakgeh arr[i]
+//    //1234556745 cur
+//    for (int i = 1; i < arr.length; i++) {
+//      if (map[arr[i]] == null) {
+//        cur++;
+//        if (res < cur) {
+//          res = cur;
+//        }
+//      } else {
+//        tmp = map[arr[i]];
+//        init(map, arr, i - cur, tmp + 1);
+//        cur = i - tmp;
+//      }
+//      map[arr[i]] = i;
+//    }
+//    return res;
+//  }
+//
+//  public void init(Integer[] map, char[] arr, int start, int end) {
+//    for (int i = start; i < end; i++) {
+//      map[arr[i]] = null;
+//    }
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.9 MB,击败了6.28% 的Java用户
   public int lengthOfLongestSubstring(String s) {
     if (s.length() < 2) {
       return s.length();
     }
-    Integer[] map = new Integer[256];
     char[] arr = s.toCharArray();
-    int res = 1, cur = 1, tmp;
-    map[arr[0]] = 0;
+    int res = 1, cur, start = 0;
     //0123456789 i
     //abcdeakgeh arr[i]
     //1234556745 cur
+    //0000011155 start
     for (int i = 1; i < arr.length; i++) {
-      if (map[arr[i]] == null) {
-        cur++;
-        if (res < cur) {
-          res = cur;
+      for (int j = start; j < i; j++) {
+        if (arr[j] == arr[i]) {
+          start = j + 1;
+          break;
         }
-      } else {
-        tmp = map[arr[i]];
-        init(map, arr, i - cur, tmp + 1);
-        cur = i - tmp;
       }
-      map[arr[i]] = i;
+      if (res < (cur = i - start + 1)) {
+        res = cur;
+      }
     }
     return res;
-  }
-
-  public void init(Integer[] map, char[] arr, int start, int end) {
-    for (int i = start; i < end; i++) {
-      map[arr[i]] = null;
-    }
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
