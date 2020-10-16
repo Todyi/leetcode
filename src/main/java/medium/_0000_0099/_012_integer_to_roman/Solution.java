@@ -84,33 +84,50 @@ class Solution {
   //  解答成功:
   //  执行耗时:4 ms,击败了89.66% 的Java用户
   //  内存消耗:38.5 MB,击败了8.01% 的Java用户
+//  public String intToRoman(int num) {
+//    String[] digit = {
+//        "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"
+//    };
+//    String[] ten = {
+//        "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"
+//    };
+//    String[] hundred = {
+//        "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"
+//    };
+//    StringBuilder sb = new StringBuilder();
+//    int tmp;
+//    while (1000 <= num) {
+//      sb.append('M');
+//      num -= 1000;
+//    }
+//    if (100 <= num) {
+//      tmp = num / 100;
+//      num -= tmp * 100;
+//      sb.append(hundred[tmp]);
+//    }
+//    if (10 <= num) {
+//      tmp = num / 10;
+//      num -= tmp * 10;
+//      sb.append(ten[tmp]);
+//    }
+//    sb.append(digit[num]);
+//    return sb.toString();
+//  }
+
+  //  Runtime: 3 ms, faster than 100.00% of Java online submissions for Integer to Roman.
+  //  Memory Usage: 38 MB, less than 8.01% of Java online submissions for Integer to Roman.
   public String intToRoman(int num) {
-    String[] digit = {
-        "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"
-    };
-    String[] ten = {
-        "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"
-    };
-    String[] hundred = {
-        "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"
-    };
+    int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
     StringBuilder sb = new StringBuilder();
-    int tmp;
-    while (1000 <= num) {
-      sb.append('M');
-      num -= 1000;
+
+    for (int i = 0; i < values.length && num >= 0; i++) {
+      while (values[i] <= num) {
+        num -= values[i];
+        sb.append(symbols[i]);
+      }
     }
-    if (100 <= num) {
-      tmp = num / 100;
-      num -= tmp * 100;
-      sb.append(hundred[tmp]);
-    }
-    if (10 <= num) {
-      tmp = num / 10;
-      num -= tmp * 10;
-      sb.append(ten[tmp]);
-    }
-    sb.append(digit[num]);
     return sb.toString();
   }
 }
