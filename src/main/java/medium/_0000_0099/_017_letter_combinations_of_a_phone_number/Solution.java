@@ -52,66 +52,103 @@ class Solution {
   //  解答成功:
   //  执行耗时:0 ms,击败了100.00% 的Java用户
   //  内存消耗:37.3 MB,击败了39.98% 的Java用户
+//  public List<String> letterCombinations(String digits) {
+//    List<String> res = new ArrayList<>();
+//    if (digits.length() == 0) {
+//      return res;
+//    }
+//    char[][] map = {
+//        {}, {},
+//        {'a', 'b', 'c'},
+//        {'d', 'e', 'f'},
+//        {'g', 'h', 'i'},
+//        {'j', 'k', 'l'},
+//        {'m', 'n', 'o'},
+//        {'p', 'q', 'r', 's'},
+//        {'t', 'u', 'v'},
+//        {'w', 'x', 'y', 'z'}
+//    };
+//    char[] arr = digits.toCharArray();
+//    char[] d0 = map[arr[0] - '0'], d1 = null, c2 = null, c3 = null;
+//    if (1 < arr.length) {
+//      d1 = map[arr[1] - '0'];
+//      if (2 < arr.length) {
+//        c2 = map[arr[2] - '0'];
+//        if (3 < arr.length) {
+//          c3 = map[arr[3] - '0'];
+//        }
+//      }
+//    }
+//    add(res, arr.length, d0, d1, c2, c3);
+//    return res;
+//  }
+
+//  public void add(List<String> res, int len, char[] d0, char[] d1, char[] d2, char[] d3) {
+//    for (char c0 : d0) {
+//      StringBuilder sb = new StringBuilder();
+//      sb.append(c0);
+//      if (1 == len) {
+//        res.add(sb.toString());
+//      } else {
+//        for (char c1 : d1) {
+//          sb.append(c1);
+//          if (2 == len) {
+//            res.add(sb.toString());
+//          } else {
+//            for (char c2 : d2) {
+//              sb.append(c2);
+//              if (3 == len) {
+//                res.add(sb.toString());
+//              } else {
+//                for (char c3 : d3) {
+//                  sb.append(c3);
+//                  res.add(sb.toString());
+//                  sb.setLength(3);
+//                }
+//              }
+//              sb.setLength(2);
+//            }
+//          }
+//          sb.setLength(1);
+//        }
+//      }
+//    }
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:37.5 MB,击败了39.98% 的Java用户
+  char[][] map = {
+      {}, {},
+      {'a', 'b', 'c'},
+      {'d', 'e', 'f'},
+      {'g', 'h', 'i'},
+      {'j', 'k', 'l'},
+      {'m', 'n', 'o'},
+      {'p', 'q', 'r', 's'},
+      {'t', 'u', 'v'},
+      {'w', 'x', 'y', 'z'}
+  };
+  List<String> res = new ArrayList<>();
+
   public List<String> letterCombinations(String digits) {
-    List<String> res = new ArrayList<>();
     if (digits.length() == 0) {
       return res;
     }
-    char[][] map = {
-        {}, {},
-        {'a', 'b', 'c'},
-        {'d', 'e', 'f'},
-        {'g', 'h', 'i'},
-        {'j', 'k', 'l'},
-        {'m', 'n', 'o'},
-        {'p', 'q', 'r', 's'},
-        {'t', 'u', 'v'},
-        {'w', 'x', 'y', 'z'}
-    };
-    char[] arr = digits.toCharArray();
-    char[] d0 = map[arr[0] - '0'], d1 = null, c2 = null, c3 = null;
-    if (1 < arr.length) {
-      d1 = map[arr[1] - '0'];
-      if (2 < arr.length) {
-        c2 = map[arr[2] - '0'];
-        if (3 < arr.length) {
-          c3 = map[arr[3] - '0'];
-        }
-      }
-    }
-    add(res, arr.length, d0, d1, c2, c3);
+    dfs(digits.toCharArray(), 0, new StringBuilder());
     return res;
   }
 
-  public void add(List<String> res, int len, char[] d0, char[] d1, char[] d2, char[] d3) {
-    for (char c0 : d0) {
-      StringBuilder sb = new StringBuilder();
-      sb.append(c0);
-      if (1 == len) {
-        res.add(sb.toString());
-      } else {
-        for (char c1 : d1) {
-          sb.append(c1);
-          if (2 == len) {
-            res.add(sb.toString());
-          } else {
-            for (char c2 : d2) {
-              sb.append(c2);
-              if (3 == len) {
-                res.add(sb.toString());
-              } else {
-                for (char c3 : d3) {
-                  sb.append(c3);
-                  res.add(sb.toString());
-                  sb.setLength(3);
-                }
-              }
-              sb.setLength(2);
-            }
-          }
-          sb.setLength(1);
-        }
-      }
+  public void dfs(char[] digits, int idx, StringBuilder sb) {
+    if (idx == digits.length) {
+      res.add(sb.toString());
+      return;
+    }
+    char[] d = map[digits[idx] - '0'];
+    for (char c : d) {
+      sb.setLength(idx);
+      sb.append(c);
+      dfs(digits, idx + 1, sb);
     }
   }
 }
