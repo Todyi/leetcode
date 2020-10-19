@@ -42,5 +42,26 @@ public class TestSet {
     assertTrue(nums, result);
   }
 
+  @Test
+  public void test3() {
+    int[] nums = {1};
+    Integer result = 0;
+    assertTrue(nums, result);
+  }
+
+  @Test
+  public void test4() {
+    int[] nums = {1, 1, -2};
+    Integer result = 1;
+    assertTrue(nums, result);
+  }
+
+  @Test
+  public void test5() {
+    int[] nums = {3, 0, -2, -1, 1, 2};
+    Integer result = 3;
+    assertTrue(nums, result);
+  }
+
 
 }
