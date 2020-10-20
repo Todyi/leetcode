@@ -1,0 +1,48 @@
+package medium._0000_0099._29_divide_two_integers;
+
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class TestSet {
+
+  @Test
+  public void test0() {
+    int dividend = 10;
+    int divisor = 3;
+    Integer result = 3;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test1() {
+    int dividend = 7;
+    int divisor = -3;
+    Integer result = -2;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test2() {
+    int dividend = 0;
+    int divisor = 1;
+    Integer result = 0;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test3() {
+    int dividend = 1;
+    int divisor = 1;
+    Integer result = 1;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
+}
