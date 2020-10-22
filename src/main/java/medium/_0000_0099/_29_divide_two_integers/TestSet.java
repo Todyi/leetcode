@@ -45,4 +45,44 @@ public class TestSet {
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
+
+  @Test
+  public void test4() {
+    int dividend = -2147483648;
+    int divisor = -1;
+    Integer result = 2147483647;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test5() {
+    int dividend = -2147483648;
+    int divisor = 1;
+    Integer result = -2147483648;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test6() {
+    int dividend = 2147483647;
+    int divisor = 1;
+    Integer result = 2147483647;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test7() {
+    int dividend = 2147483647;
+    int divisor = 3;
+    Integer result = 715827882;
+    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+        .divide(dividend, divisor);
+    Assert.assertTrue(result.equals(solution));
+  }
 }

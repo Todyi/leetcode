@@ -64,16 +64,51 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了100.00% 的Java用户
   //  内存消耗:36.4 MB,击败了12.36% 的Java用户
+//  public int divide(int dividend, int divisor) {
+//    Long res = (long) dividend / (long) divisor;
+//    if (res < Integer.MIN_VALUE) {
+//      return Integer.MIN_VALUE;
+//    }
+//    if (Integer.MAX_VALUE < res) {
+//      return Integer.MAX_VALUE;
+//    }
+//    return res.intValue();
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了100.00% 的Java用户
+  //  内存消耗:36.1 MB,击败了11.37% 的Java用户
   public int divide(int dividend, int divisor) {
-    Long res = (long) dividend / (long) divisor;
-    if (res < Integer.MIN_VALUE) {
-      return Integer.MIN_VALUE;
-    }
-    if (Integer.MAX_VALUE < res) {
+    if (dividend == Integer.MIN_VALUE && divisor == -1) {
       return Integer.MAX_VALUE;
     }
-    return res.intValue();
+    if (dividend < 0) {
+      if (divisor < 0) {
+        return divideHelper(dividend, divisor);
+      } else {
+        return -divideHelper(dividend, -divisor);
+      }
+    } else {
+      if (divisor < 0) {
+        return -divideHelper(-dividend, divisor);
+      } else {
+        return divideHelper(-dividend, -divisor);
+      }
+    }
   }
+
+  public int divideHelper(int dividend, int divisor) {
+    if (divisor < dividend) {
+      return 0;
+    }
+    int sum = divisor, m = 1;
+    while (Integer.MIN_VALUE - sum < sum && dividend < sum + sum) {
+      sum += sum;
+      m += m;
+    }
+    return m + divideHelper(dividend - sum, divisor);
+  }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
