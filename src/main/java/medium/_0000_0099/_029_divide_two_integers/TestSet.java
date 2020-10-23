@@ -1,4 +1,4 @@
-package medium._0000_0099._29_divide_two_integers;
+package medium._0000_0099._029_divide_two_integers;
 
 
 import org.junit.Assert;
@@ -11,7 +11,7 @@ public class TestSet {
     int dividend = 10;
     int divisor = 3;
     Integer result = 3;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
@@ -21,7 +21,7 @@ public class TestSet {
     int dividend = 7;
     int divisor = -3;
     Integer result = -2;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
@@ -31,7 +31,7 @@ public class TestSet {
     int dividend = 0;
     int divisor = 1;
     Integer result = 0;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
@@ -41,7 +41,7 @@ public class TestSet {
     int dividend = 1;
     int divisor = 1;
     Integer result = 1;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
@@ -51,7 +51,7 @@ public class TestSet {
     int dividend = -2147483648;
     int divisor = -1;
     Integer result = 2147483647;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
@@ -61,7 +61,7 @@ public class TestSet {
     int dividend = -2147483648;
     int divisor = 1;
     Integer result = -2147483648;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
@@ -71,7 +71,7 @@ public class TestSet {
     int dividend = 2147483647;
     int divisor = 1;
     Integer result = 2147483647;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }
@@ -81,7 +81,7 @@ public class TestSet {
     int dividend = 2147483647;
     int divisor = 3;
     Integer result = 715827882;
-    int solution = new medium._0000_0099._29_divide_two_integers.Solution()
+    int solution = new medium._0000_0099._029_divide_two_integers.Solution()
         .divide(dividend, divisor);
     Assert.assertTrue(result.equals(solution));
   }

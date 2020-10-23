@@ -1,4 +1,4 @@
-package medium._0000_0099._29_divide_two_integers;
+package medium._0000_0099._029_divide_two_integers;
 
 //Given two integers dividend and divisor,
 // divide two integers without using multiplication, division, and mod operator.
