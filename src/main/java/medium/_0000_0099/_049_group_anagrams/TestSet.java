@@ -2,6 +2,7 @@ package medium._0000_0099._049_group_anagrams;
 
 
 import common.Comparators;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,14 +11,19 @@ import org.junit.Test;
 
 public class TestSet {
 
-  private void assertTrue(String[] strs, Set<Integer> result) {
+  private void assertTrue(String[] strs, HashMap<Integer, Integer> result) {
     List<List<String>> solution = new Solution()
         .groupAnagrams(strs);
     for (List<String> list : solution) {
-      if (!result.contains(list.size())) {
+      if (!result.containsKey(list.size())) {
         Assert.fail();
       } else {
-        result.remove(list.size());
+        int n = result.get(list.size()) - 1;
+        if (0 < n) {
+          result.put(list.size(), n);
+        } else {
+          result.remove(list.size());
+        }
       }
       int[] map = new int[26];
       char[] arr = list.get(0).toCharArray();
@@ -39,26 +45,35 @@ public class TestSet {
   @Test
   public void test0() {
     String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
-    Set<Integer> result = new HashSet<>();
-    result.add(1);
-    result.add(2);
-    result.add(3);
+    HashMap<Integer, Integer> result = new HashMap<>();
+    result.put(1,1);
+    result.put(2,1);
+    result.put(3,1);
     assertTrue(strs, result);
   }
 
   @Test
   public void test1() {
     String[] strs = {""};
-    Set<Integer> result = new HashSet<>();
-    result.add(1);
+    HashMap<Integer, Integer> result = new HashMap<>();
+    result.put(1,1);
     assertTrue(strs, result);
   }
 
   @Test
   public void test2() {
     String[] strs = {"a"};
-    Set<Integer> result = new HashSet<>();
-    result.add(1);
+    HashMap<Integer, Integer> result = new HashMap<>();
+    result.put(1,1);
+    assertTrue(strs, result);
+  }
+
+  @Test
+  public void test3() {
+    String[] strs = {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"};
+    HashMap<Integer, Integer> result = new HashMap<>();
+    result.put(1, 2);
     assertTrue(strs, result);
   }
 
