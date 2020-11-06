@@ -114,4 +114,16 @@ public class TestSet {
       Assert.assertTrue(Comparators.isSame(result[i], solution[i]));
     }
   }
+
+  @Test
+  public void test9() {
+    int[][] intervals = {{3, 5}, {12, 15}};
+    int[] newInterval = {6, 6};
+    int[][] result = {{3, 5}, {6, 6}, {12, 15}};
+    int[][] solution = new medium._0000_0099._057_insert_interval.Solution()
+        .insert(intervals, newInterval);
+    for (int i = 0; i < result.length; i++) {
+      Assert.assertTrue(Comparators.isSame(result[i], solution[i]));
+    }
+  }
 }
