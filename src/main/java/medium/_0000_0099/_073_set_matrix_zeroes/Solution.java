@@ -48,28 +48,72 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了91.90% 的Java用户
   //  内存消耗:40.3 MB,击败了86.66% 的Java用户
+//  public void setZeroes(int[][] matrix) {
+//    int m = matrix.length, n = matrix[0].length;
+//    List<Integer[]> list = new ArrayList<>();
+//    for (int i = 0; i < m; i++) {
+//      for (int j = 0; j < n; j++) {
+//        if (matrix[i][j] == 0) {
+//          list.add(new Integer[]{i, j});
+//        }
+//      }
+//    }
+//    for (Integer[] coordinates : list) {
+//      setZero(matrix, coordinates[0], coordinates[1]);
+//    }
+//  }
+//
+//  public void setZero(int[][] matrix, int x, int y) {
+//    for (int i = 0; i < matrix.length; i++) {
+//      matrix[i][y] = 0;
+//    }
+//    for (int i = 0; i < matrix[0].length; i++) {
+//      matrix[x][i] = 0;
+//    }
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:40.2 MB,击败了97.93% 的Java用户
   public void setZeroes(int[][] matrix) {
     int m = matrix.length, n = matrix[0].length;
-    List<Integer[]> list = new ArrayList<>();
+    boolean isFirstColumnZero = false;
     for (int i = 0; i < m; i++) {
-      for (int j = 0; j < n; j++) {
+      if (matrix[i][0] == 0) {
+        isFirstColumnZero = true;
+      }
+      for (int j = 1; j < n; j++) {
         if (matrix[i][j] == 0) {
-          list.add(new Integer[]{i, j});
+          matrix[i][0] = 0;
+          matrix[0][j] = 0;
         }
       }
     }
-    for (Integer[] coordinates : list) {
-      setZero(matrix, coordinates[0], coordinates[1]);
+    for (int i = 1; i < n; i++) {
+      if (matrix[0][i] == 0) {
+        for (int j = 1; j < m; j++) {
+          matrix[j][i] = 0;
+        }
+      }
     }
-  }
+    for (int i = 1; i < m; i++) {
+      if (matrix[i][0] == 0) {
+        for (int j = 1; j < n; j++) {
+          matrix[i][j] = 0;
+        }
+      }
+    }
+    if (matrix[0][0] == 0) {
+      for (int i = 0; i < n; i++) {
+        matrix[0][i] = 0;
+      }
+    }
+    if (isFirstColumnZero) {
+      for (int i = 0; i < m; i++) {
+        matrix[i][0] = 0;
+      }
+    }
 
-  public void setZero(int[][] matrix, int x, int y) {
-    for (int i = 0; i < matrix.length; i++) {
-      matrix[i][y] = 0;
-    }
-    for (int i = 0; i < matrix[0].length; i++) {
-      matrix[x][i] = 0;
-    }
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
