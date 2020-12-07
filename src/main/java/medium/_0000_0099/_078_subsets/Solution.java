@@ -39,19 +39,39 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了55.19% 的Java用户
   //  内存消耗:39.7 MB,击败了5.87% 的Java用户
-  public List<List<Integer>> subsets(int[] nums) {
-    List<List<Integer>> result = new ArrayList<>();
-    subsets(result, nums, new ArrayList<>(), 0);
-    return result;
-  }
+//  public List<List<Integer>> subsets(int[] nums) {
+//    List<List<Integer>> result = new ArrayList<>();
+//    subsets(result, nums, new ArrayList<>(), 0);
+//    return result;
+//  }
+//
+//  public void subsets(List<List<Integer>> result, int[] nums, List<Integer> cur, int idx) {
+//    result.add(new ArrayList<>(cur));
+//    for (int i = idx; i < nums.length; i++) {
+//      cur.add(nums[i]);
+//      subsets(result, nums, cur, i + 1);
+//      cur.remove(cur.size() - 1);
+//    }
+//  }
 
-  public void subsets(List<List<Integer>> result, int[] nums, List<Integer> cur, int idx) {
-    result.add(new ArrayList<>(cur));
-    for (int i = idx; i < nums.length; i++) {
-      cur.add(nums[i]);
-      subsets(result, nums, cur, i + 1);
-      cur.remove(cur.size() - 1);
+  //  解答成功:
+  //  执行耗时:1 ms,击败了55.19% 的Java用户
+  //  内存消耗:40.1 MB,击败了5.87% 的Java用户
+  public List<List<Integer>> subsets(int[] nums) {
+    List<List<Integer>> res = new ArrayList<>();
+    res.add(new ArrayList<Integer>());
+
+    for(int n: nums){
+      int s = res.size();
+      //This loop to cycle through res
+      //to add the current number
+      for(int i = 0; i < s; i++){
+        List<Integer> curlist = new ArrayList<Integer>(res.get(i));
+        curlist.add(n);
+        res.add(curlist);
+      }
     }
+    return res;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
