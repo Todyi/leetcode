@@ -11,12 +11,20 @@ public class TestSet {
   @Test
   public void test0() {
     int[] n = {1, 2, 2};
+//    Integer[][] result = {
+//        {},
+//        {1},
+//        {2},
+//        {1, 2},
+//        {2, 2},
+//        {1, 2, 2},
+//    };
     Integer[][] result = {
         {},
-        {1},
         {2},
-        {1, 2},
         {2, 2},
+        {1},
+        {1, 2},
         {1, 2, 2},
     };
     List<List<Integer>> solution = new medium._0000_0099._090_subsets_ii.Solution()

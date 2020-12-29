@@ -75,31 +75,66 @@ class Solution {
 
   //  Runtime: 1 ms, faster than 99.74% of Java online submissions for Subsets II.
   //  Memory Usage: 38.9 MB, less than 94.90% of Java online submissions for Subsets II.
+//  public List<List<Integer>> subsetsWithDup(int[] nums) {
+//    List<List<Integer>> result = new ArrayList<>();
+//    Arrays.sort(nums);
+//    for (int len = 0; len <= nums.length; len++) {
+//      subsets(nums, result, new ArrayList<>(), len, 0);
+//    }
+//    return result;
+//  }
+//
+//  public void subsets(int[] nums, List<List<Integer>> result, List<Integer> cur, int len, int idx) {
+//    if (len == cur.size()) {
+//      result.add(new ArrayList<>(cur));
+//      return;
+//    }
+//    if (nums.length <= idx) {
+//      return;
+//    }
+//    for (int i = idx; i < nums.length; i++) {
+//      cur.add(nums[i]);
+//      subsets(nums, result, cur, len, i + 1);
+//      cur.remove(cur.size() - 1);
+//      while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
+//        i++;
+//        continue;
+//      }
+//    }
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.4 MB,击败了34.00% 的Java用户
   public List<List<Integer>> subsetsWithDup(int[] nums) {
     List<List<Integer>> result = new ArrayList<>();
     Arrays.sort(nums);
-    for (int len = 0; len <= nums.length; len++) {
-      subsets(nums, result, new ArrayList<>(), len, 0);
-    }
+    subsets(nums, result, new ArrayList<>(), 0);
     return result;
   }
 
-  public void subsets(int[] nums, List<List<Integer>> result, List<Integer> cur, int len, int idx) {
-    if (len == cur.size()) {
+  public void subsets(int[] nums, List<List<Integer>> result, List<Integer> cur, int idx) {
+    if (nums.length <= idx) {
       result.add(new ArrayList<>(cur));
       return;
     }
-    if (nums.length <= idx) {
-      return;
-    }
+    subsets(nums, result, new ArrayList<>(cur), idx + 1);
+    int duplicateCount = 0;
     for (int i = idx; i < nums.length; i++) {
-      cur.add(nums[i]);
-      subsets(nums, result, cur, len, i + 1);
-      cur.remove(cur.size() - 1);
-      while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
-        i++;
-        continue;
+      if (nums[idx] == nums[i]) {
+        duplicateCount++;
+      } else {
+        break;
       }
+    }
+    if (duplicateCount == 1) {
+      cur.add(nums[idx]);
+      subsets(nums, result, cur, idx + 1);
+    } else {
+      for (int i = 0; i < duplicateCount; i++) {
+        cur.add(nums[idx]);
+      }
+      subsets(nums, result, cur, idx + duplicateCount);
     }
   }
 }
