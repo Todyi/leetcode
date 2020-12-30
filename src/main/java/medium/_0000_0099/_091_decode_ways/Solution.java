@@ -68,18 +68,20 @@ class Solution {
     return count(s.toCharArray(), s.length() - 1, 1, 0, null);
   }
 
-  //12,10,1->0->1 ==>12,0,null->1==>12,12,1->1==>24,12,1
+  //ie. 11101...
+  //total,sHead,pre->cur
+  //12,10,1->0->1 ==>12,0,null->1 ==>12,12,1->1 ==>24,12,1
   public int count(char[] arr, int idx, int totalCount, int singleHeadCount, Integer pre) {
     if (idx < 0) {
       return totalCount;
     }
     int cur;
     if ((cur = arr[idx] - '0') == 0) {
-      if (--idx < 0) {
+      if (--idx < 0) {//0 cannot be any letter
         return 0;
       }
       cur = arr[idx] - '0';
-      if (cur < 1 || 2 < cur) {
+      if (cur < 1 || 2 < cur) {//00 30 cannot be any letter
         return 0;
       }
       return count(arr, idx - 1, totalCount, 0, null);
