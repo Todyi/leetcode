@@ -46,40 +46,79 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了99.06% 的Java用户
   //  内存消耗:37.6 MB,击败了97.51% 的Java用户
+//  public List<String> restoreIpAddresses(String s) {
+//    List<String> result = new ArrayList<>();
+//    if (s == null || s.length() == 0 || 12 < s.length()) {
+//      return result;
+//    }
+//    getIpAddresses(result, new StringBuilder(s), s.charAt(0) - '0', 1, 0);
+//    return result;
+//  }
+
+//  public void getIpAddresses(List<String> result, StringBuilder cur, int num, int idx, int dotCnt) {
+//    if (idx == cur.length()) {
+//      if (dotCnt == 3 && num < 256) {
+//        result.add(cur.toString());
+//      }
+//      return;
+//    }
+//    if (3 < dotCnt) {
+//      return;
+//    }
+//    if (num == 0) {
+//      cur.insert(idx, '.');
+//      getIpAddresses(result, cur, cur.charAt(idx + 1) - '0', idx + 2, dotCnt + 1);
+//      cur.deleteCharAt(idx);
+//    } else {
+//      if (num < 256 && idx < cur.length()) {
+//        cur.insert(idx, '.');
+//        getIpAddresses(result, cur, cur.charAt(idx + 1) - '0', idx + 2, dotCnt + 1);
+//        cur.deleteCharAt(idx);
+//        int tmp = num * 10 + cur.charAt(idx) - '0';
+//        if (tmp < 256) {
+//          getIpAddresses(result, cur, tmp, idx + 1, dotCnt);
+//        }
+//      }
+//    }
+//  }
+
+  //  解答成功:
+  //  执行耗时:1 ms,击败了99.06% 的Java用户
+  //  内存消耗:37.4 MB,击败了99.57% 的Java用户
   public List<String> restoreIpAddresses(String s) {
     List<String> result = new ArrayList<>();
     if (s == null || s.length() == 0 || 12 < s.length()) {
       return result;
     }
-    getIpAddresses(result, new StringBuilder(s), s.charAt(0) - '0', 1, 0);
+    store(result, s, new int[4], 0, 0);
     return result;
   }
 
-  public void getIpAddresses(List<String> result, StringBuilder cur, int num, int idx, int dotCnt) {
-    if (idx == cur.length()) {
-      if (dotCnt == 3 && num < 256) {
-        result.add(cur.toString());
+  public void store(List<String> result, String s, int[] segments, int numOfSeg, int idx) {
+    if (idx == s.length() || numOfSeg == 4) {
+      if (idx == s.length() && numOfSeg == 4) {
+        result.add(getIpAddress(segments));
       }
       return;
     }
-    if (3 < dotCnt) {
-      return;
-    }
-    if (num == 0) {
-      cur.insert(idx, '.');
-      getIpAddresses(result, cur, cur.charAt(idx + 1) - '0', idx + 2, dotCnt + 1);
-      cur.deleteCharAt(idx);
-    } else {
-      if (num < 256 && idx < cur.length()) {
-        cur.insert(idx, '.');
-        getIpAddresses(result, cur, cur.charAt(idx + 1) - '0', idx + 2, dotCnt + 1);
-        cur.deleteCharAt(idx);
-        int tmp = num * 10 + cur.charAt(idx) - '0';
-        if (tmp < 256) {
-          getIpAddresses(result, cur, tmp, idx + 1, dotCnt);
-        }
+    for (int i = idx, val = 0; i < Math.min(s.length(), idx + 3); i++) {
+      val = val * 10 + s.charAt(i) - '0';
+      if (val < 256) {
+        segments[numOfSeg] = val;
+        store(result, s, segments, numOfSeg + 1, i + 1);
+      }
+      if (val == 0) {
+        break;
       }
     }
+  }
+
+  public String getIpAddress(int[] segments) {
+    return new StringBuilder()
+        .append(segments[0]).append('.')
+        .append(segments[1]).append('.')
+        .append(segments[2]).append('.')
+        .append(segments[3]).toString();
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
