@@ -25,7 +25,6 @@ package medium._0100_0199._0105_construct_binary_tree_from_preorder_and_inorder_
 //leetcode submit region begin(Prohibit modification and deletion)
 
 import common.TreeNode;
-import java.util.HashMap;
 
 /**
  * Definition for a binary tree node. public class TreeNode { int val; TreeNode left; TreeNode
@@ -37,24 +36,44 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了97.97% 的Java用户
   //  内存消耗:38.8 MB,击败了88.98% 的Java用户
-  HashMap<Integer, Integer> map = new HashMap<>();
-  int idx = 0;
+//  HashMap<Integer, Integer> map = new HashMap<>();
+//  int idx = 0;
+//
+//  public TreeNode buildTree(int[] preorder, int[] inorder) {
+//    for (int i = 0; i < inorder.length; i++) {
+//      map.put(inorder[i], i);
+//    }
+//    return buildTree(preorder, 0, inorder.length - 1);
+//  }
+//
+//  public TreeNode buildTree(int[] preOrder, int inStart, int inEnd) {
+//    if (inEnd < inStart) {
+//      return null;
+//    }
+//    TreeNode root = new TreeNode(preOrder[idx++]);
+//    int mid = map.get(root.val);
+//    root.left = buildTree(preOrder, inStart, mid - 1);
+//    root.right = buildTree(preOrder, mid + 1, inEnd);
+//    return root;
+//  }
 
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.8 MB,击败了79.53% 的Java用户
   public TreeNode buildTree(int[] preorder, int[] inorder) {
-    for (int i = 0; i < inorder.length; i++) {
-      map.put(inorder[i], i);
-    }
-    return buildTree(preorder, 0, inorder.length - 1);
+    return buildTree(preorder, inorder, new int[]{0, 0}, Integer.MAX_VALUE);
   }
 
-  public TreeNode buildTree(int[] preOrder, int inStart, int inEnd) {
-    if (inEnd < inStart) {
+  //idx[0] current preorderIdx,idx[1] current inorderIdx
+  public TreeNode buildTree(int[] preorder, int[] inorder, int[] idx, int parent) {
+    if (preorder.length == idx[0] || inorder[idx[1]] == parent) {
       return null;
     }
-    TreeNode root = new TreeNode(preOrder[idx++]);
-    int mid = map.get(root.val);
-    root.left = buildTree(preOrder, inStart, mid - 1);
-    root.right = buildTree(preOrder, mid + 1, inEnd);
+    TreeNode root = new TreeNode(preorder[idx[0]++]);
+    root.left = buildTree(preorder, inorder, idx, root.val);
+    idx[1]++;
+    root.right = buildTree(preorder, inorder, idx, parent);
     return root;
   }
 
