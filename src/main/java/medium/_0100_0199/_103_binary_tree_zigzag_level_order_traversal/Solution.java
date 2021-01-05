@@ -1,4 +1,4 @@
-package medium._0100_0199._0103_binary_tree_zigzag_level_order_traversal;
+package medium._0100_0199._103_binary_tree_zigzag_level_order_traversal;
 
 //Given a binary tree, return the zigzag level order traversal of its nodes' val
 //ues. (ie, from left to right, then right to left for the next level and alternate between).

@@ -1,4 +1,4 @@
-package medium._0100_0199._0102_binary_tree_level_order_traversal;
+package medium._0100_0199._103_binary_tree_zigzag_level_order_traversal;
 
 
 import common.Comparators;
@@ -14,12 +14,11 @@ public class TestSet {
     TreeNode root = TreeNode.buildTree(new Integer[]{3, 9, 20, null, null, 15, 7});
     Integer[][] result = new Integer[][]{
         {3},
-        {9, 20},
+        {20, 9},
         {15, 7}
     };
-    List<List<Integer>> solution = new medium._0100_0199._0102_binary_tree_level_order_traversal.Solution()
-        .levelOrder(root);
-
+    List<List<Integer>> solution = new medium._0100_0199._103_binary_tree_zigzag_level_order_traversal.Solution()
+        .zigzagLevelOrder(root);
     Assert.assertTrue(result.length == solution.size());
     for (int i = 0; i < result.length; i++) {
       List<Integer> list = solution.get(i);

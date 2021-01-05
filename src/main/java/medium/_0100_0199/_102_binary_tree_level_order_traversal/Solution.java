@@ -1,4 +1,4 @@
-package medium._0100_0199._0102_binary_tree_level_order_traversal;
+package medium._0100_0199._102_binary_tree_level_order_traversal;
 
 //Given a binary tree, return the level order traversal of its nodes' values.
 // (ie, from left to right, level by level).

@@ -1,4 +1,4 @@
-package medium._0100_0199._0105_construct_binary_tree_from_preorder_and_inorder_traversal;
+package medium._0100_0199._105_construct_binary_tree_from_preorder_and_inorder_traversal;
 
 //Given preorder and inorder traversal of a tree, construct the binary tree. 
 //
