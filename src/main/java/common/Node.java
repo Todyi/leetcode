@@ -19,6 +19,10 @@ public class Node {
   public int val;
   public List<Node> children;
 
+  public Node left;
+  public Node right;
+  public Node next;
+
   public Node() {
   }
 
@@ -29,6 +33,13 @@ public class Node {
   public Node(int _val, List<Node> _children) {
     val = _val;
     children = _children;
+  }
+
+  public Node(int val, Node left, Node right, Node next) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+    this.next = next;
   }
 
   public static Node buildNode(Integer[] listArr) {
@@ -52,6 +63,33 @@ public class Node {
         pointer.children = children;
         queue.remove(0);
       }
+    }
+    return root;
+  }
+
+  public static Node buildTree(Integer[] treeArr) {
+    if (treeArr == null || treeArr.length == 0) {
+      return null;
+    }
+    Node root = new Node(treeArr[0]);
+    List<Node> queue = new ArrayList<>();
+    boolean left = true;
+    Node pointer = root;
+    for (int i = 1; i < treeArr.length; i++) {
+      if (left) {
+        if (treeArr[i] != null) {
+          pointer.left = new Node(treeArr[i]);
+          queue.add(pointer.left);
+        }
+      } else {
+        if (treeArr[i] != null) {
+          pointer.right = new Node(treeArr[i]);
+          queue.add(pointer.right);
+        }
+        pointer = queue.get(0);
+        queue.remove(0);
+      }
+      left = !left;
     }
     return root;
   }
