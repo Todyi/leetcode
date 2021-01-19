@@ -74,43 +74,63 @@ class Node {
 */
 
 import common.Node;
+import java.util.HashMap;
 
 class Solution {
 
   //  解答成功:
   //  执行耗时:0 ms,击败了100.00% 的Java用户
   //  内存消耗:38.6 MB,击败了66.98% 的Java用户
+//  public Node copyRandomList(Node head) {
+//    if (head == null) {
+//      return null;
+//    }
+//    Node pointer = head, newPointer;
+//    while (pointer != null) {
+//      Node tmp = new Node(pointer.val);
+//      tmp.next = pointer.next;
+//      pointer.next = tmp;
+//      pointer = pointer.next.next;
+//    }
+//    Node newHead = head.next;
+//
+//    pointer = head;
+//    while (pointer != null) {
+//      if (pointer.random != null) {
+//        pointer.next.random = pointer.random.next;
+//      }
+//      pointer = pointer.next.next;
+//    }
+//
+//    pointer = head;
+//    newPointer = head.next;
+//    while (pointer != null) {
+//      pointer.next = pointer.next.next;
+//      if (newPointer.next != null) {
+//        newPointer.next = newPointer.next.next;
+//      }
+//      pointer = pointer.next;
+//      newPointer = newPointer.next;
+//    }
+//    return newHead;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39.2 MB,击败了17.89% 的Java用户
+  HashMap<Node, Node> visitedMap = new HashMap<>();
+
   public Node copyRandomList(Node head) {
     if (head == null) {
       return null;
     }
-    Node pointer = head, newPointer;
-    while (pointer != null) {
-      Node tmp = new Node(pointer.val);
-      tmp.next = pointer.next;
-      pointer.next = tmp;
-      pointer = pointer.next.next;
+    if (visitedMap.containsKey(head)) {
+      return visitedMap.get(head);
     }
-    Node newHead = head.next;
-
-    pointer = head;
-    while (pointer != null) {
-      if (pointer.random != null) {
-        pointer.next.random = pointer.random.next;
-      }
-      pointer = pointer.next.next;
-    }
-
-    pointer = head;
-    newPointer = head.next;
-    while (pointer != null) {
-      pointer.next = pointer.next.next;
-      if (newPointer.next != null) {
-        newPointer.next = newPointer.next.next;
-      }
-      pointer = pointer.next;
-      newPointer = newPointer.next;
-    }
+    Node newHead = new Node(head.val);
+    visitedMap.put(head, newHead);
+    newHead.next = copyRandomList(head.next);
+    newHead.random = copyRandomList(head.random);
     return newHead;
   }
 
