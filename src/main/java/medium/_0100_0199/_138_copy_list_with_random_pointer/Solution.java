@@ -118,23 +118,54 @@ class Solution {
   //  解答成功:
   //  执行耗时:0 ms,击败了100.00% 的Java用户
   //  内存消耗:39.2 MB,击败了17.89% 的Java用户
+//  HashMap<Node, Node> visitedMap = new HashMap<>();
+//
+//  public Node copyRandomList(Node head) {
+//    if (head == null) {
+//      return null;
+//    }
+//    if (visitedMap.containsKey(head)) {
+//      return visitedMap.get(head);
+//    }
+//    Node newHead = new Node(head.val);
+//    visitedMap.put(head, newHead);
+//    newHead.next = copyRandomList(head.next);
+//    newHead.random = copyRandomList(head.random);
+//    return newHead;
+//  }
+
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.7 MB,击败了66.98% 的Java用户
   HashMap<Node, Node> visitedMap = new HashMap<>();
+
+  public Node getNode(Node oldNode) {
+    if (oldNode == null) {
+      return null;
+    }
+    if (visitedMap.containsKey(oldNode)) {
+      return visitedMap.get(oldNode);
+    }
+    Node copy = new Node(oldNode.val);
+    visitedMap.put(oldNode, copy);
+    return copy;
+  }
 
   public Node copyRandomList(Node head) {
     if (head == null) {
       return null;
     }
-    if (visitedMap.containsKey(head)) {
-      return visitedMap.get(head);
-    }
-    Node newHead = new Node(head.val);
+    Node newHead = new Node(head.val), pointer = head, copyPointer = newHead;
     visitedMap.put(head, newHead);
-    newHead.next = copyRandomList(head.next);
-    newHead.random = copyRandomList(head.random);
+    while (pointer != null) {
+      copyPointer.random = getNode(pointer.random);
+      copyPointer.next = getNode(pointer.next);
+      pointer = pointer.next;
+      copyPointer = copyPointer.next;
+    }
     return newHead;
   }
-
-
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
