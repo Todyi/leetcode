@@ -25,14 +25,19 @@ public class Node {
 
   public List<Node> neighbors;
 
+  public Node random;
+
   public Node() {
     val = 0;
     neighbors = new ArrayList<Node>();
   }
 
-  public Node(int _val) {
-    val = _val;
+  public Node(int val) {
+    this.val = val;
+    this.next = null;
+
     neighbors = new ArrayList<Node>();
+    this.random = null;
   }
 
   public Node(int _val, List<Node> _children) {
