@@ -54,45 +54,95 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了99.68% 的Java用户
   //  内存消耗:39 MB,击败了21.50% 的Java用户
+//  public ListNode insertionSortList(ListNode head) {
+//    if (head == null || head.next == null) {
+//      return head;
+//    }
+//    ListNode mid = insertionSortList(findMid(head));
+//    head = insertionSortList(head);
+//    return merge(head, mid);
+//  }
+//
+//  public ListNode findMid(ListNode l) {
+//    if (l == null || l.next == null) {
+//      return l;
+//    }
+//    ListNode midPre = null;
+//    while (l != null && l.next != null) {
+//      midPre = midPre == null ? l : midPre.next;
+//      l = l.next.next;
+//    }
+//    ListNode mid = midPre.next;
+//    midPre.next = null;
+//    return mid;
+//
+//  }
+//
+//  public ListNode merge(ListNode l1, ListNode l2) {
+//    ListNode tmpHead = new ListNode(), pointer = tmpHead;
+//    while (l1 != null && l2 != null) {
+//      if (l1.val < l2.val) {
+//        pointer.next = l1;
+//        l1 = l1.next;
+//      } else {
+//        pointer.next = l2;
+//        l2 = l2.next;
+//      }
+//      pointer = pointer.next;
+//    }
+//    pointer.next = l1 == null ? l2 : l1;
+//    return tmpHead.next;
+//  }
+
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.8 MB,击败了52.48% 的Java用户
   public ListNode insertionSortList(ListNode head) {
     if (head == null || head.next == null) {
       return head;
     }
-    ListNode mid = insertionSortList(findMid(head));
-    head = insertionSortList(head);
-    return merge(head, mid);
-  }
-
-  public ListNode findMid(ListNode l) {
-    if (l == null || l.next == null) {
-      return l;
+    int preVal = head.val;
+    ListNode cur = head.next;
+    boolean sorted = true;
+    while (cur != null && sorted) {
+      sorted = preVal <= cur.val;
+      preVal = cur.val;
+      cur = cur.next;
     }
-    ListNode midPre = null;
-    while (l != null && l.next != null) {
-      midPre = midPre == null ? l : midPre.next;
-      l = l.next.next;
+
+    if (sorted) {
+      return head;
     }
-    ListNode mid = midPre.next;
-    midPre.next = null;
-    return mid;
 
-  }
-
-  public ListNode merge(ListNode l1, ListNode l2) {
-    ListNode tmpHead = new ListNode(), pointer = tmpHead;
-    while (l1 != null && l2 != null) {
-      if (l1.val < l2.val) {
-        pointer.next = l1;
-        l1 = l1.next;
+    ListNode lower = null, higher = null, pivot = head;
+    cur = head.next;
+    while (cur != null) {
+      ListNode tmp = cur.next;
+      if (cur.val < pivot.val) {
+        cur.next = lower;
+        lower = cur;
       } else {
-        pointer.next = l2;
-        l2 = l2.next;
+        cur.next = higher;
+        higher = cur;
       }
-      pointer = pointer.next;
+      cur = tmp;
     }
-    pointer.next = l1 == null ? l2 : l1;
-    return tmpHead.next;
-  }
 
+    lower = insertionSortList(lower);
+    higher = insertionSortList(higher);
+    if (lower == null) {
+      head = pivot;
+    } else {
+      head = lower;
+      while (lower.next != null) {
+        lower = lower.next;
+      }
+      lower.next = pivot;
+    }
+    pivot.next = higher;
+
+    return head;
+  }
 }
 //leetcode submit region end(Prohibit modification and deletion)
