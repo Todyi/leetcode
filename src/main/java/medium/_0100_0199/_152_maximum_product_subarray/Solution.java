@@ -28,29 +28,53 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了93.58% 的Java用户
   //  内存消耗:40.4 MB,击败了5.58% 的Java用户
-  int max;
+//  int max;
+//
+//  public int maxProduct(int[] nums) {
+//    max = nums[0];
+//    //map[i][0] curMin,map[i][1] curMax
+//    int[][] map = new int[nums.length][2];
+//    map[0][0] = nums[0];
+//    map[0][1] = nums[0];
+//    helper(map, nums, nums.length - 1);
+//    return max;
+//  }
+//
+//  public int[] helper(int[][] map, int[] nums, int idx) {
+//    if (idx == 0) {
+//      return map[0];
+//    }
+//    int[] pre = helper(map, nums, idx - 1);
+//    int[] cur = map[idx];
+//    int a = nums[idx] * pre[0], b = nums[idx] * pre[1];
+//    cur[0] = Math.min(Math.min(a, b), nums[idx]);
+//    cur[1] = Math.max(Math.max(a, b), nums[idx]);
+//    max = Math.max(max, cur[1]);
+//    return cur;
+//  }
 
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.8 MB,击败了66.49% 的Java用户
   public int maxProduct(int[] nums) {
-    max = nums[0];
-    //map[i][0] curMin,map[i][1] curMax
-    int[][] map = new int[nums.length][2];
-    map[0][0] = nums[0];
-    map[0][1] = nums[0];
-    helper(map, nums, nums.length - 1);
-    return max;
-  }
-
-  public int[] helper(int[][] map, int[] nums, int idx) {
-    if (idx == 0) {
-      return map[0];
+    int max = nums[0], cur = 1;
+    for (int i = 0; i < nums.length; i++) {
+      cur = cur * nums[i];
+      max = Math.max(max, cur);
+      if (cur == 0) {
+        cur = 1;
+      }
     }
-    int[] pre = helper(map, nums, idx - 1);
-    int[] cur = map[idx];
-    int a = nums[idx] * pre[0], b = nums[idx] * pre[1];
-    cur[0] = Math.min(Math.min(a, b), nums[idx]);
-    cur[1] = Math.max(Math.max(a, b), nums[idx]);
-    max = Math.max(max, cur[1]);
-    return cur;
+    cur = 1;
+    for (int i = nums.length - 1; i >= 0; i--) {
+      cur = cur * nums[i];
+      max = Math.max(max, cur);
+      if (cur == 0) {
+        cur = 1;
+      }
+    }
+    return max;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
