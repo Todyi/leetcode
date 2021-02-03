@@ -50,8 +50,57 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了99.96% 的Java用户
   //  内存消耗:36.9 MB,击败了99.96% 的Java用户
+//  public String largestNumber(int[] nums) {
+//    quickSort(nums, 0, nums.length - 1);
+//    if (nums[0] == 0) {
+//      return "0";
+//    }
+//    StringBuilder sb = new StringBuilder();
+//    for (int n : nums) {
+//      sb.append(n);
+//    }
+//    return sb.toString();
+//  }
+//
+//  public void quickSort(int[] nums, int l, int r) {
+//    if (r <= l) {
+//      return;
+//    }
+//    int pivot = r, idx = l;
+//    for (int i = l; i < r; i++) {
+//      if (bigger(nums[i], nums[pivot])) {
+//        swap(nums, i, idx++);
+//      }
+//    }
+//    if (bigger(nums[pivot], nums[idx])) {
+//      swap(nums, pivot, idx);
+//    }
+//    quickSort(nums, l, idx - 1);
+//    quickSort(nums, idx + 1, r);
+//
+//  }
+//
+//  public void swap(int[] nums, int i, int j) {
+//    int tmp = nums[i];
+//    nums[i] = nums[j];
+//    nums[j] = tmp;
+//  }
+//
+//  public static boolean bigger(int i, int j) {
+//    long iLong = i * 10, jLong = j * 10, tmpI = i, tmpJ = j;
+//    while (0 < (tmpJ /= 10)) {
+//      iLong *= 10;
+//    }
+//    while (0 < (tmpI /= 10)) {
+//      jLong *= 10;
+//    }
+//    return jLong + i < iLong + j;
+//  }
+
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Largest Number.
+  //  Memory Usage: 37.3 MB, less than 99.93% of Java online submissions for Largest Number.
   public String largestNumber(int[] nums) {
-    quickSort(nums, 0, nums.length - 1);
+    mergeSort(nums, 0, nums.length);
     if (nums[0] == 0) {
       return "0";
     }
@@ -62,32 +111,33 @@ class Solution {
     return sb.toString();
   }
 
-  public void quickSort(int[] nums, int l, int r) {
-    if (r <= l) {
+  public void mergeSort(int[] nums, int l, int r) {
+    if (r - 2 < l) {
       return;
     }
-    int pivot = r, idx = l;
-    for (int i = l; i < r; i++) {
-      if (bigger(nums[i], nums[pivot])) {
-        swap(nums, i, idx++);
-      }
-    }
-    if (bigger(nums[pivot], nums[idx])) {
-      swap(nums, pivot, idx);
-    }
-    quickSort(nums, l, idx - 1);
-    quickSort(nums, idx + 1, r);
-
+    int mid = (l + r) / 2;
+    mergeSort(nums, l, mid);
+    mergeSort(nums, mid, r);
+    merge(nums, l, mid, r);
   }
 
-  public void swap(int[] nums, int i, int j) {
-    int tmp = nums[i];
-    nums[i] = nums[j];
-    nums[j] = tmp;
+  public void merge(int[] nums, int l, int m, int r) {
+    int[] tmp = new int[r - l];
+    for (int i = l, j = m, idx = 0; i < m || j < r; ) {
+      if (i < m && (j == r || bigger(nums[i], nums[j]))) {
+        tmp[idx++] = nums[i++];
+      } else {
+        tmp[idx++] = nums[j++];
+      }
+    }
+    for (int i = 0; i < tmp.length; i++) {
+      nums[l++] = tmp[i];
+    }
   }
 
   public static boolean bigger(int i, int j) {
-    long iLong = i * 10, jLong = j * 10, tmpI = i, tmpJ = j;
+    long iLong = i * 10, jLong = j * 10;
+    int tmpI = i, tmpJ = j;
     while (0 < (tmpJ /= 10)) {
       iLong *= 10;
     }
@@ -95,7 +145,6 @@ class Solution {
       jLong *= 10;
     }
     return jLong + i < iLong + j;
-
   }
 
 }
