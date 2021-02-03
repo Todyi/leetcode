@@ -59,4 +59,17 @@ FROM (
          WHERE e.Salary = t.maxSalary
      ) AS t
          LEFT JOIN Department d ON d.Id = t.DepartmentId
-WHERE d.name IS NOT NULL
+WHERE d.name IS NOT NULL;
+
+-- Runtime: 466 ms, faster than 97.34% of MySQL online submissions for Department Highest Salary.
+-- Memory Usage: 0B, less than 100.00% of MySQL online submissions for Department Highest Salary.
+SELECT d.name AS Department, t.name AS Employee, Salary
+FROM (
+         SELECT DepartmentId,
+                `name`,
+                Salary,
+                RANK() OVER w AS `rank`
+         FROM Employee WINDOW w AS(PARTITION BY DepartmentId ORDER BY Salary DESC)
+     ) AS t
+         RIGHT JOIN Department d ON d.Id = t.DepartmentId
+WHERE t.`rank` = 1
