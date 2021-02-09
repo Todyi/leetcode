@@ -33,3 +33,7 @@ do
     awk "{print \$$i}" file.txt | paste -s -d ' ';
     ((i=$i+1))
 done
+
+# Runtime: 0 ms, faster than 100.00% of Bash online submissions for Word Frequency.
+# Memory Usage: 3.5 MB, less than 83.20% of Bash online submissions for Word Frequency.
+head -1 file.txt | wc -w | xargs seq | xargs -n1 -I{} sh -c "cut -d' ' -f{} file.txt | xargs"
