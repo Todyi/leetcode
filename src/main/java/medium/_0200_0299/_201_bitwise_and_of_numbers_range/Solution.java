@@ -24,13 +24,29 @@ class Solution {
   //  解答成功:
   //  执行耗时:5 ms,击败了48.27% 的Java用户
   //  内存消耗:38.1 MB,击败了84.98% 的Java用户
+//  public int rangeBitwiseAnd(int m, int n) {
+//    int result = 0, mask = 1 << 30;
+//    while (0 < mask && (m & mask) == (n & mask)) {
+//      result |= m & mask;
+//      mask >>= 1;
+//    }
+//    return result;
+//  }
+
+  //  解答成功:
+  //  执行耗时:4 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.8 MB,击败了23.88% 的Java用户
   public int rangeBitwiseAnd(int m, int n) {
-    int result = 0, mask = 1 << 30;
-    while (0 < mask && (m & mask) == (n & mask)) {
-      result |= m & mask;
-      mask >>= 1;
+    //diffBitsCount -21
+    //7             111
+    //5             101
+    int diffBitsCount = 0;
+    while (m != n) {
+      m >>= 1;
+      n >>= 1;
+      diffBitsCount++;
     }
-    return result;
+    return m << diffBitsCount;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
