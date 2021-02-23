@@ -54,42 +54,73 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了99.42% 的Java用户
   //  内存消耗:39.5 MB,击败了78.74% 的Java用户
+//  public boolean canFinish(int numCourses, int[][] prerequisites) {
+//    ArrayList<LinkedList<Integer>> adjList = new ArrayList<>();
+//    for (int i = 0; i < numCourses; i++) {
+//      adjList.add(new LinkedList<>());
+//    }
+//    for (int[] item : prerequisites) {
+//      adjList.get(item[0]).add(item[1]);
+//    }
+//    //-1:visited by other course
+//    // 0:unvisited
+//    //-1:visited by current course
+//    int[] visitedMap = new int[numCourses];
+//    for (int i = 0; i < numCourses; i++) {
+//      if (isCycle_dfs(adjList, visitedMap, i)) {
+//        return false;
+//      }
+//    }
+//    return true;
+//  }
+
+//  public boolean isCycle_dfs(ArrayList<LinkedList<Integer>> adjList, int[] visitedMap, int course) {
+//    if (visitedMap[course] == -1) {
+//      return false;
+//    }
+//    if (visitedMap[course] == 1) {
+//      return true;
+//    }
+//    visitedMap[course] = 1;
+//    LinkedList<Integer> preList = adjList.get(course);
+//    for (int i = 0; i < preList.size(); i++) {
+//      if (isCycle_dfs(adjList, visitedMap, preList.get(i))) {
+//        return true;
+//      }
+//    }
+//    visitedMap[course] = -1;
+//    return false;
+//  }
+
+  //  Runtime: 1 ms, faster than 100.00% of Java online submissions for Course Schedule.
+  //  Memory Usage: 39.6 MB, less than 64.25% of Java online submissions for Course Schedule.
   public boolean canFinish(int numCourses, int[][] prerequisites) {
-    ArrayList<LinkedList<Integer>> adjList = new ArrayList<>();
-    for (int i = 0; i < numCourses; i++) {
-      adjList.add(new LinkedList<>());
-    }
+    int[] course = new int[numCourses];
+    boolean[] visited = new boolean[prerequisites.length];
     for (int[] item : prerequisites) {
-      adjList.get(item[0]).add(item[1]);
+      course[item[1]]++;
     }
-    //-1:visited by other course
-    // 0:unvisited
-    //-1:visited by current course
-    int[] visitedMap = new int[numCourses];
+    boolean someCourseFinished = true;
+    while (someCourseFinished) {
+      someCourseFinished = false;
+      for (int i = 0; i < prerequisites.length; i++) {
+        if (visited[i]) {
+          continue;
+        }
+        if (course[prerequisites[i][0]] == 0) {
+          course[prerequisites[i][1]]--;
+          visited[i] = true;
+          someCourseFinished = true;
+        }
+      }
+    }
     for (int i = 0; i < numCourses; i++) {
-      if (isCycle_dfs(adjList, visitedMap, i)) {
+      if (course[i] != 0) {
         return false;
       }
     }
-    return true;
-  }
 
-  public boolean isCycle_dfs(ArrayList<LinkedList<Integer>> adjList, int[] visitedMap, int course) {
-    if (visitedMap[course] == -1) {
-      return false;
-    }
-    if (visitedMap[course] == 1) {
-      return true;
-    }
-    visitedMap[course] = 1;
-    LinkedList<Integer> preList = adjList.get(course);
-    for (int i = 0; i < preList.size(); i++) {
-      if (isCycle_dfs(adjList, visitedMap, preList.get(i))) {
-        return true;
-      }
-    }
-    visitedMap[course] = -1;
-    return false;
+    return true;
   }
 
 }
