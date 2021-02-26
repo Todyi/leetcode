@@ -46,5 +46,15 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test4() {
+    int target = 7;
+    int[] nums = {4, 3, 1, 2, 3, 2};
+    Integer result = 2;
+    int solution = new medium._0200_0299._209_minimum_size_subarray_sum.Solution()
+        .minSubArrayLen(target, nums);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 
 }

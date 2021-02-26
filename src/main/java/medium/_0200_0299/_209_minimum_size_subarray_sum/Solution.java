@@ -50,26 +50,50 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了99.98% 的Java用户
   //  内存消耗:38.7 MB,击败了87.01% 的Java用户
+//  public int minSubArrayLen(int target, int[] nums) {
+//    int l = 0, cur = 0, result = Integer.MAX_VALUE;
+//    for (int i = 0; i < nums.length; i++) {
+//      if (target == nums[i]) {
+//        return 1;
+//      }
+//      cur += nums[i];
+//      if (cur < target) {
+//        continue;
+//      } else if (target < cur) {
+//        while (target < cur && l <= i) {
+//          result = Math.min(i - l + 1, result);
+//          cur -= nums[l++];
+//        }
+//      }
+//      if (cur == target) {
+//        result = Math.min(i - l + 1, result);
+//      }
+//    }
+//    return result == Integer.MAX_VALUE ? 0 : result;
+//  }
+
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:38.7 MB,击败了87.01% 的Java用户
   public int minSubArrayLen(int target, int[] nums) {
-    int l = 0, cur = 0, result = Integer.MAX_VALUE;
-    for (int i = 0; i < nums.length; i++) {
-      if (target == nums[i]) {
-        return 1;
-      }
-      cur += nums[i];
-      if (cur < target) {
-        continue;
-      } else if (target < cur) {
-        while (target < cur && l <= i) {
-          result = Math.min(i - l + 1, result);
-          cur -= nums[l++];
-        }
-      }
-      if (cur == target) {
-        result = Math.min(i - l + 1, result);
+    int len = nums.length, l = 0, r = 0, sum = 0;
+    while (r < len && sum < target) {
+      sum += nums[r++];
+    }
+    if (sum < target) {
+      return 0;
+    }
+    while (target <= sum - nums[l]) {
+      sum -= nums[l++];
+    }
+    while (r < len) {
+      sum = sum + nums[r++] - nums[l++];
+      while (target <= sum - nums[l]) {
+        sum -= nums[l++];
       }
     }
-    return result == Integer.MAX_VALUE ? 0 : result;
+    return r - l;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
