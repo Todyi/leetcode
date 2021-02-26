@@ -50,21 +50,82 @@ package medium._0200_0299._211_design_add_and_search_words_data_structure;
 import java.util.ArrayList;
 
 //leetcode submit region begin(Prohibit modification and deletion)
+//Runtime: 35 ms, faster than 98.67% of Java online submissions for Design Add and Search Words Data Structure.
+//Memory Usage: 49.9 MB, less than 60.66% of Java online submissions for Design Add and Search Words Data Structure.
+//class WordDictionary {
+//
+//  class Node {
+//
+//    int len;
+//    boolean isWordEnd;
+//    Node[] next = new Node[26];
+//
+//    public Node() {
+//    }
+//  }
+//
+//  Node map = new Node();
+//
+//  /**
+//   * Initialize your data structure here.
+//   */
+//  public WordDictionary() {
+//
+//  }
+//
+//  public void addWord(String word) {
+//    int len = word.length();
+//    Node cur = map;
+//    for (int i = 0; i < len; i++) {
+//      int c = word.charAt(i) - 'a';
+//      if (cur.next[c] == null) {
+//        cur.next[c] = new Node();
+//        cur.next[c].len = len - i;
+//      }
+//      cur = cur.next[c];
+//      cur.len = Math.max(cur.len, len - i);
+//    }
+//    cur.isWordEnd = true;
+//  }
+//
+//  public boolean search(String word) {
+//    Node cur = searchDot(word, map, 0);
+//    return cur != null && cur.isWordEnd;
+//  }
+//
+//  private Node searchDot(String word, Node cur, int idx) {
+//    if (idx == word.length() || cur == null) {
+//      return cur;
+//    }
+//    char c = word.charAt(idx);
+//    if (c == '.') {
+//      Node temp = null;
+//      for (Node node : cur.next) {
+//        if (node != null && word.length() - idx - 1 <= node.len) {
+//          temp = searchDot(word, node, idx + 1);
+//          if (temp != null && temp.isWordEnd) {
+//            break;
+//          }
+//        }
+//      }
+//      return temp;
+//    } else {
+//      int n = c - 'a';
+//      if (cur.next[n] == null) {
+//        return null;
+//      }
+//      return searchDot(word, cur.next[n], idx + 1);
+//    }
+//  }
+//
+//}
+
+//解答成功:
+//执行耗时:33 ms,击败了99.85% 的Java用户
+//内存消耗:49.6 MB,击败了78.02% 的Java用户
 class WordDictionary {
 
-  //  Runtime: 35 ms, faster than 98.67% of Java online submissions for Design Add and Search Words Data Structure.
-  //  Memory Usage: 49.9 MB, less than 60.66% of Java online submissions for Design Add and Search Words Data Structure.
-  class Node {
-
-    int len;
-    boolean isWordEnd;
-    Node[] next = new Node[26];
-
-    public Node() {
-    }
-  }
-
-  Node map = new Node();
+  ArrayList<String>[] map = new ArrayList[501];
 
   /**
    * Initialize your data structure here.
@@ -74,50 +135,37 @@ class WordDictionary {
   }
 
   public void addWord(String word) {
-    int len = word.length();
-    Node cur = map;
-    for (int i = 0; i < len; i++) {
-      int c = word.charAt(i) - 'a';
-      if (cur.next[c] == null) {
-        cur.next[c] = new Node();
-        cur.next[c].len = len - i;
-      }
-      cur = cur.next[c];
-      cur.len = Math.max(cur.len, len - i);
+    if (map[word.length()] == null) {
+      map[word.length()] = new ArrayList<>();
     }
-    cur.isWordEnd = true;
+    ArrayList<String> list = map[word.length()];
+    list.add(word);
   }
 
   public boolean search(String word) {
-    Node cur = searchDot(word, map, 0);
-    return cur != null && cur.isWordEnd;
-  }
-
-  private Node searchDot(String word, Node cur, int idx) {
-    if (idx == word.length() || cur == null) {
-      return cur;
+    int len = word.length();
+    ArrayList<String> list = map[len];
+    if (list == null) {
+      return false;
     }
-    char c = word.charAt(idx);
-    if (c == '.') {
-      Node temp = null;
-      for (Node node : cur.next) {
-        if (node != null && word.length() - idx - 1 <= node.len) {
-          temp = searchDot(word, node, idx + 1);
-          if (temp != null && temp.isWordEnd) {
-            break;
-          }
+    for (String s : list) {
+      boolean match = true;
+      for (int i = 0; i < len; i++) {
+        char c = word.charAt(i);
+        if (c == '.') {
+          continue;
+        }
+        if (s.charAt(i) != c) {
+          match = false;
+          break;
         }
       }
-      return temp;
-    } else {
-      int n = c - 'a';
-      if (cur.next[n] == null) {
-        return null;
+      if (match) {
+        return true;
       }
-      return searchDot(word, cur.next[n], idx + 1);
     }
+    return false;
   }
-
 }
 
 /**
