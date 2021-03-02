@@ -36,4 +36,34 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test3() {
+    int[] nums = {3, 1, 2, 4};
+    int k = 2;
+    Integer result = 3;
+    int solution = new medium._0200_0299._215_kth_largest_element_in_an_array.Solution()
+        .findKthLargest(nums, k);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test4() {
+    int[] nums = {5, 2, 4, 1, 3, 6, 0};
+    int k = 2;
+    Integer result = 5;
+    int solution = new medium._0200_0299._215_kth_largest_element_in_an_array.Solution()
+        .findKthLargest(nums, k);
+    Assert.assertTrue(result.equals(solution));
+  }
+
+  @Test
+  public void test5() {
+    int[] nums = {2, 1};
+    int k = 2;
+    Integer result = 1;
+    int solution = new medium._0200_0299._215_kth_largest_element_in_an_array.Solution()
+        .findKthLargest(nums, k);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
