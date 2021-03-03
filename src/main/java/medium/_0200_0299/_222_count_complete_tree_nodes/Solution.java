@@ -59,43 +59,51 @@ class Solution {
   //  解答成功:
   //  执行耗时:0 ms,击败了100.00% 的Java用户
   //  内存消耗:41.6 MB,击败了54.63% 的Java用户
-  boolean flag = false;
-  int lastLevelCount = 0;
+//  boolean flag = false;
+//  int lastLevelCount = 0;
+//
+//  public int countNodes(TreeNode root) {
+//    int height = height(root);
+//    lastLevelCount(root, height, 1);
+//    int result = lastLevelCount;
+//    height--;
+//    for (int i = 0; i < height; i++) {
+//      result += (int) Math.pow(2, i);
+//    }
+//    return result;
+//  }
+//
+//  public int height(TreeNode node) {
+//    if (node == null) {
+//      return 0;
+//    }
+//    return height(node.left) + 1;
+//  }
+//
+//  public void lastLevelCount(TreeNode node, int height, int curHeight) {
+//    if (flag) {
+//      return;
+//    }
+//    if (curHeight < height) {
+//      lastLevelCount(node.left, height, curHeight + 1);
+//      lastLevelCount(node.right, height, curHeight + 1);
+//    } else if (height == curHeight) {
+//      if (node != null) {
+//        lastLevelCount++;
+//      } else {
+//        flag = true;
+//      }
+//    }
+//  }
 
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:41 MB,击败了97.80% 的Java用户
   public int countNodes(TreeNode root) {
-    int height = height(root);
-    lastLevelCount(root, height, 1);
-    int result = lastLevelCount;
-    height--;
-    for (int i = 0; i < height; i++) {
-      result += (int) Math.pow(2, i);
-    }
-    return result;
-  }
-
-  public int height(TreeNode node) {
-    if (node == null) {
+    if (root == null){
       return 0;
     }
-    return height(node.left) + 1;
-  }
-
-  public void lastLevelCount(TreeNode node, int height, int curHeight) {
-    if (flag) {
-      return;
-    }
-    if (curHeight < height) {
-      lastLevelCount(node.left, height, curHeight + 1);
-      lastLevelCount(node.right, height, curHeight + 1);
-    } else if (height == curHeight) {
-      if (node != null) {
-        lastLevelCount++;
-      } else {
-        flag = true;
-      }
-    }
-
-
+    return countNodes(root.left) + countNodes(root.right) + 1;
   }
 
 }
