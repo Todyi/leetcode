@@ -61,28 +61,49 @@ class Solution {
   //  解答成功:
   //  执行耗时:13 ms,击败了91.12% 的Java用户
   //  内存消耗:42.1 MB,击败了26.02% 的Java用户
-  public long getRank(int n, long width) {
-    return n < 0 ? (n - width) / width : n / width;
-  }
+//  public long getRank(int n, long width) {
+//    return n < 0 ? (n - width) / width : n / width;
+//  }
 
+//  public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+//    long width = (long) t + 1;
+//    int len = nums.length;
+//    Map<Long, Long> map = new HashMap<>();
+//    for (int i = 0; i < len; i++) {
+//      long rank = getRank(nums[i], width);
+//      if (map.containsKey(rank)) {
+//        return true;
+//      }
+//      if (map.containsKey(rank + 1) && map.get(rank + 1) - (long) nums[i] <= t) {
+//        return true;
+//      }
+//      if (map.containsKey(rank - 1) && (long) nums[i] - map.get(rank - 1) <= t) {
+//        return true;
+//      }
+//      map.put(rank, (long) nums[i]);
+//      if (k < map.size()) {
+//        map.remove(getRank(nums[i - k], width));
+//      }
+//    }
+//    return false;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39 MB,击败了98.71% 的Java用户
   public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
-    long width = (long) t + 1;
-    int len = nums.length;
-    Map<Long, Long> map = new HashMap<>();
-    for (int i = 0; i < len; i++) {
-      long rank = getRank(nums[i], width);
-      if (map.containsKey(rank)) {
-        return true;
-      }
-      if (map.containsKey(rank + 1) && map.get(rank + 1) - (long) nums[i] <= t) {
-        return true;
-      }
-      if (map.containsKey(rank - 1) && (long) nums[i] - map.get(rank - 1) <= t) {
-        return true;
-      }
-      map.put(rank, (long) nums[i]);
-      if (k < map.size()) {
-        map.remove(getRank(nums[i - k], width));
+    if (nums.length == 0 || k <= 0 || nums.length > 9999) {
+      return false;
+    }
+
+    int n = nums.length;
+    for (int i = 0; i < n; i++) {
+      int j = i + 1;
+      while (j < n && j - i <= k) {
+        if (Math.abs((long) nums[i] - (long) nums[j]) <= t) {
+          return true;
+        }
+        j++;
       }
     }
     return false;
