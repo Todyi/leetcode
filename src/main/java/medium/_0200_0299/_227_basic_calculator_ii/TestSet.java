@@ -59,4 +59,13 @@ public class TestSet {
         .calculate(s);
     Assert.assertTrue(result.equals(solution));
   }
+
+  @Test
+  public void test6() {
+    String s = "0-2147483647";
+    Integer result = -2147483647;
+    int solution = new medium._0200_0299._227_basic_calculator_ii.Solution()
+        .calculate(s);
+    Assert.assertTrue(result.equals(solution));
+  }
 }
