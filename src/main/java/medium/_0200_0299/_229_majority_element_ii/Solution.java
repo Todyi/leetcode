@@ -47,24 +47,67 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了75.20% 的Java用户
   //  内存消耗:42.9 MB,击败了58.37% 的Java用户
+//  public List<Integer> majorityElement(int[] nums) {
+//    List<Integer> result = new LinkedList<>();
+//    int len = nums.length, n = len / 3;
+//    Arrays.sort(nums);
+//    int pre = nums[0], start = 0;
+//    for (int i = 1; i < len; i++) {
+//      if (pre != nums[i]) {
+//        if (n < i - start) {
+//          result.add(pre);
+//        }
+//        start = i;
+//        pre = nums[i];
+//      }
+//    }
+//    if (n < len - start) {
+//      result.add(pre);
+//    }
+//    return result;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:42.9 MB,击败了58.37% 的Java用户
+  int n;
+
   public List<Integer> majorityElement(int[] nums) {
     List<Integer> result = new LinkedList<>();
-    int len = nums.length, n = len / 3;
-    Arrays.sort(nums);
-    int pre = nums[0], start = 0;
-    for (int i = 1; i < len; i++) {
-      if (pre != nums[i]) {
-        if (n < i - start) {
-          result.add(pre);
+    n = nums.length / 3;
+    quicksort(result, nums, 0, nums.length - 1);
+    return result;
+  }
+
+  public void quicksort(List<Integer> result, int[] nums, int l, int r) {
+    if (r - l + 1 <= n) {
+      return;
+    }
+    int pivot = nums[r], idx = l - 1, count = 1;
+    for (int i = l; i < r; i++) {
+      if (nums[i] < pivot) {
+        swap(nums, ++idx, i);
+        if (nums[i] == pivot) {
+          i--;
+          count--;
         }
-        start = i;
-        pre = nums[i];
+      } else if (nums[i] == pivot) {
+        swap(nums, idx + count, i);
+        count++;
       }
     }
-    if (n < len - start) {
-      result.add(pre);
+    swap(nums, idx + count, r);
+    if (n < count) {
+      result.add(pivot);
     }
-    return result;
+    quicksort(result, nums, l, idx);
+    quicksort(result, nums, idx + count + 1, r);
+  }
+
+  public void swap(int[] nums, int i, int j) {
+    int temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
