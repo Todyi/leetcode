@@ -58,64 +58,26 @@ class Solution {
   //  解答成功:
   //  执行耗时:4 ms,击败了100.00% 的Java用户
   //  内存消耗:41.4 MB,击败了38.55% 的Java用户
-  boolean isPOrQ, pFound, qFound;
-
   public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
     if (root == null) {
       return null;
     }
     if (root == p || root == q) {
-      if (root == p) {
-        pFound = true;
-        if (!qFound && find(root, q) != null) {
-          qFound = true;
-          isPOrQ = true;
-        }
-      } else {
-        qFound = true;
-        if (!pFound && find(root, p) != null) {
-          pFound = true;
-          isPOrQ = true;
-        }
-      }
       return root;
-    } else {
-      TreeNode left = lowestCommonAncestor(root.left, p, q);
-      if (left != null) {
-        if (isPOrQ) {
-          return left;
-        }
-      }
-      TreeNode right = lowestCommonAncestor(root.right, p, q);
-      if (right != null) {
-        if (isPOrQ) {
-          return right;
-        }
-      }
-      if (left != null && right != null) {
-        return root;
-      }
-      if (left != null) {
-        return left;
-      }
-      if (right != null) {
-        return right;
-      }
-      return null;
     }
-  }
-
-  public TreeNode find(TreeNode node, TreeNode i) {
-    if (node == null || node == i) {
-      return node;
+    TreeNode left = lowestCommonAncestor(root.left, p, q);
+    TreeNode right = lowestCommonAncestor(root.right, p, q);
+    if (left != null && right != null) {
+      return root;
     }
-    TreeNode left = find(node.left, i);
     if (left != null) {
       return left;
     }
-    return find(node.right, i);
+    if (right != null) {
+      return right;
+    }
+    return null;
   }
-
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
