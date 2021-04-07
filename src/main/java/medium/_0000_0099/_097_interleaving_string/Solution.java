@@ -86,25 +86,52 @@ class Solution {
   //  解答成功:
   //  执行耗时:2 ms,击败了80.38% 的Java用户
   //  内存消耗:37.2 MB,击败了57.38% 的Java用户
+//  public boolean isInterleave(String s1, String s2, String s3) {
+//    int m = s1.length(), n = s2.length();
+//    if (m + n != s3.length()) {
+//      return false;
+//    }
+//    boolean[] f = new boolean[n + 1];
+//    f[0] = true;
+//    for (int i = 0; i <= m; i++) {
+//      for (int j = 0; j <= n; j++) {
+//        int k = i + j - 1;
+//        if (0 < i) {
+//          f[j] = f[j] && s1.charAt(i - 1) == s3.charAt(k);
+//        }
+//        if (0 < j) {
+//          f[j] = f[j] || (f[j - 1] && s2.charAt(j - 1) == s3.charAt(k));
+//        }
+//      }
+//    }
+//    return f[n];
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:37.5 MB,击败了34.04% 的Java用户
   public boolean isInterleave(String s1, String s2, String s3) {
     int m = s1.length(), n = s2.length();
     if (m + n != s3.length()) {
       return false;
     }
-    boolean[] f = new boolean[n + 1];
-    f[0] = true;
-    for (int i = 0; i <= m; i++) {
-      for (int j = 0; j <= n; j++) {
-        int k = i + j - 1;
-        if (0 < i) {
-          f[j] = f[j] && s1.charAt(i - 1) == s3.charAt(k);
-        }
-        if (0 < j) {
-          f[j] = f[j] || (f[j - 1] && s2.charAt(j - 1) == s3.charAt(k));
-        }
-      }
+    Boolean[][] f = new Boolean[m + 1][n + 1];
+    f[0][0] = true;
+    return isInterleave(s1, s2, s3, m, n, f);
+  }
+
+  public boolean isInterleave(String s1, String s2, String s3, int i, int j, Boolean[][] f) {
+    if (f[i][j] != null) {
+      return f[i][j];
     }
-    return f[n];
+    int k = i + j - 1;
+    if ((0 < i && i <= s1.length()
+        && (s1.charAt(i - 1) == s3.charAt(k) && isInterleave(s1, s2, s3, i - 1, j, f)))
+        || (0 < j && j <= s2.length()
+        && (s2.charAt(j - 1) == s3.charAt(k) && isInterleave(s1, s2, s3, i, j - 1, f)))) {
+      return f[i][j] = true;
+    }
+    return f[i][j] = false;
   }
 
 }

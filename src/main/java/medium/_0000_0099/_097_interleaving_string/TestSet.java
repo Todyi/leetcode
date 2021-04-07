@@ -39,4 +39,15 @@ public class TestSet {
     Assert.assertTrue(result.equals(solution));
   }
 
+  @Test
+  public void test3() {
+    String s1 = "";
+    String s2 = "";
+    String s3 = "a";
+    Boolean result = false;
+    boolean solution = new medium._0000_0099._097_interleaving_string.Solution()
+        .isInterleave(s1, s2, s3);
+    Assert.assertTrue(result.equals(solution));
+  }
+
 }
