@@ -60,27 +60,51 @@ class Solution {
   //  解答成功:
   //  执行耗时:3 ms,击败了57.72% 的Java用户
   //  内存消耗:37 MB,击败了83.24% 的Java用户
+//  public boolean isInterleave(String s1, String s2, String s3) {
+//    int m = s1.length(), n = s2.length(), l = s3.length();
+//    if (m + n != l) {
+//      return false;
+//    }
+//    //f[i+1][j+1] == true means s3[0,i+j] is formed by an interleaving of by s1[0,i] and s2[0,j]
+//    //f[m][n] == (f[m-1][n] && s1[m-1] == s3[m+n-1]) || (f[m][n-1] && s2[n-1] == s3[m+n-1])
+//    boolean[][] f = new boolean[m + 1][n + 1];
+//    f[0][0] = true;
+//    for (int i = 0; i <= m; i++) {
+//      for (int j = 0; j <= n; j++) {
+//        int k = i + j - 1;
+//        if (0 < i) {
+//          f[i][j] = f[i - 1][j] && s1.charAt(i - 1) == s3.charAt(k);
+//        }
+//        if (0 < j) {
+//          f[i][j] = f[i][j] || (f[i][j - 1] && s2.charAt(j - 1) == s3.charAt(k));
+//        }
+//      }
+//    }
+//    return f[m][n];
+//  }
+
+  //  解答成功:
+  //  执行耗时:2 ms,击败了80.38% 的Java用户
+  //  内存消耗:37.2 MB,击败了57.38% 的Java用户
   public boolean isInterleave(String s1, String s2, String s3) {
-    int m = s1.length(), n = s2.length(), l = s3.length();
-    if (m + n != l) {
+    int m = s1.length(), n = s2.length();
+    if (m + n != s3.length()) {
       return false;
     }
-    //f[i+1][j+1] == true means s3[0,i+j] is formed by an interleaving of by s1[0,i] and s2[0,j]
-    //f[m][n] == (f[m-1][n] && s1[m-1] == s3[m+n-1]) || (f[m][n-1] && s2[n-1] == s3[m+n-1])
-    boolean[][] f = new boolean[m + 1][n + 1];
-    f[0][0] = true;
+    boolean[] f = new boolean[n + 1];
+    f[0] = true;
     for (int i = 0; i <= m; i++) {
       for (int j = 0; j <= n; j++) {
         int k = i + j - 1;
         if (0 < i) {
-          f[i][j] = f[i - 1][j] && s1.charAt(i - 1) == s3.charAt(k);
+          f[j] = f[j] && s1.charAt(i - 1) == s3.charAt(k);
         }
         if (0 < j) {
-          f[i][j] = f[i][j] || (f[i][j - 1] && s2.charAt(j - 1) == s3.charAt(k));
+          f[j] = f[j] || (f[j - 1] && s2.charAt(j - 1) == s3.charAt(k));
         }
       }
     }
-    return f[m][n];
+    return f[n];
   }
 
 }
