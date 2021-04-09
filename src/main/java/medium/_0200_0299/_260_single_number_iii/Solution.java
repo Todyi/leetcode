@@ -48,39 +48,63 @@ class Solution {
   //  解答成功:
   //  执行耗时:1 ms,击败了95.93% 的Java用户
   //  内存消耗:38.9 MB,击败了80.27% 的Java用户
+//  public int[] singleNumber(int[] nums) {
+//    int xor = 0, flag = 1;
+//    for (int n : nums) {
+//      xor ^= n;
+//    }
+//    for (int i = 0; i < 32; i++) {
+//      if ((xor & flag) != 0) {
+//        break;
+//      }
+//      flag = flag << 1;
+//    }
+//    int groupALen = 0;
+//
+//    for (int i = 0; i < nums.length; i++) {
+//      if ((nums[i] & flag) != 0) {
+//        swap(i, groupALen++, nums);
+//      }
+//    }
+//
+//    int aXor = 0, bXor = 0;
+//    for (int i = 0; i < groupALen; i++) {
+//      aXor ^= nums[i];
+//    }
+//    for (int i = groupALen; i < nums.length; i++) {
+//      bXor ^= nums[i];
+//    }
+//    return new int[]{aXor, bXor};
+//  }
+//
+//  public void swap(int i, int j, int[] nums) {
+//    int tmp = nums[i];
+//    nums[i] = nums[j];
+//    nums[j] = tmp;
+//  }
+
+  //  解答成功:
+  //  执行耗时:0 ms,击败了100.00% 的Java用户
+  //  内存消耗:39 MB,击败了80.27% 的Java用户
   public int[] singleNumber(int[] nums) {
-    int xor = 0, flag = 1;
-    for (int n : nums) {
-      xor ^= n;
+    // difference between two numbers (x and y) which were seen only once
+    int bitmask = 0;
+    for (int num : nums) {
+      bitmask ^= num;
     }
-    for (int i = 0; i < 32; i++) {
-      if ((xor & flag) != 0) {
-        break;
+
+    // rightmost 1-bit diff between x and y
+    int diff = bitmask & (-bitmask);
+
+    int x = 0;
+    // bitmask which will contain only x
+    for (int num : nums) {
+      if ((num & diff) != 0) {
+        x ^= num;
       }
-      flag = flag << 1;
-    }
-    int groupALen = 0;
-
-    for (int i = 0; i < nums.length; i++) {
-      if ((nums[i] & flag) != 0) {
-        swap(i, groupALen++, nums);
-      }
     }
 
-    int aXor = 0, bXor = 0;
-    for (int i = 0; i < groupALen; i++) {
-      aXor ^= nums[i];
-    }
-    for (int i = groupALen; i < nums.length; i++) {
-      bXor ^= nums[i];
-    }
-    return new int[]{aXor, bXor};
-  }
-
-  public void swap(int i, int j, int[] nums) {
-    int tmp = nums[i];
-    nums[i] = nums[j];
-    nums[j] = tmp;
+    return new int[]{x, bitmask ^ x};
   }
 }
 //leetcode submit region end(Prohibit modification and deletion)
